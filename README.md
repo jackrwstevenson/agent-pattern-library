@@ -16,6 +16,7 @@ An attempt to make sense of emerging patterns in AI-assisted software developmen
 | [Detached Agent](patterns/detached-agent.md)         | Use issue trackers as task queues for AI agents executing in sandboxed cloud environments, decoupling interface from execution.                                       | Gains audit trails, team accessibility, and security isolation without requiring local development setup.                                                                               |
 | [Context Bypass](patterns/context-bypass.md)         | Delegate data-heavy operations to local APIs and return only compact results, avoiding context window limits entirely.                                                | Inverts the data flow: bring the model's intent to the data, not data to the model.                                                                                                     |
 | [Spec Library](patterns/spec-library.md)             | Distribute specifications and tests as the library; AI generates language-specific implementations on demand.                                                         | Inverts software distribution by treating code as ephemeral and regenerable, while specifications and tests become the preserved artefacts.                                             |
+| [Autonomous Agent](patterns/autonomous-agent.md)     | _(Emerging)_ Enable agents to select tasks from backlogs, monitor outcomes, and operate under defined values; moving beyond reactive prompting toward self-direction. | Identifies the prerequisites and scaling paradox: human review remains essential, shifting the bottleneck from scheduling to verification.                                              |
 
 ## Pattern Relationships
 
@@ -36,6 +37,11 @@ Some noteworthy relationships:
 
 - [Context Bypass](patterns/context-bypass.md): When data exceeds context limits, delegate to local APIs.
 - [Detached Agent](patterns/detached-agent.md): When you want fire-and-forget task execution with security isolation.
+
+**Increasing agent autonomy**
+
+- [Detached Agent](patterns/detached-agent.md) + [Autonomous Agent](patterns/autonomous-agent.md): Detached Agent provides the execution infrastructure; Autonomous Agent adds task selection and outcome monitoring.
+- [Skills Library](patterns/skills-library.md) + [Autonomous Agent](patterns/autonomous-agent.md): Skills define reliable coordination; a prerequisite before agents can self-direct.
 
 **Exploration vs production**
 
