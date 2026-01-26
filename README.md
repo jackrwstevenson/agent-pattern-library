@@ -57,3 +57,7 @@ Contributions welcome. To add a new pattern:
 3. Submit a PR
 
 If you spot a pattern that isn't listed here, it may be too well-known for me to bother distilling, or I simply haven't discovered it yet :-). PRs and issues pointing out gaps are appreciated.
+
+## Inspiration
+
+Credit to Chris Hay, Birgitta Böckeler, Simon Willison, Gergely Orosz, Drew Breunig, Tim Kellogg, Addy Osmani & Jesse Vincent on being the inspration for the patterns within.
