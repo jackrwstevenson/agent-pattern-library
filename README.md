@@ -1,6 +1,6 @@
 # Agent Pattern Library
 
-An attempt to make sense of emerging patterns in AI-assisted software development, drawn from personal observations and experiments.
+An attempt to make sense of emerging patterns in AI-assisted software development, drawn from research, personal observations and experiments.
 
 ## Patterns
 
