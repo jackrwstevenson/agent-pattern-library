@@ -182,4 +182,18 @@ describe("rewritePatternLinks", () => {
     expect(links[0].getAttribute("href")).toBe("#throwaway-spike");
     expect(links[1].getAttribute("href")).toBe("#context-library");
   });
+
+  it("adds data-pattern attribute for click handler", () => {
+    document.body.innerHTML = '<a href="patterns/throwaway-spike.md">link</a>';
+    rewritePatternLinks(document.body);
+    expect(document.querySelector("a").dataset.pattern).toBe("throwaway-spike");
+  });
+
+  it("rewrites relative .md links (related patterns)", () => {
+    document.body.innerHTML = '<a href="autonomous-agent.md">link</a>';
+    rewritePatternLinks(document.body);
+    const a = document.querySelector("a");
+    expect(a.getAttribute("href")).toBe("#autonomous-agent");
+    expect(a.dataset.pattern).toBe("autonomous-agent");
+  });
 });

@@ -42,9 +42,13 @@ export const buildTocHtml = (headings) => {
 };
 
 export const rewritePatternLinks = (container) => {
-  container.querySelectorAll('a[href^="patterns/"]').forEach((a) => {
-    const m = a.getAttribute("href").match(/patterns\/([^.]+)\.md/);
-    if (m) a.setAttribute("href", "#" + m[1]);
+  container.querySelectorAll('a[href$=".md"]').forEach((a) => {
+    const href = a.getAttribute("href");
+    const m = href.match(/(?:patterns\/)?([^/.]+)\.md$/);
+    if (m && !href.startsWith("http")) {
+      a.setAttribute("href", "#" + m[1]);
+      a.dataset.pattern = m[1];
+    }
   });
 };
 
