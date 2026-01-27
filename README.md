@@ -2,6 +2,8 @@
 
 An attempt to make sense of emerging patterns in AI-assisted software development, drawn from research, personal observations and experiments.
 
+Powers: https://jackrwstevenson.github.io/agent-pattern-library/
+
 ## Patterns
 
 | Pattern                                                                | Description                                                                                                                                                           | Novel Insight                                                                                                                                                                           |
