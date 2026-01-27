@@ -1,0 +1,14 @@
+{
+  "name": "agent-pattern-library",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve docs",
+    "test": "vitest run --environment happy-dom",
+    "test:watch": "vitest --environment happy-dom"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0",
+    "happy-dom": "^15.0.0"
+  }
+}

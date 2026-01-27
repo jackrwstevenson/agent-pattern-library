@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Agent Pattern Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <div>
+          <a href="#" data-page="readme" class="active">Home</a
+          ><a href="#patterns" data-page="patterns">Patterns</a>
+        </div>
+        <div>
+          <a
+            href="https://github.com/jackrwstevenson/agent-pattern-library"
+            target="_blank"
+            rel="noopener"
+            id="repo"
+            >GitHub</a
+          ><button id="theme" aria-label="Toggle dark mode">Light</button>
+        </div>
+      </nav>
+      <main id="content"></main>
+      <aside id="toc"></aside>
+      <footer>Agent Pattern Library</footer>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
