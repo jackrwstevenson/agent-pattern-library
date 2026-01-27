@@ -2,7 +2,7 @@
   --bg: #0a0a0f;
   --fg: #d0d0d0;
   --muted: #555;
-  --accent: #00f0ff;
+  --accent: #e5e5e5;
   --border: #1a1a2e;
 }
 [data-theme="light"] {
@@ -18,7 +18,7 @@
   box-sizing: border-box;
 }
 body {
-  font: 15px/1.8 "JetBrains Mono", monospace;
+  font: 16px/1.7 "Inter", sans-serif;
   background: var(--bg);
   color: var(--fg);
 }
@@ -46,28 +46,28 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Orbitron", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin: 2.5rem 0 1rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 2rem 0 1rem;
 }
 h1 {
-  font-size: 1.4rem;
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--accent);
 }
 h2 {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: var(--accent);
   border-bottom: 1px solid var(--border);
   padding-bottom: 0.5rem;
 }
 h3 {
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   color: var(--fg);
 }
 h4 {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--muted);
 }
 p,
@@ -93,13 +93,15 @@ code {
   background: var(--border);
   padding: 0.15em 0.4em;
   font-size: 0.9em;
+  font-family: "JetBrains Mono", monospace;
   border-radius: 3px;
 }
 pre {
   background: var(--border);
   padding: 1rem;
   overflow-x: auto;
-  font-size: 0.85em;
+  font-size: 0.9em;
+  font-family: "JetBrains Mono", monospace;
   border-radius: 4px;
   border-left: 3px solid var(--accent);
 }
@@ -120,10 +122,9 @@ td {
 }
 th {
   color: var(--accent);
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 blockquote {
   border-left: 3px solid var(--accent);
@@ -143,10 +144,9 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 nav a {
   color: var(--muted);
@@ -164,12 +164,11 @@ nav a.active {
   border: 1px solid var(--border);
   color: var(--muted);
   font: inherit;
-  padding: 0.3rem 0.6rem;
-  border-radius: 3px;
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 #theme {
   margin-left: 0.5rem;
@@ -192,7 +191,7 @@ button:focus-visible {
 }
 #content {
   min-height: 60vh;
-  max-width: 72ch;
+  max-width: 90ch;
 }
 #toc {
   display: none;
@@ -203,13 +202,13 @@ button:focus-visible {
     position: sticky;
     top: 2rem;
     align-self: start;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
   }
 }
 #toc h4 {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   color: var(--muted);
   margin: 0 0 0.75rem;
   border: 0;
@@ -248,18 +247,15 @@ button:focus-visible {
   border-bottom: 1px solid var(--border);
 }
 .patterns a {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 .patterns small {
   display: block;
   color: var(--muted);
-  font-size: 0.8em;
+  font-size: 0.85rem;
   margin-top: 0.3rem;
-  text-transform: none;
-  letter-spacing: 0;
 }
 footer {
   grid-column: 1/-1;
@@ -267,8 +263,5 @@ footer {
   padding-top: 1rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 0.8em;
-  font-family: "Orbitron", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 0.85rem;
 }
