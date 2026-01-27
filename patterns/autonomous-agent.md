@@ -57,7 +57,7 @@ You cannot skip to autonomous operation. The progression matters:
 2. **Task selection and monitoring arrive together**: An agent that prioritises without monitoring will optimise for the wrong things; monitoring without prioritisation leads to thrashing
 3. **Values exist from the start**: Even basic coordination requires some operating principles. Values become explicit as autonomy increases
 
-### Implementation Approach (Constrained)
+### Implementation Approach
 
 Given current limitations, a realistic implementation keeps humans in the loop at key gates:
 
