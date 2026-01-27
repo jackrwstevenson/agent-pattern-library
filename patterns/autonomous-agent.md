@@ -1,6 +1,6 @@
 # Autonomous Agent
 
-> **Candidate Draft**: This pattern describes a direction rather than current best practice. The prerequisites are steep, the tooling is immature, and **human review of all agent contributions remains essential**. Treat this as a lens for evaluating where agentic tooling is headed, not a recommendation for immediate adoption.
+> **Pattern in Research**: This pattern describes a direction rather than current best practice. The prerequisites are steep, the tooling is immature, and **human review of all agent contributions remains essential**. Treat this as a lens for evaluating where agentic tooling is headed, not a recommendation for immediate adoption.
 
 ## Problem
 
