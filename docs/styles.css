@@ -291,6 +291,28 @@ footer {
   font-size: 0.85rem;
 }
 
+/* Content images */
+#content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+/* Theme-aware images */
+img.light-only {
+  display: none;
+}
+img.dark-only {
+  display: block;
+}
+[data-theme="light"] img.light-only {
+  display: block;
+}
+[data-theme="light"] img.dark-only {
+  display: none;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 600px) {
   .wrap {

@@ -28,22 +28,8 @@ Deploy a hierarchical swarm of agents: planning agents decompose work into non-o
 
 ### Architecture
 
-```
-                    ┌─────────────┐
-                    │   Planner   │
-                    │   (root)    │
-                    └──────┬──────┘
-           ┌───────────────┼───────────────┐
-           ▼               ▼               ▼
-    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-    │  Planner    │ │  Planner    │ │  Planner    │
-    │ (subsystem) │ │ (subsystem) │ │ (subsystem) │
-    └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-           │               │               │
-     ┌─────┼─────┐   ┌─────┼─────┐   ┌─────┼─────┐
-     ▼     ▼     ▼   ▼     ▼     ▼   ▼     ▼     ▼
-   Worker agents execute discrete, non-overlapping tasks
-```
+<img src="../sketches/agent-swarm.png" alt="Agent Swarm Architecture" class="light-only" />
+<img src="../sketches/agent-swarm-dark.png" alt="Agent Swarm Architecture" class="dark-only" />
 
 _Note: Exact hierarchy depth varies by implementation. FastRender used planners assigning to workers; the multi-tier structure above is illustrative._
 
