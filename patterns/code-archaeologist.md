@@ -17,7 +17,7 @@ Use an AI agent to reverse-engineer existing codebases, extracting implicit know
 
 ### Sketch
 
-![Code Archaeologist Sketch](../sketches/code-archaeologist.png)
+![Code Archaeologist Sketch](assets/code-archaeologist.png)
 
 ### How It Works
 

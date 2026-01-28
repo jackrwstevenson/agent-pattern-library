@@ -203,19 +203,19 @@ describe("rewriteThemeImages", () => {
   });
 
   it("adds light-only class to original png image", () => {
-    document.body.innerHTML = '<img src="../sketches/diagram.png" alt="Diagram">';
+    document.body.innerHTML = '<img src="assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const img = document.querySelector("img.light-only");
     expect(img).not.toBeNull();
-    expect(img.getAttribute("src")).toBe("../sketches/diagram.png");
+    expect(img.getAttribute("src")).toBe("assets/diagram.png");
   });
 
   it("creates dark variant with -dark suffix", () => {
-    document.body.innerHTML = '<img src="../sketches/diagram.png" alt="Diagram">';
+    document.body.innerHTML = '<img src="assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const darkImg = document.querySelector("img.dark-only");
     expect(darkImg).not.toBeNull();
-    expect(darkImg.getAttribute("src")).toBe("../sketches/diagram-dark.png");
+    expect(darkImg.getAttribute("src")).toBe("assets/diagram-dark.png");
   });
 
   it("preserves alt text on both images", () => {

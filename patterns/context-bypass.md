@@ -25,7 +25,7 @@ Delegate data-intensive operations to local code APIs. Pass only compact results
 
 ### Sketch
 
-![Context Bypass Sketch](../sketches/context-bypass.png)
+![Context Bypass Sketch](assets/context-bypass.png)
 
 ### Core Principle
 
