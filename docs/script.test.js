@@ -10,9 +10,7 @@ import {
 } from "./script.js";
 
 describe("BASE URL", () => {
-  it("points to raw GitHub content", () => {
-    expect(BASE).toContain("raw.githubusercontent.com");
-    expect(BASE).toContain("agent-pattern-library");
+  it("ends with slash for path joining", () => {
     expect(BASE.endsWith("/")).toBe(true);
   });
 });

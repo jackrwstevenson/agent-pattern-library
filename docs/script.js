@@ -1,5 +1,12 @@
-export const BASE =
+const GITHUB_BASE =
   "https://raw.githubusercontent.com/jackrwstevenson/agent-pattern-library/main/";
+const LOCAL_BASE = "/";
+
+const isLocalhost =
+  typeof window !== "undefined" &&
+  (location.hostname === "localhost" || location.hostname === "127.0.0.1");
+
+export const BASE = isLocalhost ? LOCAL_BASE : GITHUB_BASE;
 
 export const slugify = (t) =>
   t

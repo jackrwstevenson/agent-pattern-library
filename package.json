@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx serve docs",
+    "dev": "npx serve",
     "test": "vitest run --environment happy-dom",
     "test:watch": "vitest --environment happy-dom"
   },
