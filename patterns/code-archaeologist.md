@@ -15,6 +15,10 @@ Teams replacing legacy systems often accidentally lose important behaviour or fa
 
 Use an AI agent to reverse-engineer existing codebases, extracting implicit knowledge into an explicit document that humans then curate before specification begins.
 
+### Sketch
+
+![Code Archaeologist Sketch](../sketches/code-archaeologist.png)
+
 ### How It Works
 
 - **Input**: Existing codebase

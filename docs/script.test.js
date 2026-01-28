@@ -7,6 +7,7 @@ import {
   renderPatternsList,
   buildTocHtml,
   rewritePatternLinks,
+  rewriteThemeImages,
 } from "./script.js";
 
 describe("BASE URL", () => {
@@ -193,5 +194,68 @@ describe("rewritePatternLinks", () => {
     const a = document.querySelector("a");
     expect(a.getAttribute("href")).toBe("#autonomous-agent");
     expect(a.dataset.pattern).toBe("autonomous-agent");
+  });
+});
+
+describe("rewriteThemeImages", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("adds light-only class to original png image", () => {
+    document.body.innerHTML = '<img src="../sketches/diagram.png" alt="Diagram">';
+    rewriteThemeImages(document.body);
+    const img = document.querySelector("img.light-only");
+    expect(img).not.toBeNull();
+    expect(img.getAttribute("src")).toBe("../sketches/diagram.png");
+  });
+
+  it("creates dark variant with -dark suffix", () => {
+    document.body.innerHTML = '<img src="../sketches/diagram.png" alt="Diagram">';
+    rewriteThemeImages(document.body);
+    const darkImg = document.querySelector("img.dark-only");
+    expect(darkImg).not.toBeNull();
+    expect(darkImg.getAttribute("src")).toBe("../sketches/diagram-dark.png");
+  });
+
+  it("preserves alt text on both images", () => {
+    document.body.innerHTML = '<img src="test.png" alt="Test Image">';
+    rewriteThemeImages(document.body);
+    const imgs = document.querySelectorAll("img");
+    expect(imgs[0].getAttribute("alt")).toBe("Test Image");
+    expect(imgs[1].getAttribute("alt")).toBe("Test Image");
+  });
+
+  it("inserts dark image after light image", () => {
+    document.body.innerHTML = '<img src="test.png" alt="Test">';
+    rewriteThemeImages(document.body);
+    const imgs = document.querySelectorAll("img");
+    expect(imgs[0].classList.contains("light-only")).toBe(true);
+    expect(imgs[1].classList.contains("dark-only")).toBe(true);
+  });
+
+  it("ignores non-png images", () => {
+    document.body.innerHTML = '<img src="photo.jpg" alt="Photo">';
+    rewriteThemeImages(document.body);
+    const imgs = document.querySelectorAll("img");
+    expect(imgs).toHaveLength(1);
+    expect(imgs[0].classList.contains("light-only")).toBe(false);
+  });
+
+  it("handles multiple png images", () => {
+    document.body.innerHTML = `
+      <img src="first.png" alt="First">
+      <img src="second.png" alt="Second">
+    `;
+    rewriteThemeImages(document.body);
+    const imgs = document.querySelectorAll("img");
+    expect(imgs).toHaveLength(4);
+  });
+
+  it("handles paths with multiple dots", () => {
+    document.body.innerHTML = '<img src="../path/file.name.png" alt="Test">';
+    rewriteThemeImages(document.body);
+    const darkImg = document.querySelector("img.dark-only");
+    expect(darkImg.getAttribute("src")).toBe("../path/file.name-dark.png");
   });
 });

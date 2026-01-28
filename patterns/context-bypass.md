@@ -23,6 +23,10 @@ The fundamental issue: we're trying to bring the data to the model when we shoul
 
 Delegate data-intensive operations to local code APIs. Pass only compact results back to the LLM.
 
+### Sketch
+
+![Context Bypass Sketch](../sketches/context-bypass.png)
+
 ### Core Principle
 
 **Don't put the data in context. Put the answer in context.**

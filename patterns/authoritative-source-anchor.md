@@ -15,6 +15,10 @@ The result is either unreliable output or short autonomous runs with heavy human
 
 Embed authoritative external specifications directly in the repository, making canonical sources available to agents during development. Agents cite these sources in code comments, creating an audit trail from standard to implementation.
 
+### Sketch
+
+![Authoritative Source Anchor Sketch](../sketches/authoritative-source-anchor.png)
+
 ### How It Works
 
 1. **Embed specifications**: Add authoritative sources to the repository (git submodules, vendored docs, or local mirrors)
@@ -35,18 +39,19 @@ Direct access to authoritative sources transforms "I think the spec says..." int
 
 ### Implementation Approaches
 
-| Approach | Pros | Cons |
-| --- | --- | --- |
-| Git submodules | Version-pinned, standard tooling, works offline | Repository bloat, submodule complexity |
-| Vendored copies | Simple, no external dependencies | Manual updates, potential licensing issues |
-| MCP server | Dynamic access, no repo bloat | Requires infrastructure, network dependency |
-| Local documentation mirror | Fast access, searchable | Storage overhead, sync maintenance |
+| Approach                   | Pros                                            | Cons                                        |
+| -------------------------- | ----------------------------------------------- | ------------------------------------------- |
+| Git submodules             | Version-pinned, standard tooling, works offline | Repository bloat, submodule complexity      |
+| Vendored copies            | Simple, no external dependencies                | Manual updates, potential licensing issues  |
+| MCP server                 | Dynamic access, no repo bloat                   | Requires infrastructure, network dependency |
+| Local documentation mirror | Fast access, searchable                         | Storage overhead, sync maintenance          |
 
 ### Limitations and Mitigations
 
 **Repository size**: Embedding full specifications can bloat repositories significantly.
 
 Mitigations:
+
 - Use sparse checkouts for large spec repos
 - Include only relevant sections
 - Consider MCP servers for very large corpora
@@ -54,6 +59,7 @@ Mitigations:
 **Spec maintenance**: Embedded specifications can become stale.
 
 Mitigations:
+
 - Dependabot or similar for submodule updates
 - Scheduled review of pinned versions
 - Clear ownership of spec currency
@@ -61,6 +67,7 @@ Mitigations:
 **Agent navigation**: Large specifications can overwhelm context windows.
 
 Mitigations:
+
 - Index documents with clear section markers
 - Use progressive loading (table of contents first, then relevant sections)
 - Provide navigation hints in repository documentation
@@ -68,6 +75,7 @@ Mitigations:
 **Licensing**: Some specifications have restrictive redistribution terms.
 
 Mitigations:
+
 - Review licensing before embedding
 - Use submodules pointing to official repos rather than copies
 - Document licensing constraints

@@ -17,6 +17,12 @@ The naive approach of "just run more agents" quickly degrades. Conflict resoluti
 
 Deploy a hierarchical swarm of agents: planning agents decompose work into non-overlapping tasks, worker agents execute those tasks in parallel. The decomposition strategy minimises merge conflicts by design. Design the swarm so human engineers remain in the loop to review, approve, and intervene on accuracy, security, and/or architecture sensitive changes.
 
+### Sketch
+
+![Agent Swarm Sketch](../sketches/agent-swarm.png)
+
+_Note: Exact hierarchy depth varies by implementation. FastRender used planners assigning to workers; the multi-tier structure above is illustrative._
+
 ### How It Works
 
 1. **Hierarchical structure**: Planning agents sit above worker agents in a tree
@@ -25,15 +31,6 @@ Deploy a hierarchical swarm of agents: planning agents decompose work into non-o
 4. **Conflict minimisation**: Decomposition deliberately avoids simultaneous work on shared code
 5. **Error tolerance**: Small errors in intermediate commits get fixed quickly rather than blocking progress
 6. **Human-in-the-loop controls**: Human reviewers sample or are automatically flagged on high-risk changes (security, public APIs, architectural boundaries) and gate merges for release branches.
-
-### Architecture
-
-<img src="../sketches/agent-swarm.png" alt="Agent Swarm Architecture" class="light-only" />
-<img src="../sketches/agent-swarm-dark.png" alt="Agent Swarm Architecture" class="dark-only" />
-
-_Note: Exact hierarchy depth varies by implementation. FastRender used planners assigning to workers; the multi-tier structure above is illustrative._
-
-Humans validate, approve, and merge high-risk or cross-cutting changes.
 
 ### Why This Works
 

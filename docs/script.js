@@ -59,6 +59,23 @@ export const rewritePatternLinks = (container) => {
   });
 };
 
+export const rewriteThemeImages = (container) => {
+  container.querySelectorAll('img[src$=".png"]').forEach((img) => {
+    const src = img.getAttribute("src");
+    const darkSrc = src.replace(/\.png$/, "-dark.png");
+    const alt = img.getAttribute("alt") || "";
+
+    img.classList.add("light-only");
+
+    const darkImg = document.createElement("img");
+    darkImg.setAttribute("src", darkSrc);
+    darkImg.setAttribute("alt", alt);
+    darkImg.classList.add("dark-only");
+
+    img.after(darkImg);
+  });
+};
+
 // App initialisation - only runs in browser with DOM ready
 if (typeof window !== "undefined" && document.querySelector("#theme")) {
   let patterns = [];
@@ -103,6 +120,7 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
         if (p === "readme" && !patterns.length) patterns = parsePatterns(text);
         $("#content").innerHTML = marked.parse(text);
         rewritePatternLinks($("#content"));
+        rewriteThemeImages($("#content"));
         buildToc();
       })
       .catch(() => {

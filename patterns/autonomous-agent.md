@@ -24,6 +24,10 @@ Enable agents to operate as self-sustaining contributors through three capabilit
 
 Together these capabilities turn shipped systems into self-improving platforms where architecture, delivery, and governance co-evolve.
 
+### Sketch
+
+![Autonomous Agent Sketch](../sketches/autonomous-agent.png)
+
 ### The Constraint
 
 Full autonomy promises to remove human scheduling as a bottleneck. But today, **human review of all agent output is non-negotiable**; code review, PR approval, and verification remain essential guardrails.
