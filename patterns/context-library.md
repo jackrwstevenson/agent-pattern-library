@@ -44,27 +44,12 @@ Agents read this context to understand your world before generating anything.
 
 ## Structure
 
-```
-context/
-├── standards/
-│   ├── api-design.md
-│   ├── security-policy.md
-│   └── testing-requirements.md
-├── architecture/
-│   ├── system-overview.md
-│   └── service-boundaries.md
-├── design-system/
-│   └── component-guide.md
-├── domain/
-│   ├── glossary.md
-│   └── entity-models.md
-├── components/
-│   ├── auth-client.md
-│   └── event-bus.md
-└── decisions/
-    ├── ADR-001-database-choice.md
-    └── ADR-002-auth-strategy.md
-```
+- **standards/** - api-design.md, security-policy.md, testing-requirements.md
+- **architecture/** - system-overview.md, service-boundaries.md
+- **design-system/** - component-guide.md
+- **domain/** - glossary.md, entity-models.md
+- **components/** - auth-client.md, event-bus.md
+- **decisions/** - ADR-001-database-choice.md, ADR-002-auth-strategy.md
 
 ## Costs and Benefits
 

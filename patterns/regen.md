@@ -17,11 +17,9 @@ Manual updates don't scale. Teams either fall behind or spend disproportionate e
 
 Treat specifications and implementations as functions, not artefacts.
 
-```
-SPEC = f(requirements, corpus)
-PLAN = f(SPEC)
-CODE = f(PLAN)
-```
+- SPEC = f(requirements, corpus)
+- PLAN = f(SPEC)
+- CODE = f(PLAN)
 
 When inputs change, outputs regenerate - all the way down. A security standard updates, affected specs regenerate, plans adapt, and code follows. This isn't rework; it's keeping the entire system aligned with reality.
 
@@ -31,12 +29,9 @@ The pattern works because regeneration is cheap. Agents draft; humans review.
 
 Every SPEC.md declares what it depends on:
 
-```markdown
-## Dependencies
-- corpus/standards/security-policy.md@v2.1
-- corpus/components/auth-client.md@v1.3
-- corpus/domain/customer-model.md@v4.0
-```
+- `corpus/standards/security-policy.md@v2.1`
+- `corpus/components/auth-client.md@v1.3`
+- `corpus/domain/customer-model.md@v4.0`
 
 When any dependency changes, dependency scanning identifies which specs need review. This can be automated: a security policy update triggers a list of affected specs, the agent proposes updates, and humans approve or reject.
 
@@ -47,34 +42,6 @@ When any dependency changes, dependency scanning identifies which specs need rev
 **Discovery during implementation** surfaces gaps. When building reveals the spec missed something, the spec updates, the plan adjusts, and code changes cascade. Don't patch around gaps - fix them at the source.
 
 **Scheduled reviews** catch drift. Periodic freshness checks ensure nothing falls too far behind. Treat it like dependency updates: regular, incremental, not a massive catching-up exercise.
-
-### Regeneration Workflow
-
-```
-┌──────────────────┐
-│  Input Changes   │  Context Library update, discovery, or scheduled review
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│  Identify Scope  │  Dependency scan finds affected specs
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│  Agent Drafts    │  Propose updated spec, plan, or code
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│  Human Reviews   │  Approve, modify, or reject changes
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│  Apply Changes   │  Merge updates, run tests, deploy
-└──────────────────┘
-```
 
 ### Living Systems
 

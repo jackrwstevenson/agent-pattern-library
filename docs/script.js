@@ -61,10 +61,11 @@ export const rewritePatternLinks = (container) => {
 
 export const rewriteThemeImages = (container) => {
   container.querySelectorAll('img[src$=".png"]').forEach((img) => {
-    const src = img.getAttribute("src");
+    const src = img.getAttribute("src").replace(/^docs\//, "");
     const darkSrc = src.replace(/\.png$/, "-dark.png");
     const alt = img.getAttribute("alt") || "";
 
+    img.setAttribute("src", src);
     img.classList.add("light-only");
 
     const darkImg = document.createElement("img");

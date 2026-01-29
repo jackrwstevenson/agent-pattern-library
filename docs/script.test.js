@@ -202,16 +202,18 @@ describe("rewriteThemeImages", () => {
     document.body.innerHTML = "";
   });
 
-  it("adds light-only class to original png image", () => {
-    document.body.innerHTML = '<img src="assets/diagram.png" alt="Diagram">';
+  it("strips docs/ prefix and adds light-only class", () => {
+    document.body.innerHTML =
+      '<img src="docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const img = document.querySelector("img.light-only");
     expect(img).not.toBeNull();
     expect(img.getAttribute("src")).toBe("assets/diagram.png");
   });
 
-  it("creates dark variant with -dark suffix", () => {
-    document.body.innerHTML = '<img src="assets/diagram.png" alt="Diagram">';
+  it("strips docs/ prefix on dark variant", () => {
+    document.body.innerHTML =
+      '<img src="docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const darkImg = document.querySelector("img.dark-only");
     expect(darkImg).not.toBeNull();

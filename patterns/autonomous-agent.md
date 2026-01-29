@@ -26,7 +26,7 @@ Together these capabilities turn shipped systems into self-improving platforms w
 
 ### Sketch
 
-![Autonomous Agent Sketch](assets/autonomous-agent.png)
+![Autonomous Agent Sketch](docs/assets/autonomous-agent.png)
 
 ### The Constraint
 

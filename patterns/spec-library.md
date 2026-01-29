@@ -19,69 +19,38 @@ The specification defines _what_ the library does. The tests prove _whether_ an 
 
 ## Structure
 
-```
-library-name/
-├── SPEC.md           # Behavioural requirements in plain language
-├── tests.yaml        # Language-agnostic test cases
-├── INSTALL.md        # Generation instructions for users
-└── examples/         # Sample outputs for reference (optional)
-```
+- **SPEC.md** - Behavioural requirements in plain language
+- **tests.yaml** - Language-agnostic test cases
+- **INSTALL.md** - Generation instructions for users
+- **examples/** - Sample outputs for reference (optional)
 
 ### SPEC.md Format
 
-```markdown
-# Library Name
+A SPEC.md should include:
 
-## Purpose
-
-[What problem this solves and why it exists]
-
-## Functions
-
-### function_name(param1: type, param2: type) → return_type
-
-[Precise behavioural description, what it does, not how]
-
-**Constraints**:
-
-- [Invariant that must hold]
-- [Performance or resource bounds, if any]
-
-**Edge cases**:
-
-- [How to handle empty/null inputs]
-- [Boundary conditions]
-```
+- **Purpose**: What problem this solves and why it exists
+- **Functions**: Each with signature, precise behavioural description, constraints, and edge cases
+  - **Constraints**: Invariants that must hold, performance or resource bounds
+  - **Edge cases**: How to handle empty/null inputs, boundary conditions
 
 ### tests.yaml Format
 
-```yaml
-tests:
-  - name: "basic case"
-    function: "function_name"
-    input: ["arg1", "arg2"]
-    expected: "result"
+Each test case defines:
 
-  - name: "edge case - empty input"
-    function: "function_name"
-    input: ["", null]
-    expected: "default"
-
-  - name: "error case - invalid type"
-    function: "function_name"
-    input: [123, "wrong"]
-    throws: "TypeError"
-```
+- **name**: Descriptive label (e.g., "basic case", "edge case - empty input", "error case - invalid type")
+- **function**: The function under test
+- **input**: Arguments to pass
+- **expected**: The expected return value, or **throws** for error cases
 
 ### Generation Prompt
 
-```
-Read SPEC.md for behavioural requirements.
-Parse tests.yaml for test cases.
-Generate tests in [TARGET_LANGUAGE] first (TDD red-green-refactor).
-Implement functions until all tests pass.
-Follow [LOCAL_CONVENTIONS] for style and idioms.
-```
+The generation prompt instructs the agent to:
+
+1. Read SPEC.md for behavioural requirements
+2. Parse tests.yaml for test cases
+3. Generate tests in the target language first (TDD red-green-refactor)
+4. Implement functions until all tests pass
+5. Follow local conventions for style and idioms
 
 ## Tradeoffs
 
@@ -109,17 +78,8 @@ Follow [LOCAL_CONVENTIONS] for style and idioms.
 
 ## The Inversion
 
-Traditional flow:
-
-```
-Specification → Implementation → Distribution → Usage
-```
-
-Codeless flow:
-
-```
-Specification + Tests → Distribution → Generation → Usage
-```
+- **Traditional flow**: Specification, Implementation, Distribution, Usage
+- **Codeless flow**: Specification + Tests, Distribution, Generation, Usage
 
 The novel insight: specifications and tests are the durable artefacts; implementations are disposable.
 

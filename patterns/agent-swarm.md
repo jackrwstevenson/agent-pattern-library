@@ -19,7 +19,7 @@ Deploy a hierarchical swarm of agents: planning agents decompose work into non-o
 
 ### Sketch
 
-![Agent Swarm Sketch](assets/agent-swarm.png)
+![Agent Swarm Sketch](docs/assets/agent-swarm.png)
 
 _Note: Exact hierarchy depth varies by implementation. FastRender used planners assigning to workers; the multi-tier structure above is illustrative._
 

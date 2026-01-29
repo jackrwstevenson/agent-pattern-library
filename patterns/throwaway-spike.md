@@ -27,17 +27,13 @@ Treat the agent as a focused, constraint-driven developer with a strict brief: s
 
 Before starting, the human prepares a structured brief:
 
-```
-## Spike Brief
-
-**Question to answer**: [One sentence the spike must resolve]
-**Success criterion**: [Observable outcome that proves/disproves the idea]
-**Sample inputs**: [Test data or scenarios to use]
-**Allowed libraries**: [Explicit allowlist]
-**Forbidden actions**: [e.g., no network calls, no real credentials, no database writes]
-**Time box**: [Maximum effort, e.g., 2 hours]
-**Deliverables**: [Code, README, verification steps, risk notes]
-```
+- **Question to answer**: One sentence the spike must resolve
+- **Success criterion**: Observable outcome that proves/disproves the idea
+- **Sample inputs**: Test data or scenarios to use
+- **Allowed libraries**: Explicit allowlist
+- **Forbidden actions**: e.g., no network calls, no real credentials, no database writes
+- **Time box**: Maximum effort, e.g., 2 hours
+- **Deliverables**: Code, README, verification steps, risk notes
 
 ### Spike Characteristics
 
@@ -48,33 +44,6 @@ Before starting, the human prepares a structured brief:
 - **Minimal structure**: Prefer a single file unless the idea requires multiple files to demonstrate the point
 - **Explainable output**: Agent returns code, run instructions, sample inputs/expected outputs, assumptions made, and a risk checklist
 - **Human gate**: A named human reviewer must run the artefact and sign off before any next steps
-
-### Spike Workflow
-
-```
-┌─────────────────┐
-│  1. Define      │  Human writes spike brief with success criterion
-│     Brief       │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  2. Agent       │  AI generates prototype within constraints
-│     Generates   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  3. Human       │  Run provided steps, observe results
-│     Verifies    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  4. Decision    │  Proceed → Productionize (new tickets)
-│     Gate        │  Iterate → Another spike with refined brief
-└─────────────────┘  Discard → Archive learnings, delete code
-```
 
 ### Required Agent Deliverables
 

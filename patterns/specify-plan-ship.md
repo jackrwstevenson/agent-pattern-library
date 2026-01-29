@@ -15,12 +15,6 @@ Teams using AI assistants often experience a frustrating pattern: impressive ini
 
 Structure AI-assisted development into three distinct phases, each with explicit artefacts and verification gates.
 
-```
-Idea → SPEC.md → PLAN.md → Working Code
-        ↑           ↑          ↑
-    Human gate  Human gate  Tests pass
-```
-
 For brownfield environments replacing legacy systems, use the [Code Archaeologist](code-archaeologist.md) pattern first to extract implicit business rules before specification begins.
 
 ### Phase 1: Specification

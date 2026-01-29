@@ -25,40 +25,16 @@ Delegate data-intensive operations to local code APIs. Pass only compact results
 
 ### Sketch
 
-![Context Bypass Sketch](assets/context-bypass.png)
+![Context Bypass Sketch](docs/assets/context-bypass.png)
 
 ### Core Principle
 
 **Don't put the data in context. Put the answer in context.**
 
-Instead of this:
+Instead of dumping 500,000 rows of event logs into context and asking the LLM to parse them, delegate to a local tool:
 
-```
-Here are 500,000 rows of event logs: [massive CSV dump]
-
-Find customers who spend less than 1 minute in the app
-and were active in the last 30 days...
-```
-
-Do this:
-
-```
-[Tool call]
-query_customers(
-  avg_session_lt=60,
-  last_active_within_days=30,
-  fields=["id", "email", "avg_session_s", "last_active"],
-  limit=50
-)
-
-[Result]
-{
-  count: 375,
-  stats: {mean: 42, p90: 58},
-  preview: [...],
-  cursor: "..."
-}
-```
+- **Tool call**: `query_customers(avg_session_lt=60, last_active_within_days=30, fields=[...], limit=50)`
+- **Result**: Compact summary with count, stats (mean, p90), preview rows, and cursor for pagination
 
 The LLM receives intent plus answer, not raw data requiring expensive, error-prone parsing.
 

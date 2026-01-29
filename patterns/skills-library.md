@@ -34,15 +34,10 @@ Skills often _reference_ context. A security review skill (HOW to review) loads 
 
 Package each skill as a portable unit:
 
-```
-security-review/
-├── SKILL.md           # Step-by-step instructions
-├── checklist.yaml     # Structured criteria to verify
-├── scripts/
-│   └── scan.sh        # Automated checks to run
-└── examples/
-    └── good-review.md # Reference output
-```
+- **SKILL.md** - Step-by-step instructions
+- **checklist.yaml** - Structured criteria to verify
+- **scripts/** - Automated checks to run (e.g., scan.sh)
+- **examples/** - Reference output (e.g., good-review.md)
 
 When an agent encounters a matching task ("review this PR for security"), it loads the skill and follows the instructions.
 
@@ -60,29 +55,7 @@ When an agent encounters a matching task ("review this PR for security"), it loa
 
 ### Multi-Product Distribution
 
-Platform teams maintain skills that product teams consume:
-
-```
-┌──────────────────────┐
-│  Platform Team       │
-│  Maintains:          │
-│  - security-review   │
-│  - incident-response │
-│  - api-design        │
-│  - code-review       │
-└────────┬─────────────┘
-         │
-         │ Publishes versioned skills
-         │
-    ┌────┴────┬────────────┐
-    ▼         ▼            ▼
-┌────────┐ ┌────────┐ ┌────────┐
-│Product │ │Product │ │Product │
-│  A     │ │  B     │ │  C     │
-└────────┘ └────────┘ └────────┘
-```
-
-When the platform team improves a procedure, all products apply the updated workflow automatically.
+Platform teams maintain skills (security-review, incident-response, api-design, code-review) that product teams consume. When the platform team improves a procedure, all products apply the updated workflow automatically.
 
 ### Progressive Loading
 
