@@ -61,7 +61,7 @@ export const rewritePatternLinks = (container) => {
 
 export const rewriteThemeImages = (container) => {
   container.querySelectorAll('img[src$=".png"]').forEach((img) => {
-    const src = img.getAttribute("src").replace(/^docs\//, "");
+    const src = img.getAttribute("src").replace(/^(\.\.\/)?docs\//, "");
     const darkSrc = src.replace(/\.png$/, "-dark.png");
     const alt = img.getAttribute("alt") || "";
 

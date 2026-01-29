@@ -204,7 +204,7 @@ describe("rewriteThemeImages", () => {
 
   it("strips docs/ prefix and adds light-only class", () => {
     document.body.innerHTML =
-      '<img src="docs/assets/diagram.png" alt="Diagram">';
+      '<img src="../docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const img = document.querySelector("img.light-only");
     expect(img).not.toBeNull();
@@ -213,7 +213,7 @@ describe("rewriteThemeImages", () => {
 
   it("strips docs/ prefix on dark variant", () => {
     document.body.innerHTML =
-      '<img src="docs/assets/diagram.png" alt="Diagram">';
+      '<img src="../docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const darkImg = document.querySelector("img.dark-only");
     expect(darkImg).not.toBeNull();

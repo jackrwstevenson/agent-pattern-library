@@ -17,7 +17,7 @@ Embed authoritative external specifications directly in the repository, making c
 
 ### Sketch
 
-![Authoritative Source Anchor Sketch](docs/assets/authoritative-source-anchor.png)
+![Authoritative Source Anchor Sketch](../docs/assets/authoritative-source-anchor.png)
 
 ### How It Works
 
