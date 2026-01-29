@@ -27,13 +27,13 @@ Deploy a hierarchical swarm of agents: planning agents decompose work into non-o
 3. **Parallel execution**: Workers execute assigned tasks concurrently
 4. **Conflict minimisation**: Decomposition deliberately avoids simultaneous work on shared code
 5. **Error tolerance**: Small errors in intermediate commits get fixed quickly rather than blocking progress
-6. **Human-in-the-loop controls**: Human reviewers sample or are automatically flagged on high-risk changes (security, public APIs, architectural boundaries) and gate merges for release branches.
+6. **Controls**: Human reviewers gate merges (especially to release branches); judge agents should escalate and block when tests/security checks fail rather than merely flagging. Use automated AI pre-reviews to reduce reviewer load but keep final authority with humans for high-risk changes.
 
 ## Costs and Benefits
 
 ### Benefits
 
-- **Massive parallelism**: Thousands of concurrent contributors
+- **Parallelism**: Potential for very high parallelism exists but only in controlled, high-infrastructure settings with disciplined verification; scale does not guarantee quality and integration failures are common without rigorous orchestration
 - **Subsystem isolation**: Dedicated machines per subsystem reduce interference
 - **Human oversight where it matters**: Agents free engineers from repetitive work so humans can concentrate on review, security, and architectural integrity.
 
@@ -43,16 +43,27 @@ Deploy a hierarchical swarm of agents: planning agents decompose work into non-o
 - **Quality variance**: Output quality varies across agents and tasks
 - **Debugging difficulty**: Tracing issues across swarm history is harder
 - **Human review overhead**: Mandatory checkpoints and targeted reviews add process overhead, acceptable tradeoff to maintain correctness, security, and design intent.
+- **Throughput risk**: throughput may collapse under naive locking or poorly designed optimistic concurrency.
+
+## Guardrails
+
+Introduce explicit guardrails to shift checks left and keep the swarm productive:
+
+- Pre-commit checks and CI gates that run before merges to main/release branches
+- Cyclomatic complexity, function length, and duplication thresholds to block low-quality large commits
+- Automated AI pre-review agents that annotate PRs and surface probable issues to human reviewers
+- Git-backed memory (JSONL issues) and a repository map/context-engineering layer so agents load only relevant context
+- Consider formal verification for security-critical subsystems
 
 ## When to Use
 
-- Large greenfield projects with clear specification
-- Codebases with naturally decomposable structure
+- When you have both infrastructure and disciplined verification processes (explicit planning phases, pre-commit guardrails, CI that can reject noisy merges)
 - Organisations with infrastructure to run many concurrent agents
 - Work that benefits from specialisation (different agents for different subsystems)
 
 ## When NOT to Use
 
+- When you lack the processes to enforce guardrails
 - Small projects where coordination overhead exceeds benefits
 - Tightly-coupled code that resists decomposition
 - Brownfield projects with unclear boundaries
