@@ -80,7 +80,6 @@ Combining techniques produces more complete analysis than any single approach.
 - **Time investment**: Analysis takes effort before any new code exists
 - **Requires code access**: Agent needs read access to legacy codebase
 - **Incomplete extraction**: Some knowledge exists only in people's heads
-- **Curation bottleneck**: Human review of analysis can be slow
 
 ## When to Use
 
@@ -95,7 +94,6 @@ Combining techniques produces more complete analysis than any single approach.
 - Greenfield development with no legacy system
 - Simple rewrites where behaviour is well-documented
 - Throwaway prototypes not intended as replacements
-- Systems so broken that preserving behaviour is undesirable
 
 ## Related Patterns
 

@@ -6,14 +6,13 @@ AI agents working on standards-compliant code must make decisions about specific
 
 - **Hallucinate specifications**: Confidently generate code based on incorrect or outdated understanding of standards
 - **Require constant human verification**: Engineers must check every standards-related decision
-- **Limit autonomous work**: Complex tasks requiring spec compliance need frequent human intervention
 - **Leave no audit trail**: No way to verify which version of a standard informed implementation choices
 
 The result is either unreliable output or short autonomous runs with heavy human oversight.
 
 ## Solution
 
-Embed authoritative external specifications directly in the repository, making canonical sources available to agents during development. Agents cite these sources in code comments, creating an audit trail from standard to implementation.
+Embed authoritative external specifications directly in the repository, making canonical sources available to agents during development.
 
 ### Sketch
 
@@ -35,8 +34,6 @@ The key insight is that agents perform dramatically better when they can **cite 
 - Edge cases and nuances get lost
 - No way to distinguish confident recall from hallucination
 
-Direct access to authoritative sources transforms "I think the spec says..." into "Section 4.3.2 states...". This grounds agent decisions in verifiable facts.
-
 ### Implementation Approaches
 
 | Approach                   | Pros                                            | Cons                                        |
@@ -46,47 +43,13 @@ Direct access to authoritative sources transforms "I think the spec says..." int
 | MCP server                 | Dynamic access, no repo bloat                   | Requires infrastructure, network dependency |
 | Local documentation mirror | Fast access, searchable                         | Storage overhead, sync maintenance          |
 
-### Limitations and Mitigations
-
-**Repository size**: Embedding full specifications can bloat repositories significantly.
-
-Mitigations:
-
-- Use sparse checkouts for large spec repos
-- Include only relevant sections
-- Consider MCP servers for very large corpora
-
-**Spec maintenance**: Embedded specifications can become stale.
-
-Mitigations:
-
-- Dependabot or similar for submodule updates
-- Scheduled review of pinned versions
-- Clear ownership of spec currency
-
-**Agent navigation**: Large specifications can overwhelm context windows.
-
-Mitigations:
-
-- Index documents with clear section markers
-- Use progressive loading (table of contents first, then relevant sections)
-- Provide navigation hints in repository documentation
-
-**Licensing**: Some specifications have restrictive redistribution terms.
-
-Mitigations:
-
-- Review licensing before embedding
-- Use submodules pointing to official repos rather than copies
-- Document licensing constraints
-
 ## Costs and Benefits
 
 ### Benefits
 
 - **Reduced hallucination**: Agents ground decisions in authoritative sources
 - **Longer autonomous runs**: Fewer interruptions for human verification
-- **Audit trail**: Code comments trace decisions to specific spec sections
+- **Audit trail**: Trace decisions to specific spec sections
 - **Reproducible builds**: Pinned versions ensure consistent behaviour
 - **Faster onboarding**: New agents (and humans) have specs at hand
 
@@ -94,7 +57,6 @@ Mitigations:
 
 - **Repository overhead**: Embedded specs increase repo size
 - **Maintenance burden**: Specs must be kept current
-- **Navigation complexity**: Agents need guidance to find relevant sections
 - **Licensing constraints**: Some specs cannot be redistributed
 
 ## When to Use

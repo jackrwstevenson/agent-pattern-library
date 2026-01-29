@@ -27,37 +27,15 @@ Delegate data-intensive operations to local code APIs. Pass only compact results
 
 ![Context Bypass Sketch](../docs/assets/context-bypass.png)
 
-### Core Principle
-
-**Don't put the data in context. Put the answer in context.**
-
-Instead of dumping 500,000 rows of event logs into context and asking the LLM to parse them, delegate to a local tool:
-
-- **Tool call**: `query_customers(avg_session_lt=60, last_active_within_days=30, fields=[...], limit=50)`
-- **Result**: Compact summary with count, stats (mean, p90), preview rows, and cursor for pagination
-
-The LLM receives intent plus answer, not raw data requiring expensive, error-prone parsing.
-
-### Query Design
-
-The critical challenge is **query correctness**: the LLM must translate natural language intent into precise tool calls.
-
-Effective local APIs should:
-
-- Accept semantic parameters (`last_active_within_days`) not just raw filters
-- Return metadata alongside results (`count`, `stats`) for verification
-- Support pagination for iterative exploration
-- Provide clear error messages when queries are malformed
-
 ## Tradeoffs
 
-| Benefit                                          | Cost                                 |
-| ------------------------------------------------ | ------------------------------------ |
-| Handle arbitrarily large datasets                | Must build and maintain local APIs   |
-| Full-data accuracy, not truncated samples        | LLM must correctly formulate queries |
-| Lower token costs                                | Local execution needs sandboxing     |
-| Faster responses (less data transfer)            | Additional infrastructure to deploy  |
-| Leverage battle-tested tools (SQL, grep, pandas) | Debugging spans LLM and local code   |
+| Benefit                                        | Cost                                 |
+| ---------------------------------------------- | ------------------------------------ |
+| Handle arbitrarily large datasets              | Must build and maintain local APIs   |
+| Full-data accuracy, not truncated samples      | LLM must correctly formulate queries |
+| Lower token costs                              | Local execution needs sandboxing     |
+| Faster responses (less data transfer)          | Additional infrastructure to deploy  |
+| Leverage battle-tested tools (SQL, grep, etc.) | Debugging spans LLM and local code   |
 
 ## When to Use
 
@@ -72,18 +50,6 @@ Effective local APIs should:
 - Small datasets that fit comfortably in context
 - Exploratory analysis where filtering criteria emerge through iteration
 - Tasks where query formulation is harder than just reading the data
-- Highly unstructured problems without clear decomposition
-
-## Context Window Growth
-
-Larger context windows reduce how often you must bypass them, but don't eliminate the need. Even with million-token windows:
-
-- Real datasets often exceed any fixed limit
-- Cost scales with tokens used
-- Latency increases with context size
-- Audit and compliance may require local processing
-
-The pattern remains relevant; the threshold simply shifts.
 
 ## Sources
 

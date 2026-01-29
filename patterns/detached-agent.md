@@ -7,13 +7,17 @@ Traditional AI coding assistants require:
 - **IDE installation**: VS Code, Cursor, or specific editors
 - **Local environment**: Development dependencies, API keys, compute resources
 - **Synchronous interaction**: Active session while agent works
-- **Trust in agent execution**: Running code with full access to your machine, credentials, and network
+- **Trust in agent execution**: Running code with full access to your machine, credentials, and network (albeit you can implement a sandbox approach to mitigate this)
 
 This creates friction for quick tasks, excludes team members without full development setups, and introduces security risks from the [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
 
 ## Solution
 
 Use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes.
+
+### Sketch
+
+![Detached Agent](../docs/assets/detached-agent.png)
 
 ### How It Works
 
@@ -43,7 +47,7 @@ Mitigations:
 - Automatic scope validation before execution begins
 - Clear acceptance criteria in the issue description
 
-**Security surface**: The agent needs write access to the repository, and issues may be visible to external contributors.
+**Security surface**: The agent needs write access to the repository.
 
 Mitigations:
 
@@ -77,27 +81,12 @@ The feedback loop problem can be mitigated with **jump-in capability**, allowing
 4. Developer provides guidance, then hands back or completes manually
 5. Session state persists through handoff
 
-**Implementation approaches:**
-
-- Access to the cloud environment
-- Web-based IDE
-- Agent checkpoint/resume with human input gates
-
-**When to use:**
-
-- Agent is mostly done but stuck on a subtle issue
-- You spot a misunderstanding early
-- Task requirements evolved mid-execution
-- Debugging agent behaviour in a specific state
-
-This gives you **async by default, sync when needed**.
+This provides an **async by default, sync when needed**.
 
 ## Costs & Benefits
 
 ### Benefits
 
-- **Zero local setup**: Works from any device with GitHub access
-- **Asynchronous**: Fire and forget, check results later
 - **Audit trail**: Issues document what was requested and why
 - **Mobile-friendly**: Create issues from phone
 - **Sandboxed**: Agent isolated from your credentials and network
@@ -108,12 +97,9 @@ This gives you **async by default, sync when needed**.
 - **Scope ambiguity**: Agents may misinterpret vague issues
 - **Cloud costs**: Compute resources for each task
 - **Security setup**: Requires careful permission configuration
-- **Latency**: Not suitable for urgent, interactive work
 
 ## When to Use
 
-- Small, well-defined tasks (fix typo, add button, update copy)
-- Teams with mixed technical levels
 - Mobile or remote scenarios
 - Batch processing of similar tasks
 - Initial triage of bug reports

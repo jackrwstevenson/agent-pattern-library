@@ -92,17 +92,6 @@ Mitigations:
 - Projects with legitimate architectural differences from the reference
 - Early-stage organisations where patterns are still being discovered
 
-## Implementation Considerations
-
-**Drift detection approaches:**
-
-| Approach           | Pros                                         | Cons                                        |
-| ------------------ | -------------------------------------------- | ------------------------------------------- |
-| AST comparison     | Ignores formatting, catches structural drift | Language-specific, complex to implement     |
-| Semantic embedding | Catches intent-level drift                   | May miss concrete issues, harder to explain |
-| Rule-based checks  | Predictable, easy to tune                    | Doesn't catch novel patterns                |
-| Hybrid             | Best coverage                                | Most complex to maintain                    |
-
 ## Sources
 
 - [Anchoring AI to Reference Applications](https://martinfowler.com/articles/exploring-gen-ai/anchoring-to-reference.html) - Birgitta Böckeler

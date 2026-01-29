@@ -4,11 +4,11 @@
 
 AI agents lack institutional knowledge. They produce impressive demos that:
 
+- Ignore your coding standards and architectural patterns
 - Reinvent solutions your team has already built
-- Ignore coding standards and architectural patterns
-- Miss available components and libraries
-- Violate security policies or compliance requirements
-- Drift from organisational conventions
+- Miss your components and libraries
+- Violate your security policies or compliance requirements
+- Drift from your organisational conventions
 
 The result is code that works in isolation but doesn't fit the broader system. Without context, agents operate as capable outsiders who don't know what good looks like here.
 
@@ -17,6 +17,10 @@ The result is code that works in isolation but doesn't fit the broader system. W
 Curate a library of reference material that agents consult to understand your organisation's standards, architecture, and domain. This is the WHAT - what good looks like, what's already built, what decisions have been made.
 
 Agents read this context to understand your world before generating anything.
+
+### Sketch
+
+![Context Library](../docs/assets/context-library.png)
 
 ### Components
 
@@ -28,7 +32,7 @@ Agents read this context to understand your world before generating anything.
 
 **Domain context** encodes business knowledge: glossaries, entity models, regulatory requirements, business rules. Agents that understand your domain speak the same language as your team.
 
-**Reusable components** catalogue what's already built: authentication clients, event bus wrappers, shared libraries. Each should document not just how to use it, but when *not* to use it.
+**Reusable components** catalogue what's already built: authentication clients, event bus wrappers, shared libraries. Each should document not just how to use it, but when _not_ to use it.
 
 **Decision records** explain why past choices were made: Architecture Decision Records, post-mortems, spike findings. These prevent agents from relitigating settled questions.
 
@@ -66,21 +70,17 @@ Agents read this context to understand your world before generating anything.
 - **Curation effort**: Building the initial library takes time
 - **Maintenance burden**: Context must stay current to stay useful
 - **Over-specification risk**: Too much context constrains creativity
-- **False authority**: Outdated context actively misleads
 
 ## When to Use
 
-- Teams with established standards worth preserving
+- Teams with established standards
 - Organisations using AI assistants across multiple projects
 - Environments with compliance or regulatory requirements
 - Any situation where "what good looks like" should be consistent
 
 ## When Not to Use
 
-- Greenfield exploration where standards are still forming
 - One-off prototypes where consistency doesn't matter
-- Small teams where verbal coordination suffices
-- Projects deliberately diverging from organisational norms
 
 ## Related Patterns
 
