@@ -6,16 +6,19 @@ Organisations have procedures that should be followed consistently, but agents d
 
 - **Inconsistent execution**: Each team prompts differently, producing divergent approaches to the same task
 - **Tribal knowledge silos**: "How we do things" lives in senior engineers' heads or scattered prompt libraries
-- **Process drift**: Documented procedures exist but aren't followed because agents can't execute prose
 - **Repeated mistakes**: Teams rediscover the same pitfalls because lessons aren't encoded into workflows
 
-The gap between "how we should do X" and "how agents actually do X" widens as AI assistants become common.
+The gap between "how we should do X" and "how agents actually do X" widens as AI agents become common.
 
 ## Solution
 
 Package procedures as executable skills that agents load and follow. This is the HOW - step-by-step instructions for performing specific tasks the way your organisation does them.
 
 Agents execute these skills to do work consistently across teams and projects.
+
+### Sketch
+
+![SKills Library](../docs/assets/skills-library.png)
 
 ### Skills vs Context
 
@@ -70,16 +73,14 @@ Context is expensive. Structure skills so agents pull in what they need:
 ### Benefits
 
 - **Consistent execution**: All teams follow the same procedures
-- **Institutional memory**: "How we do things" survives team changes
+- **Institutional memory**: "How we do things" survives team (agent) changes
 - **Reduced training**: New agents (and humans) follow established workflows
-- **Clear ownership**: Platform teams maintain skills, product teams consume them
 - **Continuous improvement**: Update the skill once, improve everywhere
 
 ### Costs
 
 - **Upfront investment**: Creating good skills takes effort
 - **Maintenance burden**: Skills go stale without active curation
-- **Over-prescription risk**: Too rigid procedures stifle appropriate judgment
 - **Coordination overhead**: Platform and product teams must align on interfaces
 
 ## When to Use
@@ -93,8 +94,6 @@ Context is expensive. Structure skills so agents pull in what they need:
 ## When Not to Use
 
 - Exploratory work where the procedure is still being discovered
-- Tasks requiring significant judgment that can't be codified
-- Small teams where verbal coordination suffices
 - Procedures changing too rapidly to be worth encoding
 
 ## Related Patterns

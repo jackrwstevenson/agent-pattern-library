@@ -9,7 +9,7 @@ AI agents excel at generating code but struggle with:
 - **Inconsistent quality**: Results vary wildly without structured feedback loops
 - **Difficult debugging**: When things go wrong, it's unclear where the process failed
 
-Teams using AI assistants often experience a frustrating pattern: impressive initial demos followed by mounting technical debt as agents produce code that works but doesn't fit the broader system.
+Teams using AI agents often experience a frustrating pattern: impressive initial demos followed by mounting technical debt as agents produce code that works but doesn't fit the broader system.
 
 ## Solution
 
@@ -50,7 +50,7 @@ The spec becomes the source of truth that both human and agent reference through
 
 Break the specification into small, verifiable implementation steps:
 
-1. Each task should be completable in one focused session (15-30 minutes of agent work)
+1. Each task should be completable in one focused session
 2. Each task has explicit verification criteria (typically a test command)
 3. Dependencies between tasks are mapped
 4. Tasks are ordered topologically by dependency

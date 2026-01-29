@@ -23,7 +23,11 @@ Treat specifications and implementations as functions, not artefacts.
 
 When inputs change, outputs regenerate - all the way down. A security standard updates, affected specs regenerate, plans adapt, and code follows. This isn't rework; it's keeping the entire system aligned with reality.
 
-The pattern works because regeneration is cheap. Agents draft; humans review.
+Regeneration is cheap. Agents draft; humans review.
+
+### Sketch
+
+![Regen](../docs/assets/regen.png)
 
 ### Dependency Tracking
 
@@ -43,12 +47,6 @@ When any dependency changes, dependency scanning identifies which specs need rev
 
 **Scheduled reviews** catch drift. Periodic freshness checks ensure nothing falls too far behind. Treat it like dependency updates: regular, incremental, not a massive catching-up exercise.
 
-### Living Systems
-
-When a spec regenerates after implementation exists, the agent proposes code changes to align with the new spec. Tests that fail against the regenerated spec reveal real drift that needed fixing anyway.
-
-The application evolves with its inputs rather than calcifying against outdated assumptions. Standards become living constraints, not historical snapshots.
-
 ## Costs and Benefits
 
 ### Benefits
@@ -64,7 +62,6 @@ The application evolves with its inputs rather than calcifying against outdated 
 - **Infrastructure investment**: Dependency tracking and scanning needs tooling
 - **Review load**: More regeneration means more human review cycles
 - **False positives**: Not every corpus change requires spec updates
-- **Coordination overhead**: Large regenerations may need sequencing
 
 ## When to Use
 
@@ -78,7 +75,6 @@ The application evolves with its inputs rather than calcifying against outdated 
 
 - Short-lived prototypes where currency doesn't matter
 - Stable domains with infrequent standard changes
-- Projects where regeneration cost exceeds drift cost
 - Early-stage work where specs are still forming
 
 ## Related Patterns

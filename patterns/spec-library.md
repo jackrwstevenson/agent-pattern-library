@@ -67,12 +67,10 @@ The generation prompt instructs the agent to:
 - Utility libraries with clear, testable behaviour (parsing, formatting, validation)
 - Cross-platform tools needed in multiple languages
 - Internal libraries where "correct and readable" beats "maximally optimised"
-- Situations where some implementation beats no implementation
 
 ## When to Avoid
 
 - Performance-critical code requiring hand-tuned optimisation
-- Libraries with deep ecosystem integrations (ORMs, framework plugins)
 - Security-sensitive implementations requiring formal verification
 - Specifications changing faster than regeneration is practical
 

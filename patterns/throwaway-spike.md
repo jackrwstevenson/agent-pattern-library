@@ -32,14 +32,13 @@ Before starting, the human prepares a structured brief:
 - **Sample inputs**: Test data or scenarios to use
 - **Allowed libraries**: Explicit allowlist
 - **Forbidden actions**: e.g., no network calls, no real credentials, no database writes
-- **Time box**: Maximum effort, e.g., 2 hours
 - **Deliverables**: Code, README, verification steps, risk notes
 
 ### Spike Characteristics
 
 - **Prompt-first**: The spike is driven by a precise brief that states success criterion, inputs, allowed libs, forbidden actions, and time box
 - **Happy-path only**: Agent implements the minimal flow to prove the idea, no error handling, no edge cases, no production hardening
-- **Ephemeral and labelled**: All artefacts include a clear `⚠️ THROWAWAY, DO NOT SHIP` header and machine-checkable marker (e.g., `// SPIKE: delete before merge`)
+- **Ephemeral and labelled**: All artefacts include a clear `⚠️ THROWAWAY, DO NOT SHIP` header and machine-checkable marker
 - **Safety-aware defaults**: Agent must not embed secrets, production credentials, or make live calls to production services, use mocks or synthetic data
 - **Minimal structure**: Prefer a single file unless the idea requires multiple files to demonstrate the point
 - **Explainable output**: Agent returns code, run instructions, sample inputs/expected outputs, assumptions made, and a risk checklist
@@ -63,10 +62,8 @@ The agent must produce:
 To prevent accidental promotion to production:
 
 1. **Directory isolation**: All spike code lives in `/spikes/` or a dedicated branch
-2. **File markers**: Every file starts with `// SPIKE: <brief-name>, delete before merge`
-3. **No shared imports**: Spike code must not import from or be imported by production code
-4. **CI blocking**: Lint rules or CI checks fail if SPIKE markers reach main branch
-5. **Expiration date**: Spike branches auto-delete after 14 days (configurable)
+2. **No shared imports**: Spike code must not import from or be imported by production code
+3. **CI blocking**: Lint rules or CI checks fail if spike markers reach main branch
 
 ## Costs and Benefits
 
@@ -98,31 +95,8 @@ To prevent accidental promotion to production:
 ## When Not to Use
 
 - Anything touching production data or sensitive systems
-- Security-, privacy-, or compliance-critical functionality
 - Work requiring realistic performance or load testing
 - Integrations that need real authentication flows
-- Anything you're tempted to "just clean up and ship"
-
-## Anti-Patterns to Avoid
-
-| Anti-Pattern                | Why It's Dangerous                        | Fix                               |
-| --------------------------- | ----------------------------------------- | --------------------------------- |
-| Shipping spike code         | Gaps in error handling, security, testing | Enforce SPIKE markers in CI       |
-| Vague success criteria      | Agent builds wrong thing                  | Require one-sentence criterion    |
-| No time box                 | Spike becomes mini-project                | Hard stop at time limit           |
-| Skipping human verification | False confidence in results               | Require sign-off before decisions |
-| No risk notes               | Hidden concerns surface later             | Make risk checklist mandatory     |
-
-## Transitioning from Spike to Production
-
-If the spike succeeds and you decide to proceed:
-
-1. **Archive the spike**: Move to `/spikes/archive/` with learnings documented
-2. **Create fresh tickets**: Do not "clean up" spike code, reimplement properly
-3. **Reference, don't copy**: Use spike as reference for requirements, not as starting code
-4. **Apply full process**: New implementation follows standard development practices (tests, review, etc.)
-
-The spike proved the idea works. Production code proves it works _reliably, securely, and maintainably_.
 
 ## Sources
 
