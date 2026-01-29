@@ -1,12 +1,12 @@
 :root {
-  --bg: #0a0a0f;
+  --bg: #121212;
   --fg: #d0d0d0;
   --muted: #555;
   --accent: #e5e5e5;
   --border: #1a1a2e;
 }
 [data-theme="light"] {
-  --bg: #f5f5f7;
+  --bg: #ffffff;
   --fg: #1a1a1a;
   --muted: #777;
   --accent: #0066cc;
@@ -18,7 +18,9 @@
   box-sizing: border-box;
 }
 body {
-  font: 16px/1.7 "Inter", sans-serif;
+  font:
+    16px/1.7 "Inter",
+    sans-serif;
   background: var(--bg);
   color: var(--fg);
   overflow-wrap: break-word;
