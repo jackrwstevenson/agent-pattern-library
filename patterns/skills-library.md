@@ -18,7 +18,7 @@ Agents execute these skills to do work consistently across teams and projects.
 
 ### Sketch
 
-![SKills Library](../docs/assets/skills-library.png)
+![Skills Library](../docs/assets/skills-library.png)
 
 ### Skills vs Context
 

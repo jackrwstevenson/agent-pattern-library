@@ -17,6 +17,10 @@ Structure AI-assisted development into three distinct phases, each with explicit
 
 For brownfield environments replacing legacy systems, use the [Code Archaeologist](code-archaeologist.md) pattern first to extract implicit business rules before specification begins.
 
+### Sketch
+
+![Specify Plan Ship](../docs/assets/specify-plan-ship.png)
+
 ### Phase 1: Specification
 
 **Input**: Idea, requirements, or curated legacy analysis

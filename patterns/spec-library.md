@@ -17,6 +17,10 @@ Distribute the specification and tests instead of code. Let AI generate implemen
 
 The specification defines _what_ the library does. The tests prove _whether_ an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
 
+### Sketch
+
+![Spec Library](../docs/assets/spec-library.png)
+
 ## Structure
 
 - **SPEC.md** - Behavioural requirements in plain language
