@@ -14,6 +14,10 @@ The result is that "best practices" exist only in documentation and new projects
 
 Use an AI agent to continuously align codebases with reference implementations through drift detection and automated remediation.
 
+### Sketch
+
+![Golden Path Anchor](../docs/assets/golden-path-anchor.png)
+
 ### How It Works
 
 1. **Reference monitoring**: Watch for changes to the reference application
