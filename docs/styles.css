@@ -54,6 +54,13 @@ a:hover {
 #content a:hover {
   text-decoration: none;
 }
+/* Remove underline from pattern cards */
+#content .pattern-card {
+  text-decoration: none;
+}
+#content .pattern-card:hover {
+  text-decoration: none;
+}
 h1,
 h2,
 h3,
