@@ -77,8 +77,8 @@ export const renderHomePage = (patterns) => {
         <a href="#${p.id}" class="pattern-card" data-pattern="${p.id}">
           <div class="pattern-card-content"><h3>${p.name}</h3></div>
           <div class="pattern-card-image">
-            <img src="assets/${p.id}.png" alt="${p.name}" class="light-only" />
-            <img src="assets/${p.id}-dark.png" alt="${p.name}" class="dark-only" />
+            <img src="assets/thumbs/${p.id}.png" alt="${p.name}" class="light-only" />
+            <img src="assets/thumbs/${p.id}-dark.png" alt="${p.name}" class="dark-only" />
           </div>
           <div class="pattern-card-content"><p>${p.description}</p></div>
         </a>

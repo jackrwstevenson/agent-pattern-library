@@ -176,21 +176,21 @@ describe("renderHomePage", () => {
 
   it("always includes image elements for all patterns", () => {
     const html = renderHomePage(patterns);
-    expect(html).toContain('src="assets/context-library.png"');
-    expect(html).toContain('src="assets/throwaway-spike.png"');
-    expect(html).toContain('src="assets/agent-swarm.png"');
+    expect(html).toContain('src="assets/thumbs/context-library.png"');
+    expect(html).toContain('src="assets/thumbs/throwaway-spike.png"');
+    expect(html).toContain('src="assets/thumbs/agent-swarm.png"');
   });
 
   it("renders title before image", () => {
     const html = renderHomePage(patterns);
     const contextLibraryTitle = html.indexOf("Context Library");
-    const contextLibraryImage = html.indexOf('src="assets/context-library.png"');
+    const contextLibraryImage = html.indexOf('src="assets/thumbs/context-library.png"');
     expect(contextLibraryTitle).toBeLessThan(contextLibraryImage);
   });
 
   it("renders image before description", () => {
     const html = renderHomePage(patterns);
-    const contextLibraryImage = html.indexOf('src="assets/context-library.png"');
+    const contextLibraryImage = html.indexOf('src="assets/thumbs/context-library.png"');
     const contextLibraryDesc = html.indexOf("Reference material");
     expect(contextLibraryImage).toBeLessThan(contextLibraryDesc);
   });
