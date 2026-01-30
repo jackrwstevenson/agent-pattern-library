@@ -190,9 +190,18 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     fetch(BASE + "patterns/" + p + ".md")
       .then((r) => (r.ok ? r.text() : Promise.reject()))
       .then((text) => {
-        $("#content").innerHTML = marked.parse(text);
-        rewritePatternLinks($("#content"));
-        rewriteThemeImages($("#content"));
+        // Parse markdown to HTML string
+        let html = marked.parse(text);
+        
+        // Transform HTML string before inserting into DOM to avoid multiple reflows
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        
+        rewritePatternLinks(tempDiv);
+        rewriteThemeImages(tempDiv);
+        
+        // Single DOM insertion
+        $("#content").innerHTML = tempDiv.innerHTML;
         buildToc();
       })
       .catch(() => {
