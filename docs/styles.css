@@ -1,14 +1,14 @@
 :root {
   --bg: #121212;
   --fg: #d0d0d0;
-  --muted: #555;
+  --muted: #999999;
   --accent: #e5e5e5;
   --border: #1a1a2e;
 }
 [data-theme="light"] {
   --bg: #ffffff;
   --fg: #1a1a1a;
-  --muted: #777;
+  --muted: #595959;
   --accent: #0066cc;
   --border: #ddd;
 }
