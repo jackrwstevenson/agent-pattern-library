@@ -120,17 +120,28 @@ export const rewritePatternLinks = (container) => {
 };
 
 export const rewriteThemeImages = (container) => {
-  container.querySelectorAll('img[src$=".png"]').forEach((img) => {
+  const images = container.querySelectorAll('img[src$=".png"]');
+  images.forEach((img, index) => {
     const src = img.getAttribute("src").replace(/^(\.\.\/)?docs\//, "");
     const alt = img.getAttribute("alt") || "";
 
     img.setAttribute("src", src);
     img.classList.add("light-only");
+    
+    // Add fetchpriority to first image for LCP optimization
+    if (index === 0) {
+      img.setAttribute("fetchpriority", "high");
+    }
 
     const darkImg = document.createElement("img");
     darkImg.setAttribute("src", src.replace(/\.png$/, "-dark.png"));
     darkImg.setAttribute("alt", alt);
     darkImg.classList.add("dark-only");
+    
+    // Add fetchpriority to first dark image too
+    if (index === 0) {
+      darkImg.setAttribute("fetchpriority", "high");
+    }
 
     img.after(darkImg);
   });
