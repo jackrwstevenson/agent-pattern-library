@@ -307,6 +307,13 @@ footer {
   border-radius: 4px;
 }
 
+/* Reserve space for pattern detail page images to reduce layout shift */
+#content > p > img,
+#content > img {
+  min-height: 400px;
+  background: var(--border);
+}
+
 img.light-only {
   display: none;
 }
