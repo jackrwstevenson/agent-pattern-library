@@ -208,7 +208,7 @@ describe("buildTocHtml", () => {
       { textContent: "Second", tagName: "H3" },
     ];
     const html = buildTocHtml(headings);
-    expect(html).toContain("<h4>On this page</h4>");
+    expect(html).toContain('<div class="toc-title">On this page</div>');
     expect(html).toContain("<ul>");
     expect(html).toContain('href="#first"');
     expect(html).toContain('href="#second"');

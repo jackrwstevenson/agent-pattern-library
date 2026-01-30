@@ -240,11 +240,12 @@ button:focus-visible {
     overflow-y: auto;
   }
 }
-#toc h4 {
+#toc .toc-title {
   font-size: 0.8rem;
   color: var(--muted);
   margin: 0 0 0.75rem;
-  border: 0;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
 }
 #toc ul {
   list-style: none;

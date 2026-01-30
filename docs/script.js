@@ -97,7 +97,7 @@ export const renderHomePage = (patterns) => {
 export const buildTocHtml = (headings) => {
   if (headings.length < 2) return "";
   return (
-    "<h4>On this page</h4><ul>" +
+    '<div class="toc-title">On this page</div><ul>' +
     headings
       .map(
         (h) =>
