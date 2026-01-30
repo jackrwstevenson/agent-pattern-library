@@ -1,5 +1,9 @@
 # Throwaway Spike
 
+## Sketch
+
+![Throwaway Spike Pattern](../docs/assets/throwaway-spike.png)
+
 ## Problem
 
 Traditional development practices (tests, code review, documentation) create overhead that slows early-stage exploration:
