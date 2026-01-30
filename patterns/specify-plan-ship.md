@@ -1,5 +1,9 @@
 # Specify Plan Ship
 
+## Sketch
+
+![Specify Plan Ship](../docs/assets/specify-plan-ship.png)
+
 ## Problem
 
 AI agents excel at generating code but struggle with:
@@ -16,10 +20,6 @@ Teams using AI agents often experience a frustrating pattern: impressive initial
 Structure AI-assisted development into three distinct phases, each with explicit artefacts and verification gates.
 
 For brownfield environments replacing legacy systems, use the [Code Archaeologist](code-archaeologist.md) pattern first to extract implicit business rules before specification begins.
-
-### Sketch
-
-![Specify Plan Ship](../docs/assets/specify-plan-ship.png)
 
 ### Phase 1: Specification
 

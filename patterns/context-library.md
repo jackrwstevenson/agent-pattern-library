@@ -1,5 +1,9 @@
 # Context Library
 
+## Sketch
+
+![Context Library](../docs/assets/context-library.png)
+
 ## Problem
 
 AI agents lack institutional knowledge. They produce impressive demos that:
@@ -17,10 +21,6 @@ The result is code that works in isolation but doesn't fit the broader system. W
 Curate a library of reference material that agents consult to understand your organisation's standards, architecture, and domain. This is the WHAT - what good looks like, what's already built, what decisions have been made.
 
 Agents read this context to understand your world before generating anything.
-
-### Sketch
-
-![Context Library](../docs/assets/context-library.png)
 
 ### Components
 

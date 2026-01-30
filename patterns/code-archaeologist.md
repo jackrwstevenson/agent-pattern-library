@@ -1,5 +1,9 @@
 # Code Archaeologist
 
+## Sketch
+
+![Code Archaeologist Sketch](../docs/assets/code-archaeologist.png)
+
 ## Problem
 
 Replacing legacy systems is risky because critical knowledge exists only in the code:
@@ -14,10 +18,6 @@ Teams replacing legacy systems often accidentally lose important behaviour or fa
 ## Solution
 
 Use an AI agent to reverse-engineer existing codebases, extracting implicit knowledge into an explicit document that humans then curate before specification begins.
-
-### Sketch
-
-![Code Archaeologist Sketch](../docs/assets/code-archaeologist.png)
 
 ### How It Works
 

@@ -1,5 +1,9 @@
 # Skills Library
 
+## Sketch
+
+![Skills Library](../docs/assets/skills-library.png)
+
 ## Problem
 
 Organisations have procedures that should be followed consistently, but agents don't know them:
@@ -15,10 +19,6 @@ The gap between "how we should do X" and "how agents actually do X" widens as AI
 Package procedures as executable skills that agents load and follow. This is the HOW - step-by-step instructions for performing specific tasks the way your organisation does them.
 
 Agents execute these skills to do work consistently across teams and projects.
-
-### Sketch
-
-![Skills Library](../docs/assets/skills-library.png)
 
 ### Skills vs Context
 

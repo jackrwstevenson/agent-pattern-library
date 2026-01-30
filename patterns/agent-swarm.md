@@ -2,6 +2,10 @@
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Demonstrated in specific high-resource contexts (dedicated hardware, thousands of concurrent agents) but not yet widely reproduced. Infrastructure requirements are steep, decomposition strategies are still being understood, and **human review remains essential**. Treat this as a lens for evaluating where agentic tooling may head, not a recommendation for immediate adoption.
 
+## Sketch
+
+![Agent Swarm Sketch](../docs/assets/agent-swarm.png)
+
 ## Problem
 
 Scaling from one agent to many creates coordination problems. Multiple agents working on the same codebase simultaneously:
@@ -15,10 +19,6 @@ The naive approach of "just run more agents" quickly degrades. Conflict resoluti
 ## Solution
 
 Deploy a hierarchical swarm of agents: planning agents decompose work into non-overlapping tasks, worker agents execute those tasks in parallel. The decomposition strategy minimises merge conflicts by design. Design the swarm so human engineers remain in the loop to review, approve, and intervene on accuracy, security, and/or architecture sensitive changes.
-
-### Sketch
-
-![Agent Swarm Sketch](../docs/assets/agent-swarm.png)
 
 ### How It Works
 

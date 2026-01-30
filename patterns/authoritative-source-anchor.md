@@ -1,5 +1,9 @@
 # Authoritative Source Anchor
 
+## Sketch
+
+![Authoritative Source Anchor Sketch](../docs/assets/authoritative-source-anchor.png)
+
 ## Problem
 
 AI agents working on standards-compliant code must make decisions about specifications they weren't trained on or can't recall accurately. Without access to authoritative sources, agents:
@@ -13,10 +17,6 @@ The result is either unreliable output or short autonomous runs with heavy human
 ## Solution
 
 Embed authoritative external specifications directly in the repository, making canonical sources available to agents during development.
-
-### Sketch
-
-![Authoritative Source Anchor Sketch](../docs/assets/authoritative-source-anchor.png)
 
 ### How It Works
 

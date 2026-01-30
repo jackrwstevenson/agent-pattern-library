@@ -1,5 +1,9 @@
 # Golden Path Anchor
 
+## Sketch
+
+![Golden Path Anchor](../docs/assets/golden-path-anchor.png)
+
 ## Problem
 
 Organisations maintain reference applications (templates, starter kits, golden paths) that embody best practices. These references work well for new projects but fail to influence existing ones:
@@ -13,10 +17,6 @@ The result is that "best practices" exist only in documentation and new projects
 ## Solution
 
 Use an AI agent to continuously align codebases with reference implementations through drift detection and automated remediation.
-
-### Sketch
-
-![Golden Path Anchor](../docs/assets/golden-path-anchor.png)
 
 ### How It Works
 

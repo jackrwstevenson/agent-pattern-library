@@ -1,5 +1,9 @@
 # Detached Agent
 
+## Sketch
+
+![Detached Agent](../docs/assets/detached-agent.png)
+
 ## Problem
 
 Traditional AI coding assistants require:
@@ -14,10 +18,6 @@ This creates friction for quick tasks, excludes team members without full develo
 ## Solution
 
 Use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes.
-
-### Sketch
-
-![Detached Agent](../docs/assets/detached-agent.png)
 
 ### How It Works
 

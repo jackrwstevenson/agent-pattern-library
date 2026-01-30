@@ -1,5 +1,9 @@
 # Context Bypass
 
+## Sketch
+
+![Context Bypass](../docs/assets/context-bypass.png)
+
 ## Problem
 
 LLM context windows have hard limits, but real-world tasks routinely exceed them:

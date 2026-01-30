@@ -17,35 +17,92 @@ export const slugify = (t) =>
 export const parsePatterns = (md) => {
   const result = [];
   const lines = md.split("\n");
+  let currentCategory = null;
+
   for (const line of lines) {
+    if (line.startsWith("### ")) {
+      currentCategory = line.slice(4).trim();
+      continue;
+    }
+
     const match = line.match(
       /\|\s*\[([^\]]+)\]\(patterns\/([^.]+)\.md\)\s*\|\s*([^|]+)\|/,
     );
-    if (match) result.push([match[2], match[1], match[3].trim()]);
+    if (match) {
+      result.push({
+        id: match[2],
+        name: match[1],
+        description: match[3].trim(),
+        category: currentCategory,
+      });
+    }
   }
   return result;
 };
 
-export const isPattern = (patterns, id) => patterns.some((p) => p[0] === id);
+export const isPattern = (patterns, id) => patterns.some((p) => p.id === id);
 
 export const renderPatternsList = (patterns) =>
   '<h1>Patterns</h1><ul class="patterns">' +
   patterns
     .map(
-      ([id, name, desc]) =>
-        `<li><a href="#${id}" data-pattern="${id}">${name}</a><small>${desc}</small></li>`,
+      (p) =>
+        `<li><a href="#${p.id}" data-pattern="${p.id}">${p.name}</a><small>${p.description}</small></li>`,
     )
     .join("") +
   "</ul>";
 
+export const renderHomePage = (patterns) => {
+  const categories = { Grounding: [], Workflow: [], Scale: [], Evolution: [] };
+
+  patterns.forEach((p) => {
+    if (categories[p.category]) categories[p.category].push(p);
+  });
+
+  let html = `
+    <div class="hero">
+      <h1>Agent Pattern Library</h1>
+      <p class="hero-subtitle">Emerging patterns in AI-assisted software development</p>
+      <p class="hero-description">An attempt to make sense of emerging patterns in AI-assisted software development, drawn from research, personal observations and experiments.</p>
+    </div>
+  `;
+
+  Object.entries(categories).forEach(([category, items]) => {
+    if (!items.length) return;
+
+    html += `<section class="pattern-category"><h2>${category}</h2><div class="pattern-grid">`;
+
+    items.forEach((p) => {
+      html += `
+        <a href="#${p.id}" class="pattern-card" data-pattern="${p.id}">
+          <div class="pattern-card-content"><h3>${p.name}</h3></div>
+          <div class="pattern-card-image">
+            <img src="assets/${p.id}.png" alt="${p.name}" class="light-only" />
+            <img src="assets/${p.id}-dark.png" alt="${p.name}" class="dark-only" />
+          </div>
+          <div class="pattern-card-content"><p>${p.description}</p></div>
+        </a>
+      `;
+    });
+
+    html += `</div></section>`;
+  });
+
+  return html;
+};
+
 export const buildTocHtml = (headings) => {
   if (headings.length < 2) return "";
-  let html = "<h4>On this page</h4><ul>";
-  for (const h of headings) {
-    const id = slugify(h.textContent);
-    html += `<li><a href="#${id}" class="${h.tagName.toLowerCase()}">${h.textContent}</a></li>`;
-  }
-  return html + "</ul>";
+  return (
+    "<h4>On this page</h4><ul>" +
+    headings
+      .map(
+        (h) =>
+          `<li><a href="#${slugify(h.textContent)}" class="${h.tagName.toLowerCase()}">${h.textContent}</a></li>`,
+      )
+      .join("") +
+    "</ul>"
+  );
 };
 
 export const rewritePatternLinks = (container) => {
@@ -62,14 +119,13 @@ export const rewritePatternLinks = (container) => {
 export const rewriteThemeImages = (container) => {
   container.querySelectorAll('img[src$=".png"]').forEach((img) => {
     const src = img.getAttribute("src").replace(/^(\.\.\/)?docs\//, "");
-    const darkSrc = src.replace(/\.png$/, "-dark.png");
     const alt = img.getAttribute("alt") || "";
 
     img.setAttribute("src", src);
     img.classList.add("light-only");
 
     const darkImg = document.createElement("img");
-    darkImg.setAttribute("src", darkSrc);
+    darkImg.setAttribute("src", src.replace(/\.png$/, "-dark.png"));
     darkImg.setAttribute("alt", alt);
     darkImg.classList.add("dark-only");
 
@@ -77,20 +133,19 @@ export const rewriteThemeImages = (container) => {
   });
 };
 
-// App initialisation - only runs in browser with DOM ready
 if (typeof window !== "undefined" && document.querySelector("#theme")) {
   let patterns = [];
 
   const $ = (s) => document.querySelector(s);
-  const prefersReducedMotion = () =>
-    window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-  const scrollBehavior = () => (prefersReducedMotion() ? "auto" : "smooth");
+  const scrollBehavior = () =>
+    window.matchMedia("(prefers-reduced-motion:reduce)").matches
+      ? "auto"
+      : "smooth";
 
   const buildToc = () => {
     const headings = $("#content").querySelectorAll("h2,h3,h4");
-    const html = buildTocHtml([...headings]);
     headings.forEach((h) => (h.id = slugify(h.textContent)));
-    $("#toc").innerHTML = html;
+    $("#toc").innerHTML = buildTocHtml([...headings]);
   };
 
   const highlightToc = () => {
@@ -100,9 +155,11 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     for (const h of headings) {
       if (h.getBoundingClientRect().top <= 100) current = h.id;
     }
-    $("#toc").querySelectorAll("a").forEach((a) => {
-      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
-    });
+    $("#toc")
+      .querySelectorAll("a")
+      .forEach((a) =>
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current),
+      );
   };
 
   const render = (p) => {
@@ -111,14 +168,14 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
       $("#toc").innerHTML = "";
       return;
     }
-    const url = p === "readme" ? BASE + "README.md" : BASE + "patterns/" + p + ".md";
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) throw new Error();
-        return r.text();
-      })
+    if (p === "readme") {
+      $("#content").innerHTML = renderHomePage(patterns);
+      $("#toc").innerHTML = "";
+      return;
+    }
+    fetch(BASE + "patterns/" + p + ".md")
+      .then((r) => (r.ok ? r.text() : Promise.reject()))
       .then((text) => {
-        if (p === "readme" && !patterns.length) patterns = parsePatterns(text);
         $("#content").innerHTML = marked.parse(text);
         rewritePatternLinks($("#content"));
         rewriteThemeImages($("#content"));
@@ -140,12 +197,12 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
         return;
       }
     }
-    document.querySelectorAll("nav a").forEach((a) => {
+    document.querySelectorAll("nav a").forEach((a) =>
       a.classList.toggle(
         "active",
         a.dataset.page === h || (a.dataset.page === "patterns" && patternMatch),
-      );
-    });
+      ),
+    );
     render(h);
     window.scrollTo(0, 0);
   };

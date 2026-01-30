@@ -2,6 +2,10 @@
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. The prerequisites are steep, the tooling is immature, and **human review of all agent contributions remains essential**. Treat this as a lens for evaluating where agentic tooling may head, not a recommendation for immediate adoption.
 
+## Sketch
+
+![Autonomous Agent Sketch](../docs/assets/autonomous-agent.png)
+
 ## Problem
 
 Current AI coding tools are **reactive**: humans prompt, agents execute. The human remains the scheduler, deciding what gets worked on and when. This creates bottlenecks:

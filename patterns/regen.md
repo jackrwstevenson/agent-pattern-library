@@ -1,5 +1,9 @@
 # Regen
 
+## Sketch
+
+![Regen](../docs/assets/regen.png)
+
 ## Problem
 
 Traditional documentation rots. Teams write specs once, then watch them drift from reality until they're worse than useless. The same happens with AI-assisted development: agents produce code based on requirements that become stale as standards evolve, dependencies update, and business rules change.

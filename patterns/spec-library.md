@@ -1,5 +1,9 @@
 # Spec Library
 
+## Sketch
+
+![Spec Library](../docs/assets/spec-library.png)
+
 ## Problem
 
 Traditional software distribution treats code as the primary artefact, creating several friction points:
@@ -16,10 +20,6 @@ The root issue: we distribute implementations when what we actually need is beha
 Distribute the specification and tests instead of code. Let AI generate implementations on demand, tailored to any language or context.
 
 The specification defines _what_ the library does. The tests prove _whether_ an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
-
-### Sketch
-
-![Spec Library](../docs/assets/spec-library.png)
 
 ## Structure
 
