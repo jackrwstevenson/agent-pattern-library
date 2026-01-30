@@ -67,22 +67,25 @@ export const renderHomePage = (patterns) => {
     </div>
   `;
 
+  let isFirstCard = true;
   Object.entries(categories).forEach(([category, items]) => {
     if (!items.length) return;
 
     html += `<section class="pattern-category"><h2>${category}</h2><div class="pattern-grid">`;
 
     items.forEach((p) => {
+      const fetchPriority = isFirstCard ? ' fetchpriority="high"' : '';
       html += `
         <a href="#${p.id}" class="pattern-card" data-pattern="${p.id}">
           <div class="pattern-card-content"><h3>${p.name}</h3></div>
           <div class="pattern-card-image">
-            <img src="assets/thumbs/${p.id}.png" alt="${p.name}" class="light-only" />
-            <img src="assets/thumbs/${p.id}-dark.png" alt="${p.name}" class="dark-only" />
+            <img src="assets/thumbs/${p.id}.png" alt="${p.name}" class="light-only"${fetchPriority} />
+            <img src="assets/thumbs/${p.id}-dark.png" alt="${p.name}" class="dark-only"${fetchPriority} />
           </div>
           <div class="pattern-card-content"><p>${p.description}</p></div>
         </a>
       `;
+      isFirstCard = false;
     });
 
     html += `</div></section>`;
