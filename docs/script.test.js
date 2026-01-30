@@ -181,6 +181,16 @@ describe("renderHomePage", () => {
     expect(html).toContain('src="assets/thumbs/agent-swarm.png"');
   });
 
+  it("adds fetchpriority=high to first pattern card images only", () => {
+    const html = renderHomePage(patterns);
+    // First pattern (context-library) should have fetchpriority
+    expect(html).toContain('src="assets/thumbs/context-library.png" alt="Context Library" class="light-only" fetchpriority="high"');
+    expect(html).toContain('src="assets/thumbs/context-library-dark.png" alt="Context Library" class="dark-only" fetchpriority="high"');
+    // Second pattern should not have fetchpriority
+    expect(html).toContain('src="assets/thumbs/throwaway-spike.png" alt="Throwaway Spike" class="light-only" />');
+    expect(html).not.toContain('throwaway-spike.png" alt="Throwaway Spike" class="light-only" fetchpriority');
+  });
+
   it("renders title before image", () => {
     const html = renderHomePage(patterns);
     const contextLibraryTitle = html.indexOf("Context Library");
@@ -326,5 +336,20 @@ describe("rewriteThemeImages", () => {
     rewriteThemeImages(document.body);
     const darkImg = document.querySelector("img.dark-only");
     expect(darkImg.getAttribute("src")).toBe("../path/file.name-dark.png");
+  });
+
+  it("adds fetchpriority=high to first image only", () => {
+    document.body.innerHTML = `
+      <img src="first.png" alt="First">
+      <img src="second.png" alt="Second">
+    `;
+    rewriteThemeImages(document.body);
+    const imgs = document.querySelectorAll("img");
+    // First light and dark images should have fetchpriority
+    expect(imgs[0].getAttribute("fetchpriority")).toBe("high");
+    expect(imgs[1].getAttribute("fetchpriority")).toBe("high");
+    // Second light and dark images should not have fetchpriority
+    expect(imgs[2].getAttribute("fetchpriority")).toBeNull();
+    expect(imgs[3].getAttribute("fetchpriority")).toBeNull();
   });
 });
