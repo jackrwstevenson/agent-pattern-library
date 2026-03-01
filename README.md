@@ -27,6 +27,15 @@ Structuring how agents perform work.
 | [Session Checkpoint](patterns/session-checkpoint.md) | Capture agent sessions with rollback capability, shadow branches for metadata, and auto-summarisation.                                                              | Preserves the reasoning behind agent-assisted code changes as replayable, recoverable history without polluting the code branch.                                                       |
 | [Validation Constraint](patterns/validation-constraint.md) | Validate agent output through externally observable behaviour (tests, monitoring) rather than line-by-line code review.                                        | Treats generated code like ML model weights - opaque internals validated through outputs - letting automated checks scale with agent throughput.                                        |
 
+### Safety
+
+Controlling and validating agent output.
+
+| Pattern                                                                    | Description                                                                                                                                                      | Novel Insight                                                                                                                                                                       |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Runtime Guardrails](patterns/runtime-guardrails.md)                       | Apply layered controls during inference (topic denial, content filters, PII detection, contextual grounding) to prevent problematic output at generation time.   | Prevention at generation time is cheaper and safer than post-hoc detection; layered controls compensate for each other's gaps.                                                      |
+| [Post-Inference Validation](patterns/post-inference-validation.md)         | Place an independent validation pipeline after inference with deterministic rules, PII re-detection, contextual verification, risk scoring, and escalation.      | Runs outside the model host to preserve separation of concerns; an auditable pipeline with immutable logs and policy versioning satisfies regulatory expectations.                  |
+
 ### Scale
 
 Operating beyond single-agent constraints.
@@ -87,6 +96,11 @@ Some noteworthy relationships:
 - [Agent Memory Graph](patterns/agent-memory-graph.md) + [Agent Swarm](patterns/agent-swarm.md): The memory graph provides coordination primitives (atomic claims, dependency tracking) that swarms need.
 - [Session Checkpoint](patterns/session-checkpoint.md) + [Agent Swarm](patterns/agent-swarm.md): Track concurrent agent sessions independently with rollback capability.
 - [Pyramid Summary](patterns/pyramid-summary.md) + [Context Bypass](patterns/context-bypass.md): Pyramid Summary handles comprehension of large systems; Context Bypass handles data-heavy processing. Different tools for different scaling problems.
+
+**Safety and compliance**
+
+- [Runtime Guardrails](patterns/runtime-guardrails.md) + [Post-Inference Validation](patterns/post-inference-validation.md): Defence in depth; guardrails prevent at generation time, validation catches what slips through.
+- [Post-Inference Validation](patterns/post-inference-validation.md) + [Validation Constraint](patterns/validation-constraint.md): Text output validated through auditable pipelines; code output validated through tests and observable behaviour.
 
 **Cross-language distribution**
 
