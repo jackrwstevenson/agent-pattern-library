@@ -2,75 +2,40 @@
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Generating reliable multi-level summaries and keeping them in sync with evolving source material remains an open problem. Treat this as a lens for thinking about context management, not a turnkey solution.
 
+Agents working with large codebases or documents face a fundamental tension. Loading everything gives accuracy but exhausts token limits. Compressing to fit discards the fine-grained information needed for precision. And once summarised, the original detail is gone from context and cannot be recovered without re-reading the source.
+
+This is different from [Context Bypass](context-bypass.md), which delegates to external tools. Here the problem is that the agent needs to hold a mental model of a large system in its own context while retaining the ability to drill into specifics.
+
 ## Sketch
 
 ![Pyramid Summary](../docs/assets/pyramid-summary.png)
 
-## Problem
+## How It Works
 
-Agents working with large codebases or documents face a fundamental tension:
+The approach builds reversible summaries at multiple zoom levels, so agents can navigate between overview and detail on demand.
 
-- **Full detail exhausts context**: Loading everything gives accuracy but exceeds token limits
-- **Summarisation loses detail**: Compressing to fit discards the fine-grained information needed for precision
-- **One-way compression**: Once summarised, the original detail is gone from context and cannot be recovered without re-reading
-
-This is different from [Context Bypass](context-bypass.md), which delegates to external tools. Here the problem is that the agent needs to hold a mental model of a large system in its own context while retaining the ability to drill into specifics.
-
-## Solution
-
-Build reversible summaries at multiple zoom levels, so agents can navigate between overview and detail on demand.
-
-### How It Works
-
-1. **Layer 0 - Full source**: The complete, uncompressed content (files, documents, data)
-2. **Layer 1 - Section summaries**: Each file or module condensed to key facts, interfaces, and responsibilities
-3. **Layer 2 - Component summaries**: Groups of related files summarised into architectural descriptions
-4. **Layer 3 - System overview**: The entire system in a paragraph or two
+At the base is *Layer 0*, the full, uncompressed source: files, documents, data. Above it, *Layer 1* condenses each file or module to key facts, interfaces, and responsibilities. *Layer 2* summarises groups of related files into architectural descriptions. And *Layer 3* captures the entire system in a paragraph or two.
 
 Agents start at the top layer and expand downward only where needed, keeping the rest compressed.
 
 ### Why It Works
 
-- **Selective attention**: Most context stays compressed; only the relevant portion expands
-- **Reversible**: Any layer can be expanded to the layer below, so detail is never permanently lost
-- **Fits context**: The pyramid shape means the full set of summaries is far smaller than the source material
-- **Navigable**: Agents can reason about which branch to explore before committing tokens to it
+The power comes from selective attention. Most context stays compressed; only the relevant portion expands. Any layer can be expanded to the layer below, so detail is never permanently lost. The pyramid shape means the full set of summaries is far smaller than the source material. And agents can reason about which branch to explore before committing tokens to it.
 
-## Costs and Benefits
+## The Trade-offs
 
-### Benefits
+The benefits are clear. Agents can reason about systems that far exceed context limits. They get precision where it matters by expanding only the relevant section. Summaries persist across sessions and regenerate only when source changes. And agents can hold broad understanding and deep focus simultaneously.
 
-- **Large codebase comprehension**: Agents can reason about systems that far exceed context limits
-- **Precision where it matters**: Expand only the relevant section to full detail
-- **Reusable**: Summaries persist across sessions; regenerate only when source changes
-- **Token-efficient**: Hold broad understanding and deep focus simultaneously
+The costs are real too. Bad summaries at upper layers misdirect exploration. Building the pyramid takes time and tokens upfront. Summaries must be regenerated when source material changes. And deciding the right granularity for each layer requires judgement.
 
-### Costs
+## When to Use It
 
-- **Summary quality**: Bad summaries at upper layers misdirect exploration
-- **Generation cost**: Building the pyramid takes time and tokens upfront
-- **Staleness**: Summaries must be regenerated when source material changes
-- **Layer design**: Deciding the right granularity for each layer requires judgement
+This pattern works for agents exploring unfamiliar large codebases, multi-step tasks requiring both breadth and depth, long-running sessions where re-reading source files wastes tokens, and documentation generation requiring understanding at multiple levels.
 
-## When to Use
+Skip it for small codebases that fit in context without compression, tasks focused on a single file or function, and situations where [Context Bypass](context-bypass.md) is more appropriate. The distinction is: Pyramid Summary handles comprehension, Context Bypass handles data processing.
 
-- Agents exploring unfamiliar large codebases
-- Multi-step tasks requiring both breadth (understanding the system) and depth (modifying specific code)
-- Long-running sessions where re-reading source files wastes tokens
-- Documentation generation requiring understanding at multiple levels
+This supports [Context Library](context-library.md) by storing summaries as reference material, and enables [Agent Swarm](agent-swarm.md) by giving each worker agent only the relevant pyramid layers.
 
-## When Not to Use
-
-- Small codebases that fit in context without compression
-- Tasks focused on a single file or function where full detail is always needed
-- When [Context Bypass](context-bypass.md) is more appropriate (data processing vs. comprehension)
-
-## Related Patterns
-
-- Complements [Context Bypass](context-bypass.md) - Pyramid Summary handles comprehension; Context Bypass handles data processing
-- Supports [Context Library](context-library.md) - summaries can be stored as reference material
-- Enables [Agent Swarm](agent-swarm.md) - each worker agent receives only the relevant pyramid layers
-
-## Sources
+## Further Reading
 
 - [Software Factory Techniques](https://factory.strongdm.ai/techniques) - StrongDM

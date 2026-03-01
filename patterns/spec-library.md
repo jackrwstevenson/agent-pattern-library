@@ -1,91 +1,54 @@
 # Spec Library
 
+Traditional software distribution treats code as the primary artefact, and this creates several friction points. A library exists for Python but not Rust, leaving developers to write their own or go without. Each language variant requires separate upkeep, bug fixes, and version management. Ports and reimplementations slowly diverge from the original's behaviour. And downloaded code may clash with your environment, style guide, or dependency constraints.
+
+The root issue is that we distribute implementations when what we actually need is behaviour.
+
 ## Sketch
 
 ![Spec Library](../docs/assets/spec-library.png)
 
-## Problem
+## How It Works
 
-Traditional software distribution treats code as the primary artefact, creating several friction points:
+The approach inverts software distribution: distribute the specification and tests instead of code. Let AI generate implementations on demand, tailored to any language or context.
 
-- **Language lock-in**: A library exists for Python but not Rust, leaving developers to write their own or go without
-- **Maintenance burden**: Each language variant requires separate upkeep, bug fixes, and version management
-- **Translation drift**: Ports and reimplementations slowly diverge from the original's behaviour
-- **Context mismatch**: Downloaded code may clash with your environment, style guide, or dependency constraints
+The specification defines *what* the library does. The tests prove *whether* an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
 
-The root issue: we distribute implementations when what we actually need is behaviour.
+### Structure
 
-## Solution
+A Spec Library contains a SPEC.md with behavioural requirements in plain language, a tests.yaml with language-agnostic test cases, an INSTALL.md with generation instructions for users, and optionally an examples/ directory with sample outputs.
 
-Distribute the specification and tests instead of code. Let AI generate implementations on demand, tailored to any language or context.
+The SPEC.md covers each function's purpose, signature, precise behavioural description, constraints and invariants, and edge case handling. The tests.yaml defines test cases with a descriptive name, the function under test, input arguments, and expected output (or error).
 
-The specification defines _what_ the library does. The tests prove _whether_ an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
+### Generation
 
-## Structure
+The generation prompt instructs the agent to read SPEC.md for behavioural requirements, parse tests.yaml for test cases, generate tests in the target language first (following TDD red-green-refactor), implement functions until all tests pass, and follow local conventions for style and idioms.
 
-- **SPEC.md** - Behavioural requirements in plain language
-- **tests.yaml** - Language-agnostic test cases
-- **INSTALL.md** - Generation instructions for users
-- **examples/** - Sample outputs for reference (optional)
+### The Inversion
 
-### SPEC.md Format
+The traditional flow is: specification, implementation, distribution, usage. The codeless flow is: specification plus tests, distribution, generation, usage.
 
-A SPEC.md should include:
+The novel insight is that specifications and tests are the durable artefacts. Implementations are disposable.
 
-- **Purpose**: What problem this solves and why it exists
-- **Functions**: Each with signature, precise behavioural description, constraints, and edge cases
-  - **Constraints**: Invariants that must hold, performance or resource bounds
-  - **Edge cases**: How to handle empty/null inputs, boundary conditions
+## The Trade-offs
 
-### tests.yaml Format
-
-Each test case defines:
-
-- **name**: Descriptive label (e.g., "basic case", "edge case - empty input", "error case - invalid type")
-- **function**: The function under test
-- **input**: Arguments to pass
-- **expected**: The expected return value, or **throws** for error cases
-
-### Generation Prompt
-
-The generation prompt instructs the agent to:
-
-1. Read SPEC.md for behavioural requirements
-2. Parse tests.yaml for test cases
-3. Generate tests in the target language first (TDD red-green-refactor)
-4. Implement functions until all tests pass
-5. Follow local conventions for style and idioms
-
-## Tradeoffs
-
-| Benefit                                  | Cost                                                        |
-| ---------------------------------------- | ----------------------------------------------------------- |
-| Universal language availability          | Requires capable AI for generation                          |
-| Zero cross-language maintenance          | Specification must be rigorous; ambiguity causes drift      |
+| Benefit | Cost |
+| --- | --- |
+| Universal language availability | Requires capable AI for generation |
+| Zero cross-language maintenance | Specification must be rigorous; ambiguity causes drift |
 | Context-appropriate output (style, deps) | Non-functional properties (perf, security) less predictable |
-| Always current with latest practices     | Generation time on each use                                 |
-| Smaller distribution size                | Users need AI access                                        |
+| Always current with latest practices | Generation time on each use |
+| Smaller distribution size | Users need AI access |
 
-## When to Use
+## When to Use It
 
-- Utility libraries with clear, testable behaviour (parsing, formatting, validation)
-- Cross-platform tools needed in multiple languages
-- Internal libraries where "correct and readable" beats "maximally optimised"
+This pattern works for utility libraries with clear, testable behaviour (parsing, formatting, validation), cross-platform tools needed in multiple languages, and internal libraries where "correct and readable" beats "maximally optimised."
 
-## When to Avoid
+Avoid it for performance-critical code requiring hand-tuned optimisation, security-sensitive implementations requiring formal verification, and specifications changing faster than regeneration is practical.
 
-- Performance-critical code requiring hand-tuned optimisation
-- Security-sensitive implementations requiring formal verification
-- Specifications changing faster than regeneration is practical
+[Semantic Port](semantic-port.md) uses a related approach: specs define what to implement, Semantic Port generates idiomatic implementations across languages. And [Regen](regen.md) applies similar thinking to keeping generated implementations current when the source specification evolves.
 
-## The Inversion
+## Further Reading
 
-- **Traditional flow**: Specification, Implementation, Distribution, Usage
-- **Codeless flow**: Specification + Tests, Distribution, Generation, Usage
-
-The novel insight: specifications and tests are the durable artefacts; implementations are disposable.
-
-## Sources
-
-- [A Software Library with No Code](https://www.dbreunig.com/2026/01/08/a-software-library-with-no-code.html), Drew Breunig's whenwords experiment
-- [whenwords](https://github.com/dbreunig/whenwords), Reference implementation of the pattern
+- [A Software Library with No Code](https://www.dbreunig.com/2026/01/08/a-software-library-with-no-code.html) - Drew Breunig
+- [whenwords](https://github.com/dbreunig/whenwords) - Reference implementation of the pattern

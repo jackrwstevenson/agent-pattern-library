@@ -1,89 +1,53 @@
 # Regen
 
+Traditional documentation rots. Teams write specs once, then watch them drift from reality until they're worse than useless. The same happens with AI-assisted development: agents produce code based on requirements that become stale as standards evolve, dependencies update, and business rules change.
+
+The maintenance burden compounds. Security standards tighten, but existing code isn't updated. New components become available, but old implementations don't adopt them. Domain models evolve, but specs reference outdated terminology. Best practices improve, but codebases fossilise around old patterns. Manual updates don't scale. Teams either fall behind or spend disproportionate effort keeping everything aligned.
+
 ## Sketch
 
 ![Regen](../docs/assets/regen.png)
 
-## Problem
+## How It Works
 
-Traditional documentation rots. Teams write specs once, then watch them drift from reality until they're worse than useless. The same happens with AI-assisted development: agents produce code based on requirements that become stale as standards evolve, dependencies update, and business rules change.
-
-The maintenance burden compounds:
-
-- Security standards tighten, but existing code isn't updated
-- New components become available, but old implementations don't adopt them
-- Domain models evolve, but specs reference outdated terminology
-- Best practices improve, but codebases fossilise around old patterns
-
-Manual updates don't scale. Teams either fall behind or spend disproportionate effort keeping everything aligned.
-
-## Solution
-
-Treat specifications and implementations as functions, not artefacts.
+The core idea is to treat specifications and implementations as functions, not artefacts.
 
 - SPEC = f(requirements, corpus)
 - PLAN = f(SPEC)
 - CODE = f(PLAN)
 
-When inputs change, outputs regenerate - all the way down. A security standard updates, affected specs regenerate, plans adapt, and code follows. This isn't rework; it's keeping the entire system aligned with reality.
+When inputs change, outputs regenerate, all the way down. A security standard updates, affected specs regenerate, plans adapt, and code follows. This isn't rework; it's keeping the entire system aligned with reality.
 
 Regeneration is cheap. Agents draft; humans review.
 
-### Sketch
-
-![Regen](../docs/assets/regen.png)
-
 ### Dependency Tracking
 
-Every SPEC.md declares what it depends on:
-
-- `corpus/standards/security-policy.md@v2.1`
-- `corpus/components/auth-client.md@v1.3`
-- `corpus/domain/customer-model.md@v4.0`
-
-When any dependency changes, dependency scanning identifies which specs need review. This can be automated: a security policy update triggers a list of affected specs, the agent proposes updates, and humans approve or reject.
+Every SPEC.md declares what it depends on: `corpus/standards/security-policy.md@v2.1`, `corpus/components/auth-client.md@v1.3`, `corpus/domain/customer-model.md@v4.0`. When any dependency changes, dependency scanning identifies which specs need review. This can be automated: a security policy update triggers a list of affected specs, the agent proposes updates, and humans approve or reject.
 
 ### Regeneration Triggers
 
-**Context Library changes** propagate through the entire chain. When a standard in the [Context Library](context-library.md) updates, affected specs regenerate, plans adapt, and implementations are updated to match.
+There are three main triggers.
 
-**Discovery during implementation** surfaces gaps. When building reveals the spec missed something, the spec updates, the plan adjusts, and code changes cascade. Don't patch around gaps - fix them at the source.
+[Context Library](context-library.md) changes propagate through the entire chain. When a standard in the library updates, affected specs regenerate, plans adapt, and implementations are updated to match.
 
-**Scheduled reviews** catch drift. Periodic freshness checks ensure nothing falls too far behind. Treat it like dependency updates: regular, incremental, not a massive catching-up exercise.
+Discovery during implementation surfaces gaps. When building reveals the spec missed something, the spec updates, the plan adjusts, and code changes cascade. The discipline is to fix gaps at the source rather than patching around them.
 
-## Costs and Benefits
+Scheduled reviews catch drift. Periodic freshness checks ensure nothing falls too far behind. Treat it like dependency updates: regular, incremental, not a massive catching-up exercise.
 
-### Benefits
+## The Trade-offs
 
-- **Continuous alignment**: Systems stay current with evolving standards
-- **Reduced drift**: Regular regeneration prevents large catch-up efforts
-- **Cheap updates**: Agents draft changes; humans review rather than rewrite
-- **Clear provenance**: Every spec knows what it depends on and why
-- **Audit trail**: Version control tracks what changed and when
+The benefits centre on alignment. Systems stay current with evolving standards. Regular regeneration prevents large catch-up efforts. Agents draft changes while humans review rather than rewrite. Every spec knows what it depends on and why. And version control tracks what changed and when.
 
-### Costs
+The costs are operational. Dependency tracking and scanning needs tooling. More regeneration means more human review cycles. And not every corpus change requires spec updates, so false positives need management.
 
-- **Infrastructure investment**: Dependency tracking and scanning needs tooling
-- **Review load**: More regeneration means more human review cycles
-- **False positives**: Not every corpus change requires spec updates
+## When to Use It
 
-## When to Use
+This pattern pays off for systems that must track evolving standards or regulations, long-lived applications where maintenance matters, multi-team environments where consistency across projects is valuable, compliance contexts requiring demonstrable currency, and any system where "we'll update it later" means "we'll never update it."
 
-- Systems that must track evolving standards or regulations
-- Long-lived applications where maintenance matters
-- Multi-team environments where consistency across projects is valuable
-- Compliance contexts requiring demonstrable currency
-- Any system where "we'll update it later" means "we'll never update it"
+Skip it for short-lived prototypes, stable domains with infrequent standard changes, and early-stage work where specs are still forming.
 
-## When Not to Use
+This connects naturally to [Context Library](context-library.md) (the vetted knowledge that specs depend on), [Specify Plan Ship](specify-plan-ship.md) (the workflow that produces specs and plans), [Code Archaeologist](code-archaeologist.md) (extracting initial requirements from legacy systems), and [Golden Path Anchor](golden-path-anchor.md) (applying similar regeneration thinking to reference applications).
 
-- Short-lived prototypes where currency doesn't matter
-- Stable domains with infrequent standard changes
-- Early-stage work where specs are still forming
+## Further Reading
 
-## Related Patterns
-
-- [Context Library](context-library.md): The vetted knowledge that specs depend on
-- [Specify Plan Ship](specify-plan-ship.md): The workflow that produces specs and plans
-- [Code Archaeologist](code-archaeologist.md): Extracts initial requirements from legacy systems
-- [Golden Path Anchor](golden-path-anchor.md): Applies similar regeneration thinking to reference applications
+- [Anchoring AI to Reference Applications](https://martinfowler.com/articles/exploring-gen-ai/anchoring-to-reference.html) - Birgitta Böckeler

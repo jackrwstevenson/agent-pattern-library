@@ -1,117 +1,52 @@
 # Detached Agent
 
+Traditional AI coding assistants impose constraints that create friction for many workflows. They require IDE installation: VS Code, Cursor, or specific editors. They need a local development environment with dependencies, API keys, and compute resources. They demand synchronous interaction while the agent works. And they run code with full access to your machine, credentials, and network, which Simon Willison has aptly termed the [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
+
+This creates friction for quick tasks, excludes team members without full development setups, and introduces security risks that are hard to mitigate.
+
 ## Sketch
 
 ![Detached Agent](../docs/assets/detached-agent.png)
 
-## Problem
+## How It Works
 
-Traditional AI coding assistants require:
+The idea is to use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes. The key insight is *decoupling interface from execution*.
 
-- **IDE installation**: VS Code, Cursor, or specific editors
-- **Local environment**: Development dependencies, API keys, compute resources
-- **Synchronous interaction**: Active session while agent works
-- **Trust in agent execution**: Running code with full access to your machine, credentials, and network (albeit you can implement a sandbox approach to mitigate this)
+A user creates an issue describing the task in natural language. A webhook or polling mechanism detects it and triggers the agent. The agent executes in a sandboxed cloud runner, then comments on the issue or creates a PR. A human reviews and merges or provides feedback via comments.
 
-This creates friction for quick tasks, excludes team members without full development setups, and introduces security risks from the [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
-
-## Solution
-
-Use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes.
-
-### How It Works
-
-1. **User creates issue**: Describes the task in natural language
-2. **Agent triggers**: Webhook or polling detects new issue
-3. **Agent executes**: Sandboxed cloud runner performs the work
-4. **Agent responds**: Comments on issue or creates PR
-5. **Human reviews**: Merge or provide feedback via comments
-
-### Why This Works
-
-The key insight is **decoupling interface from execution**. By treating issues as task queues, you get:
-
-- Asynchronous execution without blocking your workflow
-- Built-in audit trails documenting requests and rationale
-- Team accessibility without requiring development environments
-- Security isolation
-
-### Limitations and Mitigations
-
-**Feedback loop problem**: When the agent misunderstands the issue, you only discover this after execution completes. Each correction requires another full agent run.
-
-Mitigations:
-
-- Issue templates that force structured input
-- Label-based routing to specialised agents
-- Automatic scope validation before execution begins
-- Clear acceptance criteria in the issue description
-
-**Security surface**: The agent needs write access to the repository.
-
-Mitigations:
-
-- Require approval before agents process issues from external contributors
-- Use separate service accounts with minimal permissions
-- Log all agent actions for audit
-- Restrict agents to specific branches or paths
+By treating issues as task queues, you get asynchronous execution without blocking your workflow, built-in audit trails documenting requests and rationale, team accessibility without requiring development environments, and security isolation.
 
 ### Sandboxing Benefits
 
-Cloud-based execution provides security through isolation. Unlike local IDE agents that run with your full user permissions:
+Cloud-based execution provides security through isolation. Unlike local IDE agents that run with your full user permissions, sandboxed agents have no access to local secrets like `~/.ssh` or `~/.aws`. They cannot pivot to other local services. They cannot compromise your entire development environment. And they run in disposable environments that are fresh each run.
 
-| Local Agent Risk                              | Sandboxed Agent                         |
-| --------------------------------------------- | --------------------------------------- |
-| Access to `~/.ssh`, `~/.aws`, browser cookies | No local secrets accessible             |
-| Can pivot to other local services             | Network isolated to specific endpoints  |
-| Compromises entire development environment    | Blast radius limited to one repository  |
-| Malicious code can persist                    | Disposable environments, fresh each run |
+### Limitations
 
-This helps mitigate the lethal trifecta, even if the agent processes untrusted data with powerful tools, the sandbox limits potential damage.
+The feedback loop is the primary weakness. When the agent misunderstands the issue, you only discover this after execution completes. Each correction requires another full agent run.
 
-### Variation: Interactive Takeover
+Mitigations help: issue templates that force structured input, label-based routing to specialised agents, automatic scope validation before execution begins, and clear acceptance criteria in the issue description.
 
-The feedback loop problem can be mitigated with **jump-in capability**, allowing developers to attach to a running or paused cloud session.
+The security surface also needs attention. The agent needs write access to the repository, which means requiring approval before agents process issues from external contributors, using separate service accounts with minimal permissions, logging all agent actions for audit, and restricting agents to specific branches or paths.
 
-**How it works:**
+### Interactive Takeover
 
-1. Agent runs in cloud, streaming progress to a dashboard
-2. Developer monitors asynchronously
-3. If agent goes off track, developer takes over the session
-4. Developer provides guidance, then hands back or completes manually
-5. Session state persists through handoff
+The feedback loop problem can be further mitigated with jump-in capability. The agent runs in the cloud, streaming progress to a dashboard. A developer monitors asynchronously. If the agent goes off track, the developer takes over the session, provides guidance, then hands back or completes manually. Session state persists through the handoff. This gives you async by default, sync when needed.
 
-This provides an **async by default, sync when needed**.
+## The Trade-offs
 
-## Costs & Benefits
+The benefits are clear: audit trails documenting what was requested and why, mobile-friendly issue creation, and sandboxed execution isolated from your credentials and network.
 
-### Benefits
+The costs are equally clear: slow feedback that makes course-correction difficult during execution, scope ambiguity where agents may misinterpret vague issues, cloud compute costs for each task, and careful permission configuration for security.
 
-- **Audit trail**: Issues document what was requested and why
-- **Mobile-friendly**: Create issues from phone
-- **Sandboxed**: Agent isolated from your credentials and network
+## When to Use It
 
-### Costs
+This works well for mobile or remote scenarios, batch processing of similar tasks, initial triage of bug reports, and situations where you want isolation from agent execution.
 
-- **Slow feedback**: Hard to course-correct during execution
-- **Scope ambiguity**: Agents may misinterpret vague issues
-- **Cloud costs**: Compute resources for each task
-- **Security setup**: Requires careful permission configuration
+It's a poor fit for complex features requiring iterative discussion, security-sensitive changes needing careful review, and tasks requiring access to local resources or services.
 
-## When to Use
+[Autonomous Agent](autonomous-agent.md) builds on this pattern, adding task selection and outcome monitoring on top of the execution infrastructure. [Agent Swarm](agent-swarm.md) uses the same async execution model but adds coordination across multiple agents.
 
-- Mobile or remote scenarios
-- Batch processing of similar tasks
-- Initial triage of bug reports
-- When you want isolation from agent execution
-
-## When NOT to Use
-
-- Complex features requiring iterative discussion
-- Security-sensitive changes needing careful review
-- Tasks requiring access to local resources or services
-
-## Sources
+## Further Reading
 
 - [When AI writes almost all code, what happens to software engineering?](https://newsletter.pragmaticengineer.com/p/when-ai-writes-almost-all-code-what) - Gergely Orosz
 - [The Lethal Trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) - Simon Willison

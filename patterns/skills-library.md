@@ -1,108 +1,56 @@
 # Skills Library
 
+Organisations have procedures that should be followed consistently, but agents don't know them. Each team prompts differently, producing divergent approaches to the same task. "How we do things" lives in senior engineers' heads or scattered prompt libraries. Teams rediscover the same pitfalls because lessons aren't encoded into workflows.
+
+The gap between "how we should do X" and "how agents actually do X" widens as AI agents become common across an organisation.
+
 ## Sketch
 
 ![Skills Library](../docs/assets/skills-library.png)
 
-## Problem
+## How It Works
 
-Organisations have procedures that should be followed consistently, but agents don't know them:
-
-- **Inconsistent execution**: Each team prompts differently, producing divergent approaches to the same task
-- **Tribal knowledge silos**: "How we do things" lives in senior engineers' heads or scattered prompt libraries
-- **Repeated mistakes**: Teams rediscover the same pitfalls because lessons aren't encoded into workflows
-
-The gap between "how we should do X" and "how agents actually do X" widens as AI agents become common.
-
-## Solution
-
-Package procedures as executable skills that agents load and follow. This is the HOW - step-by-step instructions for performing specific tasks the way your organisation does them.
-
-Agents execute these skills to do work consistently across teams and projects.
+The approach is to package procedures as executable skills that agents load and follow. This is the HOW: step-by-step instructions for performing specific tasks the way your organisation does them. Agents execute these skills to do work consistently across teams and projects.
 
 ### Skills vs Context
 
-Skills Library complements [Context Library](context-library.md):
+Skills Library complements the [Context Library](context-library.md). Where the Context Library defines WHAT good looks like (security policy standards, API design conventions, accessibility requirements), the Skills Library defines HOW to achieve it (security review procedure, API design workflow, accessibility audit checklist).
 
-| Context Library (WHAT)     | Skills Library (HOW)          |
-| -------------------------- | ----------------------------- |
-| Security policy standards  | Security review procedure     |
-| API design conventions     | API design workflow           |
-| Accessibility requirements | Accessibility audit checklist |
-| Architecture patterns      | Architecture review process   |
-
-Skills often _reference_ context. A security review skill (HOW to review) loads the security policy (WHAT to check against).
+Skills often *reference* context. A security review skill (how to review) loads the security policy (what to check against).
 
 ### Skill Structure
 
-Package each skill as a portable unit:
-
-- **SKILL.md** - Step-by-step instructions
-- **checklist.yaml** - Structured criteria to verify
-- **scripts/** - Automated checks to run (e.g., scan.sh)
-- **examples/** - Reference output (e.g., good-review.md)
+Each skill is packaged as a portable unit: a SKILL.md with step-by-step instructions, a checklist.yaml with structured criteria to verify, a scripts/ directory for automated checks, and optionally an examples/ directory with reference output.
 
 When an agent encounters a matching task ("review this PR for security"), it loads the skill and follows the instructions.
 
 ### Example Skills
 
-**Code review workflow**: How to review PRs - what to check first, how to structure feedback, when to approve vs request changes, how to handle disagreements.
-
-**Incident response**: How to handle production incidents - triage steps, communication templates, escalation paths, post-mortem process.
-
-**Security review**: How to audit code for vulnerabilities - what tools to run, what patterns to look for, how to assess severity, how to document findings.
-
-**API design**: How to design new endpoints - naming conventions, versioning approach, error response format, documentation requirements.
-
-**Onboarding**: How to set up a new service - required infrastructure, configuration steps, integration checklist, validation process.
+A *code review workflow* defines how to review PRs: what to check first, how to structure feedback, when to approve versus request changes, how to handle disagreements. An *incident response* skill covers triage steps, communication templates, escalation paths, and the post-mortem process. A *security review* skill specifies which tools to run, which patterns to look for, how to assess severity, and how to document findings. An *API design* skill covers naming conventions, versioning, error response format, and documentation requirements.
 
 ### Multi-Product Distribution
 
-Platform teams maintain skills (security-review, incident-response, api-design, code-review) that product teams consume. When the platform team improves a procedure, all products apply the updated workflow automatically.
+Platform teams maintain skills like security-review, incident-response, api-design, and code-review. Product teams consume them. When the platform team improves a procedure, all products apply the updated workflow automatically. This is one of the most powerful aspects of the pattern.
 
 ### Progressive Loading
 
-Context is expensive. Structure skills so agents pull in what they need:
+Context is expensive. Structure skills so agents pull in only what they need. Metadata (roughly 100 tokens) is always loaded and describes when to activate. Instructions (roughly 5,000 tokens) load on activation. Resources like checklists and examples load only when referenced.
 
-1. **Metadata** (~100 tokens): Always loaded, describes when to activate
-2. **Instructions** (~5k tokens): Loaded on activation, the actual procedure
-3. **Resources** (variable): Loaded only when referenced (checklists, examples)
+## The Trade-offs
 
-## Costs and Benefits
+The benefits are significant: consistent execution across teams, institutional memory that survives team changes, reduced training burden, and the ability to update a skill once and improve everywhere.
 
-### Benefits
+The costs are the usual suspects: upfront investment in creating good skills, maintenance burden to keep them fresh, and coordination overhead between platform and product teams on interfaces.
 
-- **Consistent execution**: All teams follow the same procedures
-- **Institutional memory**: "How we do things" survives team (agent) changes
-- **Reduced training**: New agents (and humans) follow established workflows
-- **Continuous improvement**: Update the skill once, improve everywhere
+## When to Use It
 
-### Costs
+This pattern makes sense for procedures that should be consistent across teams, tasks with established best practices worth encoding, compliance workflows requiring demonstrable process, and any process where "how we do it here" should be uniform.
 
-- **Upfront investment**: Creating good skills takes effort
-- **Maintenance burden**: Skills go stale without active curation
-- **Coordination overhead**: Platform and product teams must align on interfaces
+Avoid it for exploratory work where the procedure is still being discovered, and procedures changing too rapidly to be worth encoding.
 
-## When to Use
+[Golden Path Anchor](golden-path-anchor.md) applies similar thinking to reference applications, and [Spec Library](spec-library.md) uses comparable packaging for reusable functionality.
 
-- Procedures that should be consistent across teams
-- Tasks with established best practices worth encoding
-- Compliance workflows requiring demonstrable process
-- Onboarding scenarios where consistency matters
-- Any process where "how we do it here" should be uniform
+## Further Reading
 
-## When Not to Use
-
-- Exploratory work where the procedure is still being discovered
-- Procedures changing too rapidly to be worth encoding
-
-## Related Patterns
-
-- [Context Library](context-library.md): Reference material that skills check against (WHAT vs HOW)
-- [Golden Path Anchor](golden-path-anchor.md): Applies reference patterns across codebases
-- [Spec Library](spec-library.md): Similar packaging approach for reusable functionality
-
-## Sources
-
-- [Agent Skills Specification](https://agentskills.io/), Open standard for portable agent skills
-- [lane-assist](https://github.com/jackrwstevenson/lane-assist), Working example of executable skills for Claude Code
+- [Agent Skills Specification](https://agentskills.io/) - Open standard for portable agent skills
+- [lane-assist](https://github.com/jackrwstevenson/lane-assist) - Working example of executable skills for Claude Code

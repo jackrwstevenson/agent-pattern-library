@@ -1,61 +1,40 @@
 # Context Bypass
 
+LLM context windows have hard limits, but real-world tasks routinely exceed them. A spreadsheet with 100,000 rows won't fit in context. Reading an entire repository exhausts token limits before analysis begins. Legal contracts, research corpora, and server logs all present the same problem.
+
+The common workarounds fail in predictable ways. Truncation discards potentially critical information. Sampling misses patterns visible only in full data. Summarising first strips the fine-grained detail needed for accuracy. And agent API calls add wiring overhead, bloat parsing context, and increase token costs.
+
+The fundamental issue is that we're trying to bring the data to the model when we should bring the model's intent to the data.
+
 ## Sketch
 
 ![Context Bypass](../docs/assets/context-bypass.png)
 
-## Problem
+## How It Works
 
-LLM context windows have hard limits, but real-world tasks routinely exceed them:
+The approach delegates data-intensive operations to local code APIs and passes only compact results back to the LLM. The agent formulates a query expressing what it needs. A local API executes the query against the full dataset using battle-tested tools like SQL, grep, or pandas. Only the compact result comes back to the agent's context.
 
-- **Large datasets**: A spreadsheet with 100,000 rows won't fit in context
-- **Big codebases**: Reading an entire repository exhausts token limits before analysis begins
-- **Lengthy documents**: Legal contracts, research corpora, server logs
+This inverts the data flow. Instead of cramming data into the model, you bring the model's intent to the data.
 
-Common workarounds fail in predictable ways:
+## The Trade-offs
 
-| Tactic          | Failure mode                                                        |
-| --------------- | ------------------------------------------------------------------- |
-| Truncation      | Discards potentially critical information                           |
-| Sampling        | Misses patterns visible only in full data                           |
-| Summarise-first | Strips fine-grained detail needed for accuracy                      |
-| Agent API calls | Adds wiring overhead, bloats parsing context, increases token costs |
+| Benefit | Cost |
+| --- | --- |
+| Handle arbitrarily large datasets | Must build and maintain local APIs |
+| Full-data accuracy, not truncated samples | LLM must correctly formulate queries |
+| Lower token costs | Local execution needs sandboxing |
+| Faster responses (less data transfer) | Additional infrastructure to deploy |
+| Leverage battle-tested tools (SQL, grep, etc.) | Debugging spans LLM and local code |
 
-The fundamental issue: we're trying to bring the data to the model when we should bring the model's intent to the data.
+## When to Use It
 
-## Solution
+This pattern works for datasets exceeding context window limits, aggregation tasks over large data (counting, averaging, grouping), needle-in-haystack searches with clear filtering criteria, operations where precision matters more than flexibility, and cost-sensitive applications processing high data volumes.
 
-Delegate data-intensive operations to local code APIs. Pass only compact results back to the LLM.
+It's unnecessary for small datasets that fit comfortably in context, exploratory analysis where filtering criteria emerge through iteration, and tasks where query formulation is harder than just reading the data.
 
-### Sketch
+This solves a different problem from [Pyramid Summary](pyramid-summary.md). Context Bypass handles data-heavy processing where you need precise answers from large datasets. Pyramid Summary handles comprehension of large systems where the agent needs a mental model at multiple zoom levels. Different tools for different scaling problems.
 
-![Context Bypass Sketch](../docs/assets/context-bypass.png)
+## Further Reading
 
-## Tradeoffs
-
-| Benefit                                        | Cost                                 |
-| ---------------------------------------------- | ------------------------------------ |
-| Handle arbitrarily large datasets              | Must build and maintain local APIs   |
-| Full-data accuracy, not truncated samples      | LLM must correctly formulate queries |
-| Lower token costs                              | Local execution needs sandboxing     |
-| Faster responses (less data transfer)          | Additional infrastructure to deploy  |
-| Leverage battle-tested tools (SQL, grep, etc.) | Debugging spans LLM and local code   |
-
-## When to Use
-
-- Datasets exceeding context window limits
-- Aggregation tasks over large data (counting, averaging, grouping)
-- Needle-in-haystack searches with clear filtering criteria
-- Operations where precision matters more than flexibility
-- Cost-sensitive applications processing high data volumes
-
-## When to Avoid
-
-- Small datasets that fit comfortably in context
-- Exploratory analysis where filtering criteria emerge through iteration
-- Tasks where query formulation is harder than just reading the data
-
-## Sources
-
-- [Tool Use in Claude](https://docs.anthropic.com/claude/docs/tool-use), Anthropic's tool use documentation
-- [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling), OpenAI's approach to structured tool calls
+- [Tool Use in Claude](https://docs.anthropic.com/claude/docs/tool-use) - Anthropic
+- [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling) - OpenAI

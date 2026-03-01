@@ -2,39 +2,29 @@
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Verifying behavioural equivalence across languages is hard, and subtle semantic differences between runtimes can introduce silent bugs. Treat this as a lens for rethinking code translation, not a guarantee of correctness.
 
+Porting code between languages or frameworks is common but painful. Manual translation is slow and error-prone. Syntax-level tools like transpilers and converters produce technically correct but unidiomatic output. Framework conventions differ profoundly: a React component and a SwiftUI view solve the same problem with entirely different patterns. And when the source continues to evolve, the port must track changes continuously.
+
+Traditional automated translation treats code as syntax to be converted. The result compiles but doesn't read like code a native developer would write.
+
 ## Sketch
 
 ![Semantic Port](../docs/assets/semantic-port.png)
 
-## Problem
+## How It Works
 
-Porting code between languages or frameworks is common but painful:
+The approach uses AI agents to perform semantically-aware ports that preserve intent and produce idiomatic output in the target language or framework.
 
-- **Manual translation is slow**: Line-by-line rewriting is tedious and error-prone
-- **Syntax-level tools miss intent**: Transpilers and converters produce technically correct but unidiomatic output
-- **Framework conventions differ**: A React component and a SwiftUI view solve the same problem with entirely different patterns
-- **Ongoing ports compound**: When the source continues to evolve, the port must track changes continuously
-
-Traditional automated translation treats code as syntax to be converted. The result compiles but doesn't read like code a native developer would write.
-
-## Solution
-
-Use AI agents to perform semantically-aware ports that preserve intent and produce idiomatic output in the target language or framework.
-
-### How It Works
-
-1. **Extract intent**: Analyse the source code to understand what it does and why, not just how
-2. **Map idioms**: Identify the target language's native patterns for expressing the same intent
-3. **Generate idiomatically**: Produce code that follows the target ecosystem's conventions, naming, and structure
-4. **Validate behaviourally**: Verify the port preserves the original's observable behaviour through tests
+The process has four stages. *Extract intent*: analyse the source code to understand what it does and why, not just how. *Map idioms*: identify the target language's native patterns for expressing the same intent. *Generate idiomatically*: produce code that follows the target ecosystem's conventions, naming, and structure. *Validate behaviourally*: verify the port preserves the original's observable behaviour through tests.
 
 ### One-Time vs. Ongoing
 
-**One-time port**: Migrate a codebase from one language to another. The source is archived; the target becomes canonical.
+A *one-time port* migrates a codebase from one language to another. The source is archived; the target becomes canonical.
 
-**Ongoing port**: Source and target co-exist. Changes in the source propagate to the target automatically. Useful for maintaining SDKs across multiple languages from a single reference implementation.
+An *ongoing port* keeps source and target co-existing. Changes in the source propagate to the target automatically. This is useful for maintaining SDKs across multiple languages from a single reference implementation.
 
 ### What Makes This Different from Transpilation
+
+The distinction is important. A transpiler takes a syntax tree as input and produces mechanically correct code. It uses source language error handling patterns, looks for direct library equivalents or shims, and produces output that compiles but reads foreign. A semantic port takes intent and behaviour as input and produces idiomatic code. It uses target language error handling patterns, adopts native ecosystem libraries, and produces output that reads like code a native developer would write.
 
 | Aspect | Transpiler | Semantic port |
 | --- | --- | --- |
@@ -44,41 +34,20 @@ Use AI agents to perform semantically-aware ports that preserve intent and produ
 | Dependencies | Direct equivalents or shims | Native ecosystem libraries |
 | Result | Compiles but reads foreign | Reads like native code |
 
-## Costs and Benefits
+## The Trade-offs
 
-### Benefits
+The benefits are significant. Generated code follows target ecosystem conventions. Agents port in minutes what takes developers days. Continuous ports keep multi-language projects aligned. And business logic survives translation intact.
 
-- **Idiomatic output**: Generated code follows target ecosystem conventions
-- **Faster than manual**: Agents port in minutes what takes developers days
-- **Ongoing sync**: Continuous ports keep multi-language projects aligned
-- **Preserves intent**: Business logic survives translation intact
+The costs centre on verification. Behavioural equivalence must be verified, not assumed. Some patterns have no clean equivalent in the target. Subtle language differences in threading models and error handling risk silent behavioural changes. And tests must also be ported or rewritten for the target.
 
-### Costs
+## When to Use It
 
-- **Validation burden**: Behavioural equivalence must be verified, not assumed
-- **Idiom mapping is hard**: Some patterns have no clean equivalent in the target
-- **Edge cases**: Subtle language differences (threading models, error handling) risk silent behavioural changes
-- **Test porting**: Tests must also be ported or rewritten for the target
+This works for maintaining SDKs or libraries across multiple languages, migrating codebases between frameworks (Angular to React, UIKit to SwiftUI), porting reference implementations to new platforms, and keeping multi-language projects synchronised with a single source of truth.
 
-## When to Use
+Avoid it when a rewrite from scratch would be simpler, for trivial codebases where manual translation is faster than setting up the process, and when source and target languages are too conceptually different for meaningful mapping.
 
-- Maintaining SDKs or libraries across multiple languages
-- Migrating codebases between frameworks (e.g. Angular to React, UIKit to SwiftUI)
-- Porting reference implementations to new platforms
-- Keeping multi-language projects synchronised with a single source of truth
+[Spec Library](spec-library.md) defines what to implement; Semantic Port provides the mechanism for generating language-specific code. [Regen](regen.md) ensures that when the source evolves, the port regenerates. And [Validation Constraint](validation-constraint.md) provides the behavioural tests that verify port correctness.
 
-## When Not to Use
-
-- When a rewrite from scratch would be simpler than porting
-- Trivial codebases where manual translation is faster than setting up the process
-- When the source and target languages are too conceptually different for meaningful mapping
-
-## Related Patterns
-
-- Pairs with [Spec Library](spec-library.md) - specifications define what to implement; Semantic Port provides the mechanism for generating language-specific code
-- Supports [Regen](regen.md) - when the source evolves, the port regenerates
-- Complements [Validation Constraint](validation-constraint.md) - behavioural tests verify port correctness
-
-## Sources
+## Further Reading
 
 - [Software Factory Techniques](https://factory.strongdm.ai/techniques) - StrongDM
