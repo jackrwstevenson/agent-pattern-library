@@ -17,7 +17,7 @@ This creates friction for quick tasks, excludes team members without full develo
 
 ## How It Works
 
-The idea is to use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes. The key insight is *decoupling interface from execution*.
+The idea is to use GitHub issues (or similar) as the interface for AI agents, with cloud-based execution in isolated sandboxes. The key insight is _decoupling interface from execution_.
 
 A user creates an issue describing the task in natural language. A webhook or polling mechanism detects it and triggers the agent. The agent executes in a sandboxed cloud runner, then comments on the issue or creates a PR. A human reviews and merges or provides feedback via comments.
 
@@ -48,8 +48,6 @@ The costs are equally clear: slow feedback that makes course-correction difficul
 ## When to Use It
 
 This works well for mobile or remote scenarios, batch processing of similar tasks, initial triage of bug reports, and situations where you want isolation from agent execution.
-
-It's a poor fit for complex features requiring iterative discussion, security-sensitive changes needing careful review, and tasks requiring access to local resources or services.
 
 [Autonomous Agent](autonomous-agent.md) builds on this pattern, adding task selection and outcome monitoring on top of the execution infrastructure. [Agent Swarm](agent-swarm.md) uses the same async execution model but adds coordination across multiple agents.
 

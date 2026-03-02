@@ -37,7 +37,7 @@ The agents can run on a schedule (nightly, weekly) or triggered by events (after
 
 ### The Virtuous Cycle
 
-Böckeler describes an iterative principle: when agents struggle with a particular class of problem, teams identify the missing tool or guardrail and have AI implement the fix. Garbage collection agents are both a product of this cycle and participants in it. They surface recurring problems, which informs improvements to context, linters, and constraints, which reduces the problems the next sweep finds.
+Birgitta Böckeler describes an iterative principle: when agents struggle with a particular class of problem, teams identify the missing tool or guardrail and have AI implement the fix. Garbage collection agents are both a product of this cycle and participants in it. They surface recurring problems, which informs improvements to context, linters, and constraints, which reduces the problems the next sweep finds.
 
 ## The Trade-offs
 
@@ -55,7 +55,7 @@ This builds on [Structural Constraint](structural-constraint.md) by periodically
 
 ## Maturity
 
-**Trial.** The problem is real for high-volume AI-generated codebases and the solution is conceptually clean, but requires meaningful infrastructure to implement well. I expect this to become standard practice as AI-generated code volume increases.
+**Trial.** The problem is real for high-volume AI-generated codebases and the solution is conceptually clean, but requires meaningful infrastructure to implement well. This is likely to become standard practice as AI-generated code volume increases.
 
 ## Further Reading
 

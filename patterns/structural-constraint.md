@@ -7,11 +7,11 @@ maturity: trial
 
 # Structural Constraint
 
-[Validation Constraint](validation-constraint.md) asks whether agent-generated code *works*: do the tests pass? But there's a different question that matters just as much at scale: does the code *fit*? An agent can produce a functionally correct implementation that ignores your module boundaries, bypasses your layering conventions, introduces circular dependencies, or reaches into internals that should be private.
+[Validation Constraint](validation-constraint.md) asks whether agent-generated code _works_: do the tests pass? But there's a different question that matters just as much at scale: does the code _fit_? An agent can produce a functionally correct implementation that ignores your module boundaries, bypasses your layering conventions, introduces circular dependencies, or reaches into internals that should be private.
 
 Functional tests won't catch these problems. A test suite that asserts correct behaviour tells you nothing about whether the implementation respects your architecture. And the [Context Library](context-library.md) can describe your architectural conventions, but description is advisory. Agents can read it and still produce code that violates it.
 
-The insight from OpenAI's experience building a million-line AI-generated codebase is that maintainable AI-generated code at scale requires *constraining the solution space* through enforcement, not just guidance. You need to trade "generate anything" flexibility for structural rules that keep the codebase coherent as it grows.
+Maintainable AI-generated code at scale requires _constraining the solution space_ through enforcement, not just guidance. You need to trade "generate anything" flexibility for structural rules that keep the codebase coherent as it grows.
 
 ## Sketch
 
@@ -23,7 +23,7 @@ The approach uses custom linters, structural tests, and enforced boundaries to c
 
 ### Custom Linters
 
-Purpose-built lint rules enforce organisation-specific conventions that general-purpose linters don't cover. These might prohibit imports across module boundaries, enforce naming conventions for specific layers, require certain annotations or decorators on public APIs, or flag patterns your team has explicitly banned. The key is that these rules are *deterministic*: they run fast, produce no false negatives, and give agents unambiguous pass/fail signals.
+Purpose-built lint rules enforce organisation-specific conventions that general-purpose linters don't cover. These might prohibit imports across module boundaries, enforce naming conventions for specific layers, require certain annotations or decorators on public APIs, or flag patterns your team has explicitly banned. The key is that these rules are _deterministic_: they run fast, are predictable for the patterns they check, and give agents unambiguous pass/fail signals.
 
 ### Structural Tests
 
@@ -37,7 +37,7 @@ Beyond linting and testing, some constraints work best as hard boundaries: separ
 
 ### The Feedback Loop
 
-Böckeler emphasises the iterative nature of this work. When agents consistently produce code that violates a constraint, the response isn't to relax the constraint. It's to improve the harness: add better context, write clearer linter messages, or provide examples of conforming code. The agents themselves can implement these improvements, creating a virtuous cycle where the harness becomes more effective over time.
+Birgitta Böckeler emphasises the iterative nature of this work. When agents consistently produce code that violates a constraint, the response isn't to relax the constraint. It's to improve the harness: add better context, write clearer linter messages, or provide examples of conforming code. The agents themselves can implement these improvements, creating a virtuous cycle where the harness becomes more effective over time.
 
 ## The Trade-offs
 
@@ -55,7 +55,7 @@ This complements [Validation Constraint](validation-constraint.md) directly: fun
 
 ## Maturity
 
-**Trial.** Custom linters and structural tests work, but writing effective ones requires deep understanding of your architecture. The investment is justified for large AI-generated codebases; the overhead rarely pays off for smaller ones.
+**Trial.** Custom linters and structural tests work, but writing effective ones requires deep understanding of your architecture. The investment is justified for large AI-generated codebases; the overhead may not pay off for smaller ones.
 
 ## Further Reading
 

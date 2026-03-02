@@ -39,6 +39,10 @@ Skip it for solo prototyping, short single-purpose agent interactions, and envir
 
 This complements [Specify Plan Ship](specify-plan-ship.md) by preserving the reasoning behind implementation decisions, and supports [Agent Swarm](agent-swarm.md) by tracking concurrent agent sessions independently with rollback capability.
 
+## Maturity
+
+**Assess.** The concept is sound and the need is real, but tooling is immature. Shadow branch management and session capture add operational complexity that few teams are equipped for today.
+
 ## Further Reading
 
 - [Entire CLI](https://github.com/entireio/cli) - Entire.io

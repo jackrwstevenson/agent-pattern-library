@@ -53,6 +53,10 @@ Avoid it when a rewrite from scratch would be simpler, for trivial codebases whe
 
 [Spec Library](spec-library.md) defines what to implement; Semantic Port provides the mechanism for generating language-specific code. [Regen](regen.md) ensures that when the source evolves, the port regenerates. And [Validation Constraint](validation-constraint.md) provides the behavioural tests that verify port correctness.
 
+## Maturity
+
+**Assess.** The distinction from transpilation is clear and valuable, but behavioural verification of ports remains the critical unsolved challenge. Evaluate for SDK maintenance and framework migration.
+
 ## Further Reading
 
 - [Software Factory Techniques](https://factory.strongdm.ai/techniques) - StrongDM

@@ -43,7 +43,7 @@ This solves a different problem from [Pyramid Summary](pyramid-summary.md). Cont
 
 ## Maturity
 
-**Adopt.** The inversion principle; bring intent to data rather than data to context; is clear and practical. I've applied this on every project where data volume is an issue.
+**Adopt.** The inversion principle -- bring intent to data rather than data to context -- is clear and practical, and applies to any project where data volume is an issue.
 
 ## Further Reading
 

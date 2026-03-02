@@ -19,21 +19,21 @@ _Sketch coming soon._
 
 The approach places an independent validation pipeline after the model produces text. Output must pass through a series of gates before it is surfaced to users or downstream systems.
 
-*Deterministic rule checks* use regex and DSL-based rules to enforce hard constraints. Examples include blocking financial-advice phrasing, enforcing contractual wording restrictions, and validating output format. These are fast, predictable, and easy to audit.
+_Deterministic rule checks_ use regex and DSL-based rules to enforce hard constraints. Examples include blocking financial-advice phrasing, enforcing contractual wording restrictions, and validating output format. These are fast, predictable, and easy to audit.
 
-*PII re-detection and redaction* provides a second-pass PII detector that catches exposures missed by runtime controls. It operates independently with its own detection models and patterns, providing defence in depth for sensitive data.
+_PII re-detection and redaction_ provides a second-pass PII detector that catches exposures missed by runtime controls. It operates independently with its own detection models and patterns, providing defence in depth for sensitive data.
 
-*Contextual verification* checks that claims in the output are supported by the supplied context or data. Techniques include citation matching, evidence anchoring, and semantic similarity scoring against source documents. This catches confabulation that contextual grounding missed.
+_Contextual verification_ checks that claims in the output are supported by the supplied context or data. Techniques include citation matching, evidence anchoring, and semantic similarity scoring against source documents. This catches confabulation that contextual grounding missed.
 
-*Risk scoring and explainability tags* attach a compliance or confidence score and provenance metadata to each output. They record why the output passed or failed each gate, supporting downstream decisions and regulatory review.
+_Risk scoring and explainability tags_ attach a compliance or confidence score and provenance metadata to each output. They record why the output passed or failed each gate, supporting downstream decisions and regulatory review.
 
-*Escalation workflows* automatically route uncertain or high-risk outputs to human reviewers or stricter validation policies. Configurable thresholds determine when automated approval is sufficient and when human judgement is required.
+_Escalation workflows_ automatically route uncertain or high-risk outputs to human reviewers or stricter validation policies. Configurable thresholds determine when automated approval is sufficient and when human judgement is required.
 
 ### Architecture
 
 This validation layer intentionally runs outside the model host (external to Bedrock or equivalent) to preserve separation of concerns, simplify audits, and meet regulator expectations.
 
-The pipeline should be auditable by design. *Immutable logs* record every validation decision with input, output, gate results, and timestamps. *Policy versioning* tracks validation rules so you can reconstruct what policy was active for any historical output. *Review trails* provide clear provenance linking each output to the gates it passed, the scores it received, and any human review decisions.
+The pipeline should be auditable by design. _Immutable logs_ record every validation decision with input, output, gate results, and timestamps. _Policy versioning_ tracks validation rules so you can reconstruct what policy was active for any historical output. _Review trails_ provide clear provenance linking each output to the gates it passed, the scores it received, and any human review decisions.
 
 This architecture lets you demonstrate controls, decisions, and provenance during compliance reviews without coupling your audit story to a specific model provider.
 
@@ -54,7 +54,3 @@ Together with [Runtime Guardrails](runtime-guardrails.md), this pattern forms de
 ## Maturity
 
 **Trial.** The architecture is well-understood but building and maintaining a validation pipeline is a non-trivial investment. Worth it for regulated industries and high-stakes customer-facing applications; overhead for most internal tools.
-
-## Further Reading
-
-- [Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) - AWS

@@ -2,7 +2,7 @@
 name: Golden Path Anchor
 description: Continuously align codebases with reference implementations through drift detection and automated remediation.
 category: Evolution
-maturity: trial
+maturity: adopt
 ---
 
 # Golden Path Anchor
@@ -41,7 +41,7 @@ There are three significant limitations worth understanding.
 
 The benefits are compelling. Best practices propagate automatically. Updates flow with minimal manual effort. All projects stay aligned. Traceability from reference to implementation simplifies auditing. And teams don't need to track what's changed in the reference.
 
-The costs are real. The reference application becomes critical path: poor quality causes fleet-wide harm. Legitimate variations require explicit exception handling. The tooling investment for comparison, PR generation, and tracking is non-trivial. The agent may flag acceptable variations as drift. And too many auto-generated PRs can overwhelm teams.
+The costs are real. The reference application becomes the critical path: poor quality causes fleet-wide harm. Legitimate variations require explicit exception handling. The tooling investment for comparison, PR generation, and tracking is non-trivial. The agent may flag acceptable variations as drift. And too many auto-generated PRs can overwhelm teams.
 
 ## When to Use It
 
@@ -51,7 +51,7 @@ Avoid it for small teams with few projects, highly diverse applications with lit
 
 ## Maturity
 
-**Trial.** Continuous alignment with reference implementations is a powerful idea, but the reference quality concern is serious: bad patterns propagate automatically. Adopt this carefully with rigorous review of reference changes.
+**Adopt.** Continuous alignment with reference implementations is well-proven in platform engineering. The reference quality concern is real but manageable with rigorous review of reference changes and staged rollout.
 
 ## Further Reading
 

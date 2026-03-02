@@ -54,4 +54,4 @@ This pairs naturally with the [Context Library](context-library.md), which cover
 
 ## Further Reading
 
-- [FastRender development approach](https://simonwillison.net/2026/Jan/23/fastrender/) - Wilson Lin's use of spec submodules for autonomous agent development
+- [FastRender development approach](https://simonwillison.net/2026/Jan/23/fastrender/) - Simon Willison's use of spec submodules for autonomous agent development

@@ -62,4 +62,4 @@ Code Archaeologist is fundamentally a prerequisite phase. Its output feeds into 
 
 ## Maturity
 
-**Adopt.** The approach is sound, but extraction quality varies with codebase characteristics.
+**Adopt.** Legacy replacement without explicit analysis of existing behaviour is the single most common cause of failed rewrites. Extraction quality varies with codebase characteristics, but even partial analysis dramatically reduces risk.

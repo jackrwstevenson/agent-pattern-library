@@ -51,4 +51,4 @@ This provides the orchestration layer that [Specify Plan Ship](specify-plan-ship
 
 ## Further Reading
 
-- [Harness Engineering](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html) - Birgitta Böckeler
+- [Agentic Workflows for Software Development](https://medium.com/quantumblack/agentic-workflows-for-software-development-dc8e64f4a79d) - Dan Sheard

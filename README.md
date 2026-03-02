@@ -16,14 +16,14 @@ Each pattern carries a **maturity badge** indicating how much confidence I have 
 
 The 26 patterns are organised into six categories:
 
-| Category            | What it covers                                                                                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Grounding**       | Ensuring agents work from accurate, authoritative information rather than inventing their own                            |
-| **Workflow**        | Structuring how agents perform work, compensating for the limitations that make unstructured use unreliable              |
-| **Safety**          | Controlling and validating agent output to meet compliance, safety, and quality requirements                             |
-| **Observability**   | Persisting agent progress, decisions, and provenance so that work survives context limits and remains auditable          |
-| **Scale**           | What happens when you push beyond single-agent constraints: context limits, throughput ceilings, coordination challenges |
-| **Evolution**       | Keeping systems current as dependencies, standards, and the world around them change                                     |
+| Category          | What it covers                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Grounding**     | Ensuring agents work from accurate, authoritative information rather than inventing their own                            |
+| **Workflow**      | Structuring how agents perform work, compensating for the limitations that make unstructured use unreliable              |
+| **Safety**        | Controlling and validating agent output to meet compliance, safety, and quality requirements                             |
+| **Observability** | Persisting agent progress, decisions, and provenance so that work survives context limits and remains auditable          |
+| **Scale**         | What happens when you push beyond single-agent constraints: context limits, throughput ceilings, coordination challenges |
+| **Evolution**     | Keeping systems current as dependencies, standards, and the world around them change                                     |
 
 ### Maturity ratings
 
@@ -77,11 +77,11 @@ These patterns control and validate agent output to meet compliance, safety, and
 
 These patterns persist agent progress, decisions, and provenance so that work survives context limits and remains auditable.
 
-| Pattern                                                  | Description                                                                                                                                           | Novel Insight                                                                                                                                               |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Session Checkpoint](patterns/session-checkpoint.md)     | Capture agent sessions with rollback capability, shadow branches for metadata, and auto-summarisation.                                                | Preserves the reasoning behind agent-assisted code changes as replayable, recoverable history without polluting the code branch.                            |
-| [Generation Memory](patterns/generation-memory.md)       | Give agents an external log of their own work that persists across context window compactions, preventing repeated work and lost decisions.            | Solves a problem unique to LLMs: context compaction silently discards the agent's working memory. Externalising progress into a file restores continuity.   |
-| [Provenance Ledger](patterns/provenance-ledger.md)       | Record which agent, model, prompt, and iteration produced every artefact, providing lightweight traceability from deployment to reasoning.             | Distinct from session replay: structured metadata per generation step, not transcripts. Paired with Git, provides a complete audit chain for regulated domains. |
+| Pattern                                              | Description                                                                                                                                 | Novel Insight                                                                                                                                                   |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Session Checkpoint](patterns/session-checkpoint.md) | Capture agent sessions with rollback capability, shadow branches for metadata, and auto-summarisation.                                      | Preserves the reasoning behind agent-assisted code changes as replayable, recoverable history without polluting the code branch.                                |
+| [Generation Memory](patterns/generation-memory.md)   | Give agents an external log of their own work that persists across context window compactions, preventing repeated work and lost decisions. | Solves a problem unique to LLMs: context compaction silently discards the agent's working memory. Externalising progress into a file restores continuity.       |
+| [Provenance Ledger](patterns/provenance-ledger.md)   | Record which agent, model, and iteration produced every artefact, providing lightweight traceability from deployment to reasoning.          | Distinct from session replay: structured metadata per generation step, not transcripts. Paired with Git, provides a complete audit chain for regulated domains. |
 
 ### Scale
 
@@ -133,12 +133,12 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 
 ### Memory and observability
 
-- [Generation Memory](patterns/generation-memory.md); a single agent's awareness of its own progress across context compactions
-- [Agent Memory Graph](patterns/agent-memory-graph.md); coordination primitives for parallel agents: atomic task claims, dependency tracking, ready-state detection
-- [Session Checkpoint](patterns/session-checkpoint.md); concurrent session history with rollback, without polluting the code branch
-- [Provenance Ledger](patterns/provenance-ledger.md); lightweight audit trail from any artefact back to the agent and prompt that produced it
-- [Pyramid Summary](patterns/pyramid-summary.md); navigating systems that exceed context limits through selective expansion rather than lossy compression
-- [Context Bypass](patterns/context-bypass.md); delegating data-heavy operations to local APIs so they never enter the context window at all
+- [Generation Memory](patterns/generation-memory.md): a single agent's awareness of its own progress across context compactions
+- [Agent Memory Graph](patterns/agent-memory-graph.md): coordination primitives for parallel agents: atomic task claims, dependency tracking, ready-state detection
+- [Session Checkpoint](patterns/session-checkpoint.md): concurrent session history with rollback, without polluting the code branch
+- [Provenance Ledger](patterns/provenance-ledger.md): lightweight audit trail from any artefact back to the agent and model that produced it
+- [Pyramid Summary](patterns/pyramid-summary.md): navigating systems that exceed context limits through selective expansion rather than lossy compression
+- [Context Bypass](patterns/context-bypass.md): delegating data-heavy operations to local APIs so they never enter the context window at all
 
 ### Testing and validation
 
@@ -175,4 +175,4 @@ If you spot a pattern that isn't listed here, it may be too well-known for me to
 
 ## Acknowledgements
 
-Credit to Chris Hay, Birgitta Böckeler, Simon Willison, Gergely Orosz, Drew Breunig, Wilson Lin, Tim Kellogg, Addy Osmani, Jesse Vincent, Steve Yegge, StrongDM, and Entire.io for the ideas that inspired the patterns here.
+Credit to Chris Hay, Birgitta Böckeler, Dan Sheard, Simon Willison, Wilson Lin, Gergely Orosz, Drew Breunig, Tim Kellogg, Addy Osmani, Jesse Vincent, Steve Yegge, StrongDM, and Entire.io for the ideas that inspired the patterns here.

@@ -39,6 +39,10 @@ Avoid it when you lack the processes to enforce guardrails, on small projects wh
 
 This builds on [Detached Agent](detached-agent.md) for async execution infrastructure. [Autonomous Agent](autonomous-agent.md) adds individual agent self-direction; swarms add coordination across agents. [Context Library](context-library.md) and [Authoritative Source Anchor](authoritative-source-anchor.md) keep swarm output consistent and grounded. And [Agent Memory Graph](agent-memory-graph.md) provides the coordination primitives that swarms need for parallel work.
 
+## Maturity
+
+**Assess.** Demonstrated in controlled settings with impressive throughput, but the infrastructure and orchestration requirements are substantial. Most teams lack the guardrails and decomposition discipline to make this work reliably.
+
 ## Further Reading
 
-- [FastRender development approach](https://simonwillison.net/2026/Jan/23/fastrender/) - Wilson Lin's use of ~2,000 concurrent agents generating 30,000+ commits
+- [FastRender development approach](https://simonwillison.net/2026/Jan/23/fastrender/) - Wilson Lin's use of ~2,000 concurrent agents generating 30,000+ commits (via Simon Willison's Weblog)

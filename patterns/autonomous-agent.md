@@ -47,6 +47,10 @@ Avoid it for early-stage projects with forming requirements, teams without solid
 
 [Detached Agent](detached-agent.md) provides the execution infrastructure; Autonomous Agent adds task selection on top. [Context Library](context-library.md) informs operating values with "what good looks like." [Skills Library](skills-library.md) enables consistent coordination. And [Golden Path Anchor](golden-path-anchor.md) applies outcome monitoring to drift detection.
 
+## Maturity
+
+**Assess.** The vision is compelling but the prerequisites are steep. Human review remains the bottleneck, limiting the throughput gains that autonomy promises. Worth designing toward, not deploying naively.
+
 ## Further Reading
 
 - [The Levels of Agentic Coding](https://timkellogg.me/blog/2026/01/20/agentic-coding-vsm) - Tim Kellogg

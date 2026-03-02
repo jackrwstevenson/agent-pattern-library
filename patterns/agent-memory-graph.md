@@ -47,6 +47,10 @@ For single-agent, single-session tasks, simple linear workflows with no dependen
 
 This enables [Agent Swarm](agent-swarm.md) by providing the coordination layer for parallel workers, supports [Autonomous Agent](autonomous-agent.md) by giving agents structured task selection, and complements [Detached Agent](detached-agent.md) where issue trackers serve a similar but less agent-native purpose.
 
+## Maturity
+
+**Assess.** Solves a real coordination problem for multi-agent workflows, but adds complexity that single-agent setups don't need. Worth evaluating when flat task files start breaking down.
+
 ## Further Reading
 
 - [Beads: A Coding Agent Memory System](https://github.com/steveyegge/beads) - Steve Yegge

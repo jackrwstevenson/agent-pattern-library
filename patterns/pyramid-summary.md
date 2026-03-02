@@ -19,7 +19,7 @@ This is different from [Context Bypass](context-bypass.md), which delegates to e
 
 The approach builds reversible summaries at multiple zoom levels, so agents can navigate between overview and detail on demand.
 
-At the base is *Layer 0*, the full, uncompressed source: files, documents, data. Above it, *Layer 1* condenses each file or module to key facts, interfaces, and responsibilities. *Layer 2* summarises groups of related files into architectural descriptions. And *Layer 3* captures the entire system in a paragraph or two.
+At the base is _Layer 0_, the full, uncompressed source: files, documents, data. Above it, _Layer 1_ condenses each file or module to key facts, interfaces, and responsibilities. _Layer 2_ summarises groups of related files into architectural descriptions. And _Layer 3_ captures the entire system in a paragraph or two.
 
 Agents start at the top layer and expand downward only where needed, keeping the rest compressed.
 
@@ -40,6 +40,10 @@ This pattern works for agents exploring unfamiliar large codebases, multi-step t
 Skip it for small codebases that fit in context without compression, tasks focused on a single file or function, and situations where [Context Bypass](context-bypass.md) is more appropriate. The distinction is: Pyramid Summary handles comprehension, Context Bypass handles data processing.
 
 This supports [Context Library](context-library.md) by storing summaries as reference material, and enables [Agent Swarm](agent-swarm.md) by giving each worker agent only the relevant pyramid layers.
+
+## Maturity
+
+**Assess.** The selective expansion principle is sound, but summary quality at upper layers is critical.
 
 ## Further Reading
 

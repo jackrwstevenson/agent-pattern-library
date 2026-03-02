@@ -45,7 +45,7 @@ Scheduled reviews catch drift. Periodic freshness checks ensure nothing falls to
 
 The benefits centre on alignment. Systems stay current with evolving standards. Regular regeneration prevents large catch-up efforts. Agents draft changes while humans review rather than rewrite. Every spec knows what it depends on and why. And version control tracks what changed and when.
 
-The costs are operational. Dependency tracking and scanning needs tooling. More regeneration means more human review cycles. And not every corpus change requires spec updates, so false positives need management.
+The costs are operational. Dependency tracking and scanning need tooling. More regeneration means more human review cycles. And not every corpus change requires spec updates, so false positives need management.
 
 ## When to Use It
 
