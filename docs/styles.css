@@ -22,7 +22,6 @@ body {
   background: var(--bg);
   color: var(--fg);
   overflow-wrap: break-word;
-  word-wrap: break-word;
 }
 
 /* ── Layout ────────────────────────────────────────── */
@@ -76,7 +75,7 @@ h3 { font-size: 1.25rem; color: var(--fg); }
 h4 { font-size: 1rem; color: var(--muted); }
 
 p, ul, ol, table, pre, blockquote { margin: 0 0 1.2rem; max-width: 100%; }
-p { overflow-wrap: break-word; word-wrap: break-word; }
+p { overflow-wrap: break-word; }
 ul, ol { padding-left: 1.5rem; }
 li { margin: 0.3rem 0; overflow-wrap: break-word; }
 li > ul, li > ol { margin: 0; }
@@ -97,9 +96,6 @@ pre {
   font-family: "JetBrains Mono", monospace;
   border-radius: 4px;
   border-left: 3px solid var(--accent);
-  max-width: 100%;
-  white-space: pre;
-  word-wrap: normal;
 }
 pre code { background: none; padding: 0; word-break: normal; }
 
@@ -148,9 +144,6 @@ nav a:hover, nav a.active { color: var(--accent); text-decoration: none; }
   font: inherit;
   padding: 0.4rem 0.75rem;
   border-radius: 4px;
-  font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 #theme:hover, #repo:hover { color: var(--accent); border-color: var(--accent); }
 

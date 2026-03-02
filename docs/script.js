@@ -155,11 +155,7 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     }
 
     const tempDiv = document.createElement("div");
-    if (p === "readme") {
-      tempDiv.innerHTML = marked.parse(text);
-    } else {
-      tempDiv.innerHTML = marked.parse(stripFrontmatter(text));
-    }
+    tempDiv.innerHTML = marked.parse(p === "readme" ? text : stripFrontmatter(text));
     rewritePatternLinks(tempDiv);
     rewriteThemeImages(tempDiv);
     $("#content").innerHTML = tempDiv.innerHTML;
@@ -214,12 +210,6 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
       location.hash = a.dataset.pattern;
       return;
     }
-    if (a.getAttribute("href") === "#readme") {
-      e.preventDefault();
-      location.hash = "readme";
-      return;
-    }
-    // Heading anchor — scroll smoothly
     const href = a.getAttribute("href");
     if (href?.startsWith("#") && href.length > 1) {
       const el = document.getElementById(href.slice(1));

@@ -199,11 +199,9 @@ describe("renderSidebar", () => {
     const headings = [{ text: "How It Works", level: 2 }];
     const html = renderSidebar(patterns, "throwaway-spike", headings);
     const ctxIdx = html.indexOf('href="#context-library"');
-    const headingIdx = html.indexOf("How It Works");
-    // Heading for throwaway-spike (current) appears after throwaway-spike link
     const spikeIdx = html.indexOf('href="#throwaway-spike"');
+    const headingIdx = html.indexOf("How It Works");
     expect(headingIdx).toBeGreaterThan(spikeIdx);
-    // Heading does NOT appear before context-library link (i.e., not under it)
     expect(headingIdx).toBeGreaterThan(ctxIdx);
   });
 
