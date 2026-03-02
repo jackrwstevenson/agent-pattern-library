@@ -25,13 +25,13 @@ This inverts the data flow. Instead of cramming data into the model, you bring t
 
 ## The Trade-offs
 
-| Benefit | Cost |
-| --- | --- |
-| Handle arbitrarily large datasets | Must build and maintain local APIs |
-| Full-data accuracy, not truncated samples | LLM must correctly formulate queries |
-| Lower token costs | Local execution needs sandboxing |
-| Faster responses (less data transfer) | Additional infrastructure to deploy |
-| Leverage battle-tested tools (SQL, grep, etc.) | Debugging spans LLM and local code |
+| Benefit                                        | Cost                                 |
+| ---------------------------------------------- | ------------------------------------ |
+| Handle arbitrarily large datasets              | Must build and maintain local APIs   |
+| Full-data accuracy, not truncated samples      | LLM must correctly formulate queries |
+| Lower token costs                              | Local execution needs sandboxing     |
+| Faster responses (less data transfer)          | Additional infrastructure to deploy  |
+| Leverage battle-tested tools (SQL, grep, etc.) | Debugging spans LLM and local code   |
 
 ## When to Use It
 
@@ -40,6 +40,10 @@ This pattern works for datasets exceeding context window limits, aggregation tas
 It's unnecessary for small datasets that fit comfortably in context, exploratory analysis where filtering criteria emerge through iteration, and tasks where query formulation is harder than just reading the data.
 
 This solves a different problem from [Pyramid Summary](pyramid-summary.md). Context Bypass handles data-heavy processing where you need precise answers from large datasets. Pyramid Summary handles comprehension of large systems where the agent needs a mental model at multiple zoom levels. Different tools for different scaling problems.
+
+## Maturity
+
+**Adopt.** The inversion principle; bring intent to data rather than data to context; is clear and practical. I've applied this on every project where data volume is an issue.
 
 ## Further Reading
 

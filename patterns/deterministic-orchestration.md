@@ -13,7 +13,7 @@ The instinct is understandable. If agents are good at reasoning, why not let the
 
 ## Sketch
 
-![Deterministic Orchestration](../docs/assets/deterministic-orchestration.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -44,6 +44,10 @@ This pattern is essential for multi-phase agent workflows where steps must execu
 It's unnecessary for single-shot agent interactions, exploratory work where the workflow is deliberately unstructured, and simple tasks where a prompt and a response suffice.
 
 This provides the orchestration layer that [Specify Plan Ship](specify-plan-ship.md) describes conceptually. It enforces [Structural Constraint](structural-constraint.md) and [Runtime Guardrails](runtime-guardrails.md) through hooks rather than relying on agents to remember them. And it complements [Agent Swarm](agent-swarm.md) by providing deterministic coordination for hierarchical agent workflows.
+
+## Maturity
+
+**Adopt.** Various independent teams reached the same conclusion before I documented it. Agents orchestrating themselves works in demos and fails in production. The separation of orchestration from execution is non-negotiable for multi-phase workflows.
 
 ## Further Reading
 

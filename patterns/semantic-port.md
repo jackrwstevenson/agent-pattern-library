@@ -7,8 +7,6 @@ maturity: assess
 
 # Semantic Port
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. Verifying behavioural equivalence across languages is hard, and subtle semantic differences between runtimes can introduce silent bugs. Treat this as a lens for rethinking code translation, not a guarantee of correctness.
-
 Porting code between languages or frameworks is common but painful. Manual translation is slow and error-prone. Syntax-level tools like transpilers and converters produce technically correct but unidiomatic output. Framework conventions differ profoundly: a React component and a SwiftUI view solve the same problem with entirely different patterns. And when the source continues to evolve, the port must track changes continuously.
 
 Traditional automated translation treats code as syntax to be converted. The result compiles but doesn't read like code a native developer would write.

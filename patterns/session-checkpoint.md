@@ -7,8 +7,6 @@ maturity: assess
 
 # Session Checkpoint
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. Tooling for session capture and checkpoint-based rollback is nascent, and the value depends on team workflows and review norms. Treat this as a lens for thinking about agent observability, not a mature practice.
-
 AI agent sessions are surprisingly opaque. When an agent makes a destructive change, recovery means manual git archaeology. The chain of thought behind code changes disappears when the session ends. You cannot revisit an earlier point in a session to branch in a different direction. And team members reviewing agent-assisted code have no visibility into how it was produced.
 
 Agent output looks like any other commit, but the process that created it is fundamentally different from human development and worth preserving.

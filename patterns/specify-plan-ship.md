@@ -75,6 +75,10 @@ For trivial bug fixes, obvious errors, and single-line changes with clear scope,
 
 [Regen](regen.md) treats specs as functions that regenerate when inputs change, which pairs naturally with this workflow.
 
+## Maturity
+
+**Adopt.** This is the foundational workflow for AI-assisted development. The three-phase structure directly compensates for LLM limitations, and the discipline of TDD compounds over time. Teams that skip it consistently accumulate debt faster than teams that don't.
+
 ## Further Reading
 
 - [My LLM coding workflow](https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e) - Addy Osmani

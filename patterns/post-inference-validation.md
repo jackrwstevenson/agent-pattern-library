@@ -13,7 +13,7 @@ A second, independent validation layer is needed between inference and the user.
 
 ## Sketch
 
-![Post-Inference Validation](../docs/assets/post-inference-validation.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -50,6 +50,10 @@ This pattern is essential for regulated industries where audit trails and demons
 It's unnecessary for low-risk internal tools where the overhead outweighs the compliance benefit, prototyping and experimentation where speed matters more than auditability, and applications where runtime guardrails alone provide sufficient control.
 
 Together with [Runtime Guardrails](runtime-guardrails.md), this pattern forms defence in depth: guardrails prevent at generation time, validation catches what slips through. [Validation Constraint](validation-constraint.md) addresses a related problem for agent-generated code, validating through tests rather than an auditable pipeline.
+
+## Maturity
+
+**Trial.** The architecture is well-understood but building and maintaining a validation pipeline is a non-trivial investment. Worth it for regulated industries and high-stakes customer-facing applications; overhead for most internal tools.
 
 ## Further Reading
 

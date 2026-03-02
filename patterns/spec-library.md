@@ -19,7 +19,7 @@ The root issue is that we distribute implementations when what we actually need 
 
 The approach inverts software distribution: distribute the specification and tests instead of code. Let AI generate implementations on demand, tailored to any language or context.
 
-The specification defines *what* the library does. The tests prove *whether* an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
+The specification defines _what_ the library does. The tests prove _whether_ an implementation is correct. The code itself becomes ephemeral, generated fresh whenever needed.
 
 ### Structure
 
@@ -39,13 +39,13 @@ The novel insight is that specifications and tests are the durable artefacts. Im
 
 ## The Trade-offs
 
-| Benefit | Cost |
-| --- | --- |
-| Universal language availability | Requires capable AI for generation |
-| Zero cross-language maintenance | Specification must be rigorous; ambiguity causes drift |
+| Benefit                                  | Cost                                                        |
+| ---------------------------------------- | ----------------------------------------------------------- |
+| Universal language availability          | Requires capable AI for generation                          |
+| Zero cross-language maintenance          | Specification must be rigorous; ambiguity causes drift      |
 | Context-appropriate output (style, deps) | Non-functional properties (perf, security) less predictable |
-| Always current with latest practices | Generation time on each use |
-| Smaller distribution size | Users need AI access |
+| Always current with latest practices     | Generation time on each use                                 |
+| Smaller distribution size                | Users need AI access                                        |
 
 ## When to Use It
 
@@ -54,6 +54,10 @@ This pattern works for utility libraries with clear, testable behaviour (parsing
 Avoid it for performance-critical code requiring hand-tuned optimisation, security-sensitive implementations requiring formal verification, and specifications changing faster than regeneration is practical.
 
 [Semantic Port](semantic-port.md) uses a related approach: specs define what to implement, Semantic Port generates idiomatic implementations across languages. And [Regen](regen.md) applies similar thinking to keeping generated implementations current when the source specification evolves.
+
+## Maturity
+
+**Trial.** The economics are clear for cross-language utility libraries, and Drew Breunig's demonstration is compelling. The pattern is young; not yet ready for performance-critical or security-sensitive implementations.
 
 ## Further Reading
 

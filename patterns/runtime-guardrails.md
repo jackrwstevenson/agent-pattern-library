@@ -13,7 +13,7 @@ Post-hoc validation catches some of these failures, but prevention at generation
 
 ## Sketch
 
-![Runtime Guardrails](../docs/assets/runtime-guardrails.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -46,6 +46,10 @@ This pattern is essential for customer-facing applications where inappropriate o
 It's unnecessary for internal prototyping where speed matters more than content safety, research environments where unrestricted model output is the goal, and situations where latency budgets cannot accommodate additional processing layers.
 
 Runtime Guardrails pairs naturally with [Post-Inference Validation](post-inference-validation.md) to form defence in depth: guardrails prevent at generation time, validation catches what slips through. [Validation Constraint](validation-constraint.md) addresses a related problem for agent-generated code rather than text.
+
+## Maturity
+
+**Adopt.** Prevention at generation time is cheaper than detection after the fact. This is table stakes for any customer-facing deployment; the layered approach is well-understood from traditional defence-in-depth security practice.
 
 ## Further Reading
 

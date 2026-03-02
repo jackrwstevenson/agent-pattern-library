@@ -7,8 +7,6 @@ maturity: assess
 
 # Agent Swarm
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. It has been demonstrated in specific high-resource contexts (dedicated hardware, thousands of concurrent agents) but not yet widely reproduced. Infrastructure requirements are steep, decomposition strategies are still being understood, and human review remains essential. Treat this as a lens for evaluating where agentic tooling may head, not a recommendation for immediate adoption.
-
 Scaling from one agent to many creates coordination problems that are harder than they first appear. Multiple agents working on the same codebase simultaneously produce merge conflicts that require manual resolution. Without visibility into what others are doing, agents solve the same problems independently. And independently correct changes combine into broken states at integration time.
 
 The naive approach of "just run more agents" quickly degrades. Conflict resolution and rework consume the time gained from parallelism. Beyond a handful of concurrent agents, throughput plateaus or declines.

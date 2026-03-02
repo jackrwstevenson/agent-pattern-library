@@ -15,7 +15,7 @@ The symptoms are familiar to anyone who's run extended generation sessions. The 
 
 ## Sketch
 
-![Generation Memory](../docs/assets/generation-memory.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -48,3 +48,7 @@ The costs are modest but real. The agent must be disciplined about writing to th
 This pattern pays off for long generation sessions spanning many tasks or files, multi-step workflows like [Specify Plan Ship](specify-plan-ship.md) where the agent works through a plan over an extended period, complex features where decisions made early in the session affect later steps, and any situation where you've observed agents losing the thread during extended work.
 
 It's unnecessary for short, single-task interactions where context compaction won't occur, workflows that are already broken into independent sessions (one session per task), and environments where the model's context window is large enough to hold the entire session.
+
+## Maturity
+
+**Trial.** This solves a real problem with a simple mechanism, and I use it on long sessions. The uncertainty is whether it remains necessary as models gain longer context windows with better recall.

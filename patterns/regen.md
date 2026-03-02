@@ -55,6 +55,10 @@ Skip it for short-lived prototypes, stable domains with infrequent standard chan
 
 This connects naturally to [Context Library](context-library.md) (the vetted knowledge that specs depend on), [Specify Plan Ship](specify-plan-ship.md) (the workflow that produces specs and plans), [Code Archaeologist](code-archaeologist.md) (extracting initial requirements from legacy systems), and [Golden Path Anchor](golden-path-anchor.md) (applying similar regeneration thinking to reference applications).
 
+## Maturity
+
+**Trial.** The principle is compelling but dependency tracking and managing review load when many specs regenerate simultaneously needs tooling that is still maturing. Worth implementing for long-lived systems with evolving standards.
+
 ## Further Reading
 
 - [Anchoring AI to Reference Applications](https://martinfowler.com/articles/exploring-gen-ai/anchoring-to-reference.html) - Birgitta Böckeler

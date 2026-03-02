@@ -72,6 +72,10 @@ The [Skills Library](skills-library.md) is a natural companion. Where Context Li
 
 Context Library also feeds directly into [Specify Plan Ship](specify-plan-ship.md), informing the specification phase. And when context changes, [Regen](regen.md) can trigger spec and code updates to keep everything aligned.
 
+## Maturity
+
+**Adopt.** The problem is universal and the solution is straightforward. Every team I've seen adopt this reports the same result: agents produce output that fits. The pattern requires no new tooling, just discipline in curation.
+
 ## Further Reading
 
 - [Anchoring AI to Reference Applications](https://martinfowler.com/articles/exploring-gen-ai/anchoring-to-reference.html) - Birgitta Böckeler

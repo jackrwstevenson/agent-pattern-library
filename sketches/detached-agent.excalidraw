@@ -47,7 +47,7 @@
       "y": 15,
       "width": 670.7354736328125,
       "height": 20,
-      "text": "Issue-driven, cloud-sandboxed agent execution — async by default, sync when needed",
+      "text": "Issue-driven, cloud-sandboxed agent execution; async by default, sync when needed",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "left",
@@ -73,7 +73,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Issue-driven, cloud-sandboxed agent execution — async by default, sync when needed",
+      "originalText": "Issue-driven, cloud-sandboxed agent execution; async by default, sync when needed",
       "autoResize": true,
       "lineHeight": 1.25
     },

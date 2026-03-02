@@ -60,6 +60,10 @@ Skip it for greenfield development, simple rewrites where behaviour is already w
 
 Code Archaeologist is fundamentally a prerequisite phase. Its output feeds into [Specify Plan Ship](specify-plan-ship.md) as input to specification, informs the [Context Library](context-library.md) with domain-specific knowledge extracted from legacy code, and supports [Regen](regen.md) by providing baseline requirements that can be re-evaluated as standards evolve.
 
+## Maturity
+
+**Trial.** The approach is sound, but extraction quality varies with codebase characteristics. It works best on codebases with high test coverage and consistent patterns; on tangled legacy systems the agent produces a useful starting point rather than a reliable analysis.
+
 ## Further Reading
 
 - [Working Effectively with Legacy Code](https://www.oreilly.com/library/view/working-effectively-with/0131177052/) - Michael Feathers

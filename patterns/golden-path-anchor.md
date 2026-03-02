@@ -49,6 +49,10 @@ This works for organisations with multiple similar applications (microservices, 
 
 Avoid it for small teams with few projects, highly diverse applications with little shared structure, unstable reference applications, projects with legitimate architectural differences from the reference, and early-stage organisations where patterns are still being discovered.
 
+## Maturity
+
+**Trial.** Continuous alignment with reference implementations is a powerful idea, but the reference quality concern is serious: bad patterns propagate automatically. Adopt this carefully with rigorous review of reference changes.
+
 ## Further Reading
 
 - [Anchoring AI to Reference Applications](https://martinfowler.com/articles/exploring-gen-ai/anchoring-to-reference.html) - Birgitta Böckeler

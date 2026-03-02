@@ -47,6 +47,10 @@ Spikes work well for validating a new library, SDK, or API integration, proving 
 
 Avoid them for anything touching production data or sensitive systems, work requiring realistic performance or load testing, and integrations that need real authentication flows. For production-quality work that proves the idea, move on to [Specify Plan Ship](specify-plan-ship.md).
 
+## Maturity
+
+**Adopt.** XP's spike practice adapts well to AI agents, and the guardrails here prevent the most common failure: clean-looking output getting promoted accidentally. I use this constantly.
+
 ## Further Reading
 
 - [Spike Solutions in XP](http://www.extremeprogramming.org/rules/spike.html) - Time-boxed experiments

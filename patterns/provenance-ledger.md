@@ -15,7 +15,7 @@ For internal tooling, this question is academic. For regulated industries, banki
 
 ## Sketch
 
-![Provenance Ledger](../docs/assets/provenance-ledger.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -48,5 +48,9 @@ The costs are modest. The agent must write a ledger entry on every generation st
 This pattern is valuable for regulated industries where AI-generated artefact provenance must be demonstrable, teams using multiple models or model versions who want to correlate output quality with model changes, organisations building trust in AI-assisted development who need to show the chain from deployment to reasoning, and any environment where "which AI produced this?" is a question someone will ask.
 
 It's unnecessary for personal projects and prototypes where traceability adds no value, teams using a single model version in a stable environment, and situations where Git history alone provides sufficient audit trail.
+
+## Maturity
+
+**Trial.** Straightforward to implement but most teams don't yet need it. For regulated industries it's essential; for everyone else, it's useful infrastructure worth designing now even if not immediately required.
 
 This complements [Session Checkpoint](session-checkpoint.md), which provides full session replay, while the ledger provides lightweight structured provenance. It supports [Post-Inference Validation](post-inference-validation.md) by providing the provenance metadata that validation decisions can reference. And it integrates naturally with [Specify Plan Ship](specify-plan-ship.md), recording provenance at each phase transition.

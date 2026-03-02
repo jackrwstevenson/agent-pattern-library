@@ -7,8 +7,6 @@ maturity: trial
 
 # Validation Constraint
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. Replacing human code review with automated validation requires mature test infrastructure and carries risks for security-sensitive code. Treat this as a lens for scaling agent output verification, not a mandate to stop reading code.
-
 Traditional code review doesn't scale to AI-generated code, and the reasons are worth understanding clearly. Agents produce code faster than humans can meaningfully review it. Reviewing unfamiliar code line-by-line is slow and error-prone. AI-generated code often looks clean and well-structured, creating a dangerous illusion of correctness. And the sheer volume of agent output degrades review quality over time.
 
 The instinct is to read the code carefully, but this approach collapses when agents produce substantial output in minutes.
@@ -51,6 +49,10 @@ This pattern works for high-volume agent output where human review is the bottle
 Avoid it for security-critical code requiring manual audit, novel architectures where tests can't yet capture intent, early-stage projects where the specification is still fluid, and codebases where test infrastructure is immature or absent.
 
 This pairs naturally with [Specify Plan Ship](specify-plan-ship.md), where TDD is already part of the workflow. It enables [Agent Swarm](agent-swarm.md) by removing human review as the throughput bottleneck. And it supports [Regen](regen.md), since automated validation makes regeneration low-risk.
+
+## Maturity
+
+**Trial.** Replacing line-by-line review with automated validation is directionally correct, but requires mature test infrastructure as a prerequisite. Teams without strong test suites cannot adopt this safely.
 
 ## Further Reading
 

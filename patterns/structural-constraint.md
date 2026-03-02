@@ -15,7 +15,7 @@ The insight from OpenAI's experience building a million-line AI-generated codeba
 
 ## Sketch
 
-![Structural Constraint](../docs/assets/structural-constraint.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -52,6 +52,10 @@ This pattern earns its keep on large codebases with high volumes of AI-generated
 It's unnecessary for small projects where architectural drift is manageable through review, exploratory work and spikes where structural flexibility is the point, and early-stage projects where the architecture is still being discovered.
 
 This complements [Validation Constraint](validation-constraint.md) directly: functional tests validate behaviour, structural constraints validate form. Together they provide comprehensive automated verification. [Context Library](context-library.md) provides the advisory layer describing your architecture, while Structural Constraint provides the enforcement layer ensuring agents actually follow it.
+
+## Maturity
+
+**Trial.** Custom linters and structural tests work, but writing effective ones requires deep understanding of your architecture. The investment is justified for large AI-generated codebases; the overhead rarely pays off for smaller ones.
 
 ## Further Reading
 

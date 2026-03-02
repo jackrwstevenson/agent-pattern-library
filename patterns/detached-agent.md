@@ -53,6 +53,10 @@ It's a poor fit for complex features requiring iterative discussion, security-se
 
 [Autonomous Agent](autonomous-agent.md) builds on this pattern, adding task selection and outcome monitoring on top of the execution infrastructure. [Agent Swarm](agent-swarm.md) uses the same async execution model but adds coordination across multiple agents.
 
+## Maturity
+
+**Trial.** The async, sandboxed model is genuinely useful and the security benefits are real. The feedback loop limitation is the main friction point; the pattern is proven in practice but not yet standard.
+
 ## Further Reading
 
 - [When AI writes almost all code, what happens to software engineering?](https://newsletter.pragmaticengineer.com/p/when-ai-writes-almost-all-code-what) - Gergely Orosz

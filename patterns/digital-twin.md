@@ -7,8 +7,6 @@ maturity: assess
 
 # Digital Twin
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. Building behavioural replicas of third-party services requires significant tooling investment, and the fidelity of the twin depends on the quality and completeness of captured interactions. Treat this as a lens for improving agent testing workflows, not a plug-and-play solution.
-
 AI agents writing integration code need to test against external dependencies - APIs, databases, cloud services - but the reality of doing so is painful. Real APIs charge per call, making testing at scale expensive. External services return different results at different times, producing flaky tests. Third-party services go down, blocking development entirely. Edge cases like error conditions and timeouts are difficult to reproduce. And network calls slow test suites to the point where thorough testing becomes impractical.
 
 Mocking is the traditional answer, but hand-written mocks drift from real behaviour. You end up testing the mock rather than the integration.
@@ -47,6 +45,10 @@ This pattern works well for testing integrations with rate-limited or paid APIs,
 It's overkill for simple, stateless APIs where basic mocks suffice, services with official sandbox environments that already meet testing needs, and trivial integrations with one or two endpoints.
 
 When paired with [Validation Constraint](validation-constraint.md), you get a powerful combination: clone dependencies for deterministic testing, then validate agent output through observable behaviour rather than code review.
+
+## Maturity
+
+**Assess.** Building behavioural replicas of third-party dependencies requires substantial investment, and keeping twins synchronised adds ongoing maintenance burden. Worth evaluating for systems with expensive or unreliable external dependencies, but not yet proven as a general practice.
 
 ## Further Reading
 

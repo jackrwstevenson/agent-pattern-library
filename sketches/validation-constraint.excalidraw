@@ -1080,7 +1080,7 @@
       "y": 312,
       "width": 460,
       "height": 30,
-      "text": "Key Insight: Treat generated code like ML model weights —\nopaque internals validated exclusively through outputs",
+      "text": "Key Insight: Treat generated code like ML model weights;\nopaque internals validated exclusively through outputs",
       "fontSize": 12,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1106,7 +1106,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Key Insight: Treat generated code like ML model weights —\nopaque internals validated exclusively through outputs",
+      "originalText": "Key Insight: Treat generated code like ML model weights;\nopaque internals validated exclusively through outputs",
       "autoResize": true,
       "lineHeight": 1.25
     }

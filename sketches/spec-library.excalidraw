@@ -47,7 +47,7 @@
       "y": 15,
       "width": 717.5353393554688,
       "height": 20,
-      "text": "Distribute specs + tests, not code — generate implementations on demand for any language",
+      "text": "Distribute specs + tests, not code; generate implementations on demand for any language",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "left",
@@ -73,7 +73,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Distribute specs + tests, not code — generate implementations on demand for any language",
+      "originalText": "Distribute specs + tests, not code; generate implementations on demand for any language",
       "autoResize": true,
       "lineHeight": 1.25
     },

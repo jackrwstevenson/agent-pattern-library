@@ -13,7 +13,7 @@ These problems aren't new. Every codebase accumulates entropy. But AI-generated 
 
 ## Sketch
 
-![Garbage Collection Agent](../docs/assets/garbage-collection-agent.png)
+_Sketch coming soon._
 
 ## How It Works
 
@@ -52,6 +52,10 @@ This pattern pays off for codebases with high volumes of AI-generated code where
 It's unnecessary for small projects maintained by a single developer or agent, short-lived codebases where long-term maintenance isn't a concern, and teams where the volume of AI-generated code is low enough that manual review catches inconsistencies.
 
 This builds on [Structural Constraint](structural-constraint.md) by periodically enforcing constraints beyond CI. It complements [Golden Path Anchor](golden-path-anchor.md), which detects drift from a reference application, while Garbage Collection Agent detects drift from the codebase's own internal consistency. And it supports [Regen](regen.md) by identifying the staleness that triggers regeneration.
+
+## Maturity
+
+**Trial.** The problem is real for high-volume AI-generated codebases and the solution is conceptually clean, but requires meaningful infrastructure to implement well. I expect this to become standard practice as AI-generated code volume increases.
 
 ## Further Reading
 

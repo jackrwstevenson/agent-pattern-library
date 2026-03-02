@@ -7,8 +7,6 @@ maturity: assess
 
 # Pyramid Summary
 
-> **Pattern in Research**: This pattern describes a direction rather than current best practice. Generating reliable multi-level summaries and keeping them in sync with evolving source material remains an open problem. Treat this as a lens for thinking about context management, not a turnkey solution.
-
 Agents working with large codebases or documents face a fundamental tension. Loading everything gives accuracy but exhausts token limits. Compressing to fit discards the fine-grained information needed for precision. And once summarised, the original detail is gone from context and cannot be recovered without re-reading the source.
 
 This is different from [Context Bypass](context-bypass.md), which delegates to external tools. Here the problem is that the agent needs to hold a mental model of a large system in its own context while retaining the ability to drill into specifics.

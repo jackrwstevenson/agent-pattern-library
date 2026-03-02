@@ -2,7 +2,7 @@
 name: Skills Library
 description: Package procedures as executable skills that agents follow to perform tasks consistently across your organisation.
 category: Workflow
-maturity: trial
+maturity: adopt
 ---
 
 # Skills Library
@@ -23,7 +23,7 @@ The approach is to package procedures as executable skills that agents load and 
 
 Skills Library complements the [Context Library](context-library.md). Where the Context Library defines WHAT good looks like (security policy standards, API design conventions, accessibility requirements), the Skills Library defines HOW to achieve it (security review procedure, API design workflow, accessibility audit checklist).
 
-Skills often *reference* context. A security review skill (how to review) loads the security policy (what to check against).
+Skills often _reference_ context. A security review skill (how to review) loads the security policy (what to check against).
 
 ### Skill Structure
 
@@ -33,7 +33,7 @@ When an agent encounters a matching task ("review this PR for security"), it loa
 
 ### Example Skills
 
-A *code review workflow* defines how to review PRs: what to check first, how to structure feedback, when to approve versus request changes, how to handle disagreements. An *incident response* skill covers triage steps, communication templates, escalation paths, and the post-mortem process. A *security review* skill specifies which tools to run, which patterns to look for, how to assess severity, and how to document findings. An *API design* skill covers naming conventions, versioning, error response format, and documentation requirements.
+A _code review workflow_ defines how to review PRs: what to check first, how to structure feedback, when to approve versus request changes, how to handle disagreements. An _incident response_ skill covers triage steps, communication templates, escalation paths, and the post-mortem process. A _security review_ skill specifies which tools to run, which patterns to look for, how to assess severity, and how to document findings. An _API design_ skill covers naming conventions, versioning, error response format, and documentation requirements.
 
 ### Multi-Product Distribution
 
@@ -56,6 +56,10 @@ This pattern makes sense for procedures that should be consistent across teams, 
 Avoid it for exploratory work where the procedure is still being discovered, and procedures changing too rapidly to be worth encoding.
 
 [Golden Path Anchor](golden-path-anchor.md) applies similar thinking to reference applications, and [Spec Library](spec-library.md) uses comparable packaging for reusable functionality.
+
+## Maturity
+
+**Adopt.** The value is clear even though the tooling ecosystem is still forming. I've seen this work well with Claude Code's skill system.
 
 ## Further Reading
 

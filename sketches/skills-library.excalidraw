@@ -47,7 +47,7 @@
       "y": 15,
       "width": 617.775390625,
       "height": 20,
-      "text": "Executable procedures agents load and follow — the HOW of your organisation",
+      "text": "Executable procedures agents load and follow; the HOW of your organisation",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "left",
@@ -73,7 +73,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Executable procedures agents load and follow — the HOW of your organisation",
+      "originalText": "Executable procedures agents load and follow; the HOW of your organisation",
       "autoResize": true,
       "lineHeight": 1.25
     },

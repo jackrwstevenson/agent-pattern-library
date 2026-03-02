@@ -1115,7 +1115,7 @@
       "y": 320,
       "width": 370,
       "height": 25,
-      "text": "Key Insight: \"Anchoring to reference\" — a well-maintained\nreference app as executable, authoritative source of truth",
+      "text": "Key Insight: \"Anchoring to reference\"; a well-maintained\nreference app as executable, authoritative source of truth",
       "fontSize": 10,
       "fontFamily": 1,
       "textAlign": "center",
@@ -1141,7 +1141,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Key Insight: \"Anchoring to reference\" — a well-maintained\nreference app as executable, authoritative source of truth",
+      "originalText": "Key Insight: \"Anchoring to reference\"; a well-maintained\nreference app as executable, authoritative source of truth",
       "autoResize": true,
       "lineHeight": 1.25
     },

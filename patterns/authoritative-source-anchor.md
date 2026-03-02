@@ -48,6 +48,10 @@ Avoid it for rapidly evolving specifications where pinning causes more problems 
 
 This pairs naturally with the [Context Library](context-library.md), which covers internal organisational standards, while Authoritative Source Anchor covers external canonical sources. Both feed into [Specify Plan Ship](specify-plan-ship.md) during the specification phase, and spec version updates can trigger [Regen](regen.md) cycles.
 
+## Maturity
+
+**Adopt.** The difference between an agent that cites and one that recalls is the difference between reliable output and confident hallucination. I apply this on any project where specification compliance matters.
+
 ## Further Reading
 
 - [FastRender development approach](https://simonwillison.net/2026/Jan/23/fastrender/) - Wilson Lin's use of spec submodules for autonomous agent development
