@@ -75,7 +75,7 @@ export const renderSidebar = (patterns, currentId, headings = []) => {
     grouped[p.category].push(p);
   });
 
-  let html = CATEGORY_ORDER.filter((c) => grouped[c])
+  const html = CATEGORY_ORDER.filter((c) => grouped[c])
     .map(
       (c) => `
       <div class="sidebar-section">

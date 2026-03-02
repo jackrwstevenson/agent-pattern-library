@@ -101,7 +101,6 @@ pre code { background: none; padding: 0; word-break: normal; }
 
 .table-wrap {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   margin: 0 0 1.2rem;
 }
 table {
@@ -140,7 +139,7 @@ nav > div { display: flex; align-items: center; gap: 0.5rem; }
 nav a { color: var(--muted); margin-right: 1rem; }
 nav a:hover, nav a.active { color: var(--accent); text-decoration: none; }
 
-#theme, #repo {
+#theme, #repo, #menu-toggle {
   cursor: pointer;
   background: 0;
   border: 1px solid var(--border);
@@ -149,22 +148,10 @@ nav a:hover, nav a.active { color: var(--accent); text-decoration: none; }
   padding: 0.4rem 0.75rem;
   border-radius: 4px;
 }
-#theme:hover, #repo:hover { color: var(--accent); border-color: var(--accent); }
+#theme:hover, #repo:hover, #menu-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ── Mobile menu toggle ──────────────────────────────── */
-#menu-toggle {
-  display: none;
-  cursor: pointer;
-  background: 0;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font: inherit;
-  font-size: 1.25rem;
-  padding: 0.4rem 0.75rem;
-  border-radius: 4px;
-  line-height: 1;
-}
-#menu-toggle:hover { color: var(--accent); border-color: var(--accent); }
+#menu-toggle { display: none; font-size: 1.25rem; line-height: 1; }
 
 #sidebar-backdrop {
   display: none;
@@ -304,7 +291,7 @@ img.dark-only { display: block; }
   h3 { font-size: 1.1rem; }
   h1, h2, h3, h4 { margin: 1.5rem 0 0.75rem; }
   nav { flex-wrap: wrap; gap: 0.75rem; }
-  #theme, #repo { padding: 0.5rem 0.75rem; min-height: 44px; min-width: 44px; }
+  #theme, #repo, #menu-toggle { padding: 0.5rem 0.75rem; min-height: 44px; min-width: 44px; }
   pre { padding: 0.75rem; font-size: 0.8em; }
   code { font-size: 0.85em; }
   th, td { padding: 0.5rem; font-size: 0.85em; white-space: normal; word-break: break-word; }
