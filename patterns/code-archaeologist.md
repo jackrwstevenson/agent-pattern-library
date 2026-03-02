@@ -2,7 +2,7 @@
 name: Code Archaeologist
 description: Reverse-engineer legacy codebases to extract implicit business rules and constraints before replacement begins.
 category: Grounding
-maturity: trial
+maturity: adopt
 ---
 
 # Code Archaeologist
