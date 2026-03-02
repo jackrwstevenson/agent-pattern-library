@@ -1,3 +1,10 @@
+---
+name: Agent Memory Graph
+description: Replace flat task files with a structured graph tracking dependencies and supporting safe multi-agent coordination.
+category: Scale
+maturity: assess
+---
+
 # Agent Memory Graph
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Purpose-built agent memory tooling is early-stage, and the overhead of graph-based coordination may not justify itself for single-agent or simple workflows. Treat this as a lens for understanding multi-agent coordination needs, not a recommendation for immediate adoption.

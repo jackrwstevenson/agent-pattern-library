@@ -1,3 +1,10 @@
+---
+name: Digital Twin
+description: Clone the observable behaviour of third-party dependencies into local replicas for deterministic, high-volume testing.
+category: Workflow
+maturity: assess
+---
+
 # Digital Twin
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Building behavioural replicas of third-party services requires significant tooling investment, and the fidelity of the twin depends on the quality and completeness of captured interactions. Treat this as a lens for improving agent testing workflows, not a plug-and-play solution.

@@ -1,3 +1,10 @@
+---
+name: Structural Constraint
+description: Use custom linters and structural tests to ensure agent-generated code fits your architecture, not just works.
+category: Workflow
+maturity: trial
+---
+
 # Structural Constraint
 
 [Validation Constraint](validation-constraint.md) asks whether agent-generated code *works*: do the tests pass? But there's a different question that matters just as much at scale: does the code *fit*? An agent can produce a functionally correct implementation that ignores your module boundaries, bypasses your layering conventions, introduces circular dependencies, or reaches into internals that should be private.

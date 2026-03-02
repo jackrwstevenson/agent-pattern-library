@@ -1,3 +1,10 @@
+---
+name: Pyramid Summary
+description: Build reversible summaries at multiple zoom levels so agents can navigate between overview and detail on demand.
+category: Scale
+maturity: assess
+---
+
 # Pyramid Summary
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Generating reliable multi-level summaries and keeping them in sync with evolving source material remains an open problem. Treat this as a lens for thinking about context management, not a turnkey solution.

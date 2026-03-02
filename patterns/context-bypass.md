@@ -1,3 +1,10 @@
+---
+name: Context Bypass
+description: Delegate data-intensive operations to local code APIs, passing only compact results back to the LLM.
+category: Scale
+maturity: adopt
+---
+
 # Context Bypass
 
 LLM context windows have hard limits, but real-world tasks routinely exceed them. A spreadsheet with 100,000 rows won't fit in context. Reading an entire repository exhausts token limits before analysis begins. Legal contracts, research corpora, and server logs all present the same problem.

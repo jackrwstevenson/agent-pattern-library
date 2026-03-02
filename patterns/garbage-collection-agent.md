@@ -1,3 +1,10 @@
+---
+name: Garbage Collection Agent
+description: Deploy periodic agents that sweep codebases for inconsistencies, dead code, and documentation drift.
+category: Evolution
+maturity: trial
+---
+
 # Garbage Collection Agent
 
 AI agents generate code faster than humans can review it. Over time, this accumulation produces a familiar kind of rot: documentation drifts from implementation, dead code lingers because nobody is confident enough to remove it, architectural constraint violations creep in between CI runs, and inconsistencies multiply across modules that were generated in separate sessions with slightly different context.

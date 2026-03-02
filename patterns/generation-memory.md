@@ -1,3 +1,10 @@
+---
+name: Generation Memory
+description: Give agents an external progress log that persists across context window compactions, preventing repeated work in long sessions.
+category: Workflow
+maturity: trial
+---
+
 # Generation Memory
 
 Long agent sessions have a subtle failure mode that's easy to miss. Modern LLMs operate within finite context windows, and when a session grows long enough, the system compacts earlier messages to make room. This is necessary, but it means the agent silently loses awareness of work it has already completed.

@@ -1,3 +1,10 @@
+---
+name: Agent Swarm
+description: Deploy hierarchical swarms of planning and worker agents with intelligent task decomposition for massive parallelism.
+category: Scale
+maturity: assess
+---
+
 # Agent Swarm
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. It has been demonstrated in specific high-resource contexts (dedicated hardware, thousands of concurrent agents) but not yet widely reproduced. Infrastructure requirements are steep, decomposition strategies are still being understood, and human review remains essential. Treat this as a lens for evaluating where agentic tooling may head, not a recommendation for immediate adoption.

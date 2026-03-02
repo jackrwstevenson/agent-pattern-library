@@ -1,3 +1,10 @@
+---
+name: Runtime Guardrails
+description: Apply layered controls during inference to prevent problematic output at generation time.
+category: Safety
+maturity: adopt
+---
+
 # Runtime Guardrails
 
 LLMs generate fluent, confident text regardless of whether the content is appropriate, safe, or compliant. Without active controls during inference, models freely discuss high-risk domains like financial advice and legal interpretation where incorrect output creates liability. They produce content that violates organisational policies. They reproduce personally identifiable information from context or training data without awareness of data handling obligations. And they confabulate assertions that sound authoritative but lack any basis in the provided context.

@@ -1,3 +1,10 @@
+---
+name: Semantic Port
+description: Port code between languages by preserving intent and producing idiomatic output rather than mechanical translation.
+category: Evolution
+maturity: assess
+---
+
 # Semantic Port
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Verifying behavioural equivalence across languages is hard, and subtle semantic differences between runtimes can introduce silent bugs. Treat this as a lens for rethinking code translation, not a guarantee of correctness.

@@ -1,3 +1,10 @@
+---
+name: Throwaway Spike
+description: Rapid throwaway prototypes with explicit constraints and safety guardrails that prevent accidental promotion to production.
+category: Workflow
+maturity: adopt
+---
+
 # Throwaway Spike
 
 Traditional development practices - tests, code review, documentation - create overhead that makes sense for production code but actively hinders early-stage exploration. You end up spending time on code quality for experiments that may be discarded, over-thinking architecture for throwaway code, and building production-quality implementations for concepts that don't pan out.

@@ -1,3 +1,10 @@
+---
+name: Code Archaeologist
+description: Reverse-engineer legacy codebases to extract implicit business rules and constraints before replacement begins.
+category: Grounding
+maturity: trial
+---
+
 # Code Archaeologist
 
 Replacing legacy systems is one of the riskiest things a team can do, and the reason is almost always the same: critical knowledge exists only in the code. Business rules were encoded by developers long gone. Edge cases are handled by accident rather than design. Workarounds for limitations that no longer exist sit alongside undocumented integration points that you only discover when things break.

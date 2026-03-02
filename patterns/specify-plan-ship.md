@@ -1,3 +1,10 @@
+---
+name: Specify Plan Ship
+description: A three-phase workflow (Specify, Plan, Implement) with explicit documents and verification gates for AI-assisted development.
+category: Workflow
+maturity: adopt
+---
+
 # Specify Plan Ship
 
 Teams using AI agents often experience a frustrating arc: impressive initial demos followed by mounting technical debt as agents produce code that works but doesn't fit the broader system. The root cause is almost always the same. Without boundaries, agents wander into over-engineering or miss requirements entirely. Long sessions degrade quality as agents lose track of goals and constraints. Results vary wildly without structured feedback loops. And when things go wrong, it's unclear where the process failed.

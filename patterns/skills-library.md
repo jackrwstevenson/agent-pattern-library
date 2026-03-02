@@ -1,3 +1,10 @@
+---
+name: Skills Library
+description: Package procedures as executable skills that agents follow to perform tasks consistently across your organisation.
+category: Workflow
+maturity: trial
+---
+
 # Skills Library
 
 Organisations have procedures that should be followed consistently, but agents don't know them. Each team prompts differently, producing divergent approaches to the same task. "How we do things" lives in senior engineers' heads or scattered prompt libraries. Teams rediscover the same pitfalls because lessons aren't encoded into workflows.

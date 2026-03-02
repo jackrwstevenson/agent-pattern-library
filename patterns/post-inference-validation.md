@@ -1,3 +1,10 @@
+---
+name: Post-Inference Validation
+description: Place an independent validation pipeline after inference with deterministic rules, risk scoring, and escalation workflows.
+category: Safety
+maturity: trial
+---
+
 # Post-Inference Validation
 
 Runtime guardrails reduce but cannot eliminate problematic output. No single set of filters catches every failure mode; novel phrasings, edge cases, and context-dependent risks slip through. Regulated industries need demonstrable, auditable proof that output was validated, not just that controls were configured. Validation logic coupled to the model host is harder to audit, version, and update independently. And without structured validation records, organisations cannot explain why a given output was surfaced or blocked.

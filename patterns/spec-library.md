@@ -1,3 +1,10 @@
+---
+name: Spec Library
+description: Distribute specifications and tests rather than code; let AI generate implementations on demand in any language.
+category: Evolution
+maturity: trial
+---
+
 # Spec Library
 
 Traditional software distribution treats code as the primary artefact, and this creates several friction points. A library exists for Python but not Rust, leaving developers to write their own or go without. Each language variant requires separate upkeep, bug fixes, and version management. Ports and reimplementations slowly diverge from the original's behaviour. And downloaded code may clash with your environment, style guide, or dependency constraints.

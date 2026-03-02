@@ -1,3 +1,10 @@
+---
+name: Deterministic Orchestration
+description: Control workflow progression through deterministic hooks, not agent reasoning, reserving creativity for bounded execution steps.
+category: Workflow
+maturity: adopt
+---
+
 # Deterministic Orchestration
 
 Every team I've studied that tried letting agents orchestrate themselves abandoned it. The pattern is remarkably consistent: it works on small demos, then collapses on real codebases. Agents skip steps, create cycles, get stuck in loops, and lose track of where they are in a multi-phase workflow. The more capable the model, the more confidently it goes off the rails.

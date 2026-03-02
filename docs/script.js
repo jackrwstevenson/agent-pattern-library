@@ -8,104 +8,82 @@ const isLocalhost =
 
 export const BASE = isLocalhost ? LOCAL_BASE : GITHUB_BASE;
 
+export const PATTERN_IDS = [
+  "context-library", "authoritative-source-anchor", "code-archaeologist",
+  "specify-plan-ship", "throwaway-spike", "skills-library", "digital-twin",
+  "session-checkpoint", "validation-constraint", "structural-constraint",
+  "deterministic-orchestration", "generation-memory", "provenance-ledger",
+  "runtime-guardrails", "post-inference-validation",
+  "agent-swarm", "detached-agent", "context-bypass", "autonomous-agent",
+  "pyramid-summary", "agent-memory-graph",
+  "regen", "golden-path-anchor", "spec-library", "semantic-port",
+  "garbage-collection-agent",
+];
+
+const CATEGORY_ORDER = ["Grounding", "Workflow", "Safety", "Scale", "Evolution"];
+
 export const slugify = (t) =>
   t
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export const parsePatterns = (md) => {
-  const result = [];
-  const lines = md.split("\n");
-  let currentCategory = null;
-
-  for (const line of lines) {
-    if (line.startsWith("### ")) {
-      currentCategory = line.slice(4).trim();
-      continue;
-    }
-
-    const match = line.match(
-      /\|\s*\[([^\]]+)\]\(patterns\/([^.]+)\.md\)\s*\|\s*([^|]+)\|/,
-    );
-    if (match) {
-      result.push({
-        id: match[2],
-        name: match[1],
-        description: match[3].trim(),
-        category: currentCategory,
-      });
-    }
+export const parseFrontmatter = (id, text) => {
+  const match = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return { id };
+  const result = { id };
+  for (const line of match[1].split("\n")) {
+    const colon = line.indexOf(":");
+    if (colon > 0) result[line.slice(0, colon).trim()] = line.slice(colon + 1).trim();
   }
   return result;
 };
 
+export const stripFrontmatter = (text) =>
+  text.startsWith("---") ? text.replace(/^---\n[\s\S]*?\n---\n?/, "") : text;
+
 export const isPattern = (patterns, id) => patterns.some((p) => p.id === id);
 
-export const renderPatternsList = (patterns) =>
-  '<h1>Patterns</h1><ul class="patterns">' +
-  patterns
-    .map(
-      (p) =>
-        `<li><a href="#${p.id}" data-pattern="${p.id}">${p.name}</a><small>${p.description}</small></li>`,
-    )
-    .join("") +
-  "</ul>";
-
-export const renderHomePage = (patterns) => {
-  const categories = { Grounding: [], Workflow: [], Scale: [], Evolution: [] };
-
+export const renderSidebar = (patterns, currentId, headings = []) => {
+  const grouped = {};
   patterns.forEach((p) => {
-    if (categories[p.category]) categories[p.category].push(p);
+    if (!grouped[p.category]) grouped[p.category] = [];
+    grouped[p.category].push(p);
   });
 
-  let html = `
-    <div class="hero">
-      <h1>Agent Pattern Library</h1>
-      <p class="hero-subtitle">Emerging patterns in AI-assisted software development</p>
-      <p class="hero-description">An attempt to make sense of emerging patterns in AI-assisted software development, drawn from research, personal observations and experiments.</p>
-    </div>
-  `;
-
-  let isFirstCard = true;
-  Object.entries(categories).forEach(([category, items]) => {
-    if (!items.length) return;
-
-    html += `<section class="pattern-category"><h2>${category}</h2><div class="pattern-grid">`;
-
-    items.forEach((p) => {
-      const fetchPriority = isFirstCard ? ' fetchpriority="high"' : '';
-      html += `
-        <a href="#${p.id}" class="pattern-card" data-pattern="${p.id}">
-          <div class="pattern-card-content"><h3>${p.name}</h3></div>
-          <div class="pattern-card-image">
-            <img src="assets/thumbs/${p.id}.png" alt="${p.name}" class="light-only"${fetchPriority} />
-            <img src="assets/thumbs/${p.id}-dark.png" alt="${p.name}" class="dark-only"${fetchPriority} />
-          </div>
-          <div class="pattern-card-content"><p>${p.description}</p></div>
-        </a>
-      `;
-      isFirstCard = false;
-    });
-
-    html += `</div></section>`;
-  });
+  let html = CATEGORY_ORDER
+    .filter((c) => grouped[c])
+    .map((c) => `
+      <div class="sidebar-section">
+        <div class="sidebar-category">${c}</div>
+        <ul>
+          ${grouped[c]
+            .map((p) => {
+              const isActive = p.id === currentId;
+              const headingsHtml =
+                isActive && headings.length
+                  ? `<ul class="sidebar-headings">${headings
+                      .map(
+                        (h) =>
+                          `<li><a href="#${slugify(h.text)}" class="h${h.level}">${h.text}</a></li>`,
+                      )
+                      .join("")}</ul>`
+                  : "";
+              const badge = p.maturity ? `<span class="maturity ${p.maturity}">${p.maturity}</span>` : "";
+              return `<li><a href="#${p.id}" data-pattern="${p.id}"${isActive ? ' class="active"' : ""}>${p.name}${badge}</a>${headingsHtml}</li>`;
+            })
+            .join("")}
+        </ul>
+      </div>`)
+    .join("");
 
   return html;
 };
 
-export const buildTocHtml = (headings) => {
-  if (headings.length < 2) return "";
-  return (
-    '<div class="toc-title">On this page</div><ul>' +
-    headings
-      .map(
-        (h) =>
-          `<li><a href="#${slugify(h.textContent)}" class="${h.tagName.toLowerCase()}">${h.textContent}</a></li>`,
-      )
-      .join("") +
-    "</ul>"
-  );
+export const assignHeadingIds = (container) => {
+  container.querySelectorAll("h2, h3").forEach((h) => {
+    h.id = slugify(h.textContent);
+  });
 };
 
 export const rewritePatternLinks = (container) => {
@@ -127,21 +105,15 @@ export const rewriteThemeImages = (container) => {
 
     img.setAttribute("src", src);
     img.classList.add("light-only");
-    
-    // Add fetchpriority to first image for LCP optimization
-    if (index === 0) {
-      img.setAttribute("fetchpriority", "high");
-    }
+
+    if (index === 0) img.setAttribute("fetchpriority", "high");
 
     const darkImg = document.createElement("img");
     darkImg.setAttribute("src", src.replace(/\.png$/, "-dark.png"));
     darkImg.setAttribute("alt", alt);
     darkImg.classList.add("dark-only");
-    
-    // Add fetchpriority to first dark image too
-    if (index === 0) {
-      darkImg.setAttribute("fetchpriority", "high");
-    }
+
+    if (index === 0) darkImg.setAttribute("fetchpriority", "high");
 
     img.after(darkImg);
   });
@@ -149,84 +121,76 @@ export const rewriteThemeImages = (container) => {
 
 if (typeof window !== "undefined" && document.querySelector("#theme")) {
   let patterns = [];
+  const cache = {};
 
   const $ = (s) => document.querySelector(s);
   const scrollBehavior = () =>
-    window.matchMedia("(prefers-reduced-motion:reduce)").matches
-      ? "auto"
-      : "smooth";
+    window.matchMedia("(prefers-reduced-motion:reduce)").matches ? "auto" : "smooth";
 
-  const buildToc = () => {
-    const headings = $("#content").querySelectorAll("h2,h3,h4");
-    headings.forEach((h) => (h.id = slugify(h.textContent)));
-    $("#toc").innerHTML = buildTocHtml([...headings]);
+  const updateSidebar = (currentId, headings = []) => {
+    $("#sidebar").innerHTML = renderSidebar(patterns, currentId, headings);
   };
 
-  const highlightToc = () => {
-    const headings = [...$("#content").querySelectorAll("h2,h3,h4")];
+  const highlightActive = () => {
+    const headings = [...$("#content").querySelectorAll("h2,h3")];
     if (!headings.length) return;
     let current = headings[0].id;
     for (const h of headings) {
       if (h.getBoundingClientRect().top <= 100) current = h.id;
     }
-    $("#toc")
-      .querySelectorAll("a")
+    document
+      .querySelectorAll(".sidebar-headings a")
       .forEach((a) =>
         a.classList.toggle("active", a.getAttribute("href") === "#" + current),
       );
   };
 
   const render = (p) => {
-    if (p === "patterns") {
-      $("#content").innerHTML = renderPatternsList(patterns);
-      $("#toc").innerHTML = "";
+    const text = cache[p]?.fullText ?? "";
+
+    if (!text) {
+      $("#content").innerHTML = "<p>Content not found</p>";
+      updateSidebar(p);
       return;
     }
+
+    const tempDiv = document.createElement("div");
     if (p === "readme") {
-      $("#content").innerHTML = renderHomePage(patterns);
-      $("#toc").innerHTML = "";
-      return;
+      tempDiv.innerHTML = marked.parse(text);
+    } else {
+      tempDiv.innerHTML = marked.parse(stripFrontmatter(text));
     }
-    fetch(BASE + "patterns/" + p + ".md")
-      .then((r) => (r.ok ? r.text() : Promise.reject()))
-      .then((text) => {
-        // Parse markdown to HTML string
-        let html = marked.parse(text);
-        
-        // Transform HTML string before inserting into DOM to avoid multiple reflows
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        
-        rewritePatternLinks(tempDiv);
-        rewriteThemeImages(tempDiv);
-        
-        // Single DOM insertion
-        $("#content").innerHTML = tempDiv.innerHTML;
-        buildToc();
-      })
-      .catch(() => {
-        $("#content").innerHTML = "<p>Failed to load content</p>";
-        $("#toc").innerHTML = "";
-      });
+    rewritePatternLinks(tempDiv);
+    rewriteThemeImages(tempDiv);
+    $("#content").innerHTML = tempDiv.innerHTML;
+
+    // Assign IDs to headings so sidebar links work
+    if (p !== "readme") assignHeadingIds($("#content"));
+
+    // Extract headings for sidebar (patterns only)
+    const headings = p !== "readme"
+      ? [...$("#content").querySelectorAll("h2,h3")].map((h) => ({
+          text: h.textContent,
+          level: parseInt(h.tagName[1]),
+        }))
+      : [];
+
+    updateSidebar(p, headings);
   };
 
   const route = () => {
     const h = location.hash.slice(1) || "readme";
-    const patternMatch = isPattern(patterns, h);
-    if (!patternMatch && h !== "readme" && h !== "patterns") {
+
+    if (!isPattern(patterns, h) && h !== "readme") {
       const el = document.getElementById(h);
       if (el) {
         el.scrollIntoView({ behavior: scrollBehavior() });
         return;
       }
     }
-    document.querySelectorAll("nav a").forEach((a) =>
-      a.classList.toggle(
-        "active",
-        a.dataset.page === h || (a.dataset.page === "patterns" && patternMatch),
-      ),
-    );
-    render(h);
+
+    $("#nav-home").classList.toggle("active", h === "readme");
+    render(isPattern(patterns, h) ? h : "readme");
     window.scrollTo(0, 0);
   };
 
@@ -242,6 +206,31 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     $("#theme").textContent = localStorage.theme === "light" ? "Dark" : "Light";
   }
 
+  $("#sidebar").onclick = (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    if (a.dataset.pattern) {
+      e.preventDefault();
+      location.hash = a.dataset.pattern;
+      return;
+    }
+    if (a.getAttribute("href") === "#readme") {
+      e.preventDefault();
+      location.hash = "readme";
+      return;
+    }
+    // Heading anchor — scroll smoothly
+    const href = a.getAttribute("href");
+    if (href?.startsWith("#") && href.length > 1) {
+      const el = document.getElementById(href.slice(1));
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: scrollBehavior() });
+        history.pushState(null, null, href);
+      }
+    }
+  };
+
   $("#content").onclick = (e) => {
     if (e.target.dataset.pattern) {
       e.preventDefault();
@@ -249,23 +238,26 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     }
   };
 
-  $("#toc").onclick = (e) => {
-    if (e.target.tagName === "A") {
-      e.preventDefault();
-      const id = e.target.getAttribute("href").slice(1);
-      document.getElementById(id)?.scrollIntoView({ behavior: scrollBehavior() });
-      history.pushState(null, null, "#" + id);
-    }
-  };
-
-  window.addEventListener("scroll", highlightToc, { passive: true });
+  window.addEventListener("scroll", highlightActive, { passive: true });
   window.onhashchange = route;
 
-  fetch(BASE + "README.md")
+  const readmePromise = fetch(BASE + "README.md")
     .then((r) => r.text())
-    .then((text) => {
-      patterns = parsePatterns(text);
-      route();
-    })
-    .catch(() => route());
+    .then((text) => { cache["readme"] = { fullText: text }; })
+    .catch(() => { cache["readme"] = { fullText: "" }; });
+
+  const patternsPromise = Promise.all(
+    PATTERN_IDS.map((id) =>
+      fetch(BASE + "patterns/" + id + ".md")
+        .then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((text) => {
+          const meta = parseFrontmatter(id, text);
+          cache[id] = { meta, fullText: text };
+          return meta;
+        })
+        .catch(() => ({ id, name: id, description: "", category: "Workflow", maturity: "trial" })),
+    ),
+  ).then((metas) => { patterns = metas; });
+
+  Promise.all([readmePromise, patternsPromise]).then(route);
 }

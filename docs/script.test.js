@@ -1,19 +1,32 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import {
   BASE,
+  PATTERN_IDS,
   slugify,
-  parsePatterns,
+  parseFrontmatter,
+  stripFrontmatter,
   isPattern,
-  renderPatternsList,
-  renderHomePage,
-  buildTocHtml,
+  renderSidebar,
   rewritePatternLinks,
   rewriteThemeImages,
+  assignHeadingIds,
 } from "./script.js";
 
 describe("BASE URL", () => {
   it("ends with slash for path joining", () => {
     expect(BASE.endsWith("/")).toBe(true);
+  });
+});
+
+describe("PATTERN_IDS", () => {
+  it("contains all 26 pattern ids", () => {
+    expect(PATTERN_IDS).toHaveLength(26);
+  });
+
+  it("ids are lowercase kebab-case", () => {
+    PATTERN_IDS.forEach((id) => {
+      expect(id).toMatch(/^[a-z][a-z0-9-]*$/);
+    });
   });
 });
 
@@ -45,65 +58,60 @@ describe("slugify", () => {
   });
 });
 
-describe("parsePatterns", () => {
-  const sampleReadme = `
-# Agent Pattern Library
+describe("parseFrontmatter", () => {
+  const sample = `---
+name: Context Library
+description: Curate reference material for agents.
+category: Grounding
+maturity: adopt
+---
 
-## Patterns
+# Context Library
 
-### Workflow
+Content here.`;
 
-| Pattern | Description | Novel Insight |
-| ------- | ----------- | ------------- |
-| [Throwaway Spike](patterns/throwaway-spike.md) | Rapid prototypes with constraints. | Adds guardrails. |
-| [Context Library](patterns/context-library.md) | Reference material for agents. | Institutional memory. |
-
-### Evolution
-
-| Pattern | Description | Novel Insight |
-| ------- | ----------- | ------------- |
-| [Spec Library](patterns/spec-library.md) | Specs as the library. | Inverts distribution. |
-
-## Other stuff
-`;
-
-  it("extracts patterns from README table", () => {
-    const patterns = parsePatterns(sampleReadme);
-    expect(patterns).toHaveLength(3);
+  it("extracts name, description, category, maturity", () => {
+    const result = parseFrontmatter("context-library", sample);
+    expect(result.id).toBe("context-library");
+    expect(result.name).toBe("Context Library");
+    expect(result.description).toBe("Curate reference material for agents.");
+    expect(result.category).toBe("Grounding");
+    expect(result.maturity).toBe("adopt");
   });
 
-  it("extracts pattern id, name, description, and category", () => {
-    const patterns = parsePatterns(sampleReadme);
-    expect(patterns[0].id).toBe("throwaway-spike");
-    expect(patterns[0].name).toBe("Throwaway Spike");
-    expect(patterns[0].description).toBe("Rapid prototypes with constraints.");
-    expect(patterns[0].category).toBe("Workflow");
+  it("returns just id when no frontmatter present", () => {
+    const result = parseFrontmatter("context-library", "# Context Library\nContent.");
+    expect(result).toEqual({ id: "context-library" });
   });
 
-  it("groups patterns by category", () => {
-    const patterns = parsePatterns(sampleReadme);
-    expect(patterns[0].category).toBe("Workflow");
-    expect(patterns[1].category).toBe("Workflow");
-    expect(patterns[2].category).toBe("Evolution");
+  it("handles descriptions with colons", () => {
+    const text = `---\nname: Foo: Bar\n---\n`;
+    const result = parseFrontmatter("foo", text);
+    expect(result.name).toBe("Foo: Bar");
+  });
+});
+
+describe("stripFrontmatter", () => {
+  it("removes frontmatter block from text", () => {
+    const text = `---\nname: Foo\n---\n# Title\n\nContent.`;
+    expect(stripFrontmatter(text)).toBe("# Title\n\nContent.");
   });
 
-  it("returns empty array for markdown without pattern table", () => {
-    const patterns = parsePatterns("# Just a title\n\nSome text.");
-    expect(patterns).toHaveLength(0);
+  it("returns text unchanged when no frontmatter", () => {
+    const text = "# Title\n\nContent.";
+    expect(stripFrontmatter(text)).toBe(text);
   });
 
-  it("ignores table header row", () => {
-    const patterns = parsePatterns(sampleReadme);
-    const ids = patterns.map((p) => p.id);
-    expect(ids).not.toContain("Pattern");
-    expect(ids).not.toContain("-------");
+  it("handles frontmatter at start of file", () => {
+    const text = `---\nname: Test\nmaturity: adopt\n---\nContent.`;
+    expect(stripFrontmatter(text)).toBe("Content.");
   });
 });
 
 describe("isPattern", () => {
   const patterns = [
-    { id: "throwaway-spike", name: "Throwaway Spike", description: "Desc", category: "Workflow" },
-    { id: "context-library", name: "Context Library", description: "Desc", category: "Grounding" },
+    { id: "throwaway-spike", name: "Throwaway Spike", category: "Workflow", maturity: "adopt" },
+    { id: "context-library", name: "Context Library", category: "Grounding", maturity: "adopt" },
   ];
 
   it("returns true for valid pattern ids", () => {
@@ -118,112 +126,85 @@ describe("isPattern", () => {
   });
 });
 
-describe("renderPatternsList", () => {
+describe("renderSidebar", () => {
   const patterns = [
-    { id: "throwaway-spike", name: "Throwaway Spike", description: "Rapid prototypes", category: "Workflow" },
-    { id: "context-library", name: "Context Library", description: "Reference material", category: "Grounding" },
+    { id: "context-library", name: "Context Library", category: "Grounding", maturity: "adopt" },
+    { id: "throwaway-spike", name: "Throwaway Spike", category: "Workflow", maturity: "adopt" },
+    { id: "agent-swarm", name: "Agent Swarm", category: "Scale", maturity: "assess" },
   ];
 
-  it("renders patterns as list", () => {
-    const html = renderPatternsList(patterns);
-    expect(html).toContain("<h1>Patterns</h1>");
-    expect(html).toContain('<ul class="patterns">');
+  it("renders categories as sections", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).toContain("Grounding");
+    expect(html).toContain("Workflow");
+    expect(html).toContain("Scale");
   });
 
-  it("includes pattern data attributes and names", () => {
-    const html = renderPatternsList(patterns);
-    expect(html).toContain('data-pattern="throwaway-spike"');
+  it("renders pattern links with data-pattern attributes", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).toContain('href="#context-library"');
+    expect(html).toContain('href="#throwaway-spike"');
+    expect(html).toContain('data-pattern="context-library"');
+  });
+
+  it("marks current pattern as active", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).toContain('data-pattern="context-library" class="active"');
+  });
+
+  it("does not mark other patterns as active", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).not.toContain('data-pattern="throwaway-spike" class="active"');
+  });
+
+  it("renders pattern names as link text", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).toContain("Context Library");
     expect(html).toContain("Throwaway Spike");
-    expect(html).toContain('data-pattern="context-library"');
-    expect(html).toContain("Context Library");
   });
 
-  it("includes descriptions", () => {
-    const html = renderPatternsList(patterns);
-    expect(html).toContain("Rapid prototypes");
-    expect(html).toContain("Reference material");
-  });
-});
-
-describe("renderHomePage", () => {
-  const patterns = [
-    { id: "context-library", name: "Context Library", description: "Reference material", category: "Grounding" },
-    { id: "throwaway-spike", name: "Throwaway Spike", description: "Rapid prototypes", category: "Workflow" },
-    { id: "agent-swarm", name: "Agent Swarm", description: "Hierarchical swarms", category: "Scale" },
-  ];
-
-  it("renders hero section", () => {
-    const html = renderHomePage(patterns);
-    expect(html).toContain('<div class="hero">');
-    expect(html).toContain("Agent Pattern Library");
-    expect(html).toContain("Emerging patterns in AI-assisted software development");
-  });
-
-  it("groups patterns by category", () => {
-    const html = renderHomePage(patterns);
-    expect(html).toContain("<h2>Grounding</h2>");
-    expect(html).toContain("<h2>Workflow</h2>");
-    expect(html).toContain("<h2>Scale</h2>");
-  });
-
-  it("renders pattern cards with correct structure", () => {
-    const html = renderHomePage(patterns);
-    expect(html).toContain('class="pattern-card"');
-    expect(html).toContain('data-pattern="context-library"');
-    expect(html).toContain("Context Library");
-    expect(html).toContain("Reference material");
-  });
-
-  it("always includes image elements for all patterns", () => {
-    const html = renderHomePage(patterns);
-    expect(html).toContain('src="assets/thumbs/context-library.png"');
-    expect(html).toContain('src="assets/thumbs/throwaway-spike.png"');
-    expect(html).toContain('src="assets/thumbs/agent-swarm.png"');
-  });
-
-  it("adds fetchpriority=high to first pattern card images only", () => {
-    const html = renderHomePage(patterns);
-    // First pattern (context-library) should have fetchpriority
-    expect(html).toContain('src="assets/thumbs/context-library.png" alt="Context Library" class="light-only" fetchpriority="high"');
-    expect(html).toContain('src="assets/thumbs/context-library-dark.png" alt="Context Library" class="dark-only" fetchpriority="high"');
-    // Second pattern should not have fetchpriority
-    expect(html).toContain('src="assets/thumbs/throwaway-spike.png" alt="Throwaway Spike" class="light-only" />');
-    expect(html).not.toContain('throwaway-spike.png" alt="Throwaway Spike" class="light-only" fetchpriority');
-  });
-
-  it("renders title before image", () => {
-    const html = renderHomePage(patterns);
-    const contextLibraryTitle = html.indexOf("Context Library");
-    const contextLibraryImage = html.indexOf('src="assets/thumbs/context-library.png"');
-    expect(contextLibraryTitle).toBeLessThan(contextLibraryImage);
-  });
-
-  it("renders image before description", () => {
-    const html = renderHomePage(patterns);
-    const contextLibraryImage = html.indexOf('src="assets/thumbs/context-library.png"');
-    const contextLibraryDesc = html.indexOf("Reference material");
-    expect(contextLibraryImage).toBeLessThan(contextLibraryDesc);
-  });
-});
-
-describe("buildTocHtml", () => {
-  it("returns empty string for fewer than 2 headings", () => {
-    expect(buildTocHtml([])).toBe("");
-    expect(buildTocHtml([{ textContent: "One", tagName: "H2" }])).toBe("");
-  });
-
-  it("builds TOC HTML for multiple headings", () => {
+  it("renders headings under the current pattern when provided", () => {
     const headings = [
-      { textContent: "First", tagName: "H2" },
-      { textContent: "Second", tagName: "H3" },
+      { text: "How It Works", level: 2 },
+      { text: "The Trade-offs", level: 2 },
     ];
-    const html = buildTocHtml(headings);
-    expect(html).toContain('<div class="toc-title">On this page</div>');
-    expect(html).toContain("<ul>");
-    expect(html).toContain('href="#first"');
-    expect(html).toContain('href="#second"');
-    expect(html).toContain('class="h2"');
-    expect(html).toContain('class="h3"');
+    const html = renderSidebar(patterns, "context-library", headings);
+    expect(html).toContain("How It Works");
+    expect(html).toContain("The Trade-offs");
+    expect(html).toContain('href="#how-it-works"');
+    expect(html).toContain('href="#the-trade-offs"');
+  });
+
+  it("renders headings after the current pattern link", () => {
+    const headings = [{ text: "How It Works", level: 2 }];
+    const html = renderSidebar(patterns, "context-library", headings);
+    const patternLinkIdx = html.indexOf('href="#context-library"');
+    const headingIdx = html.indexOf("How It Works");
+    expect(headingIdx).toBeGreaterThan(patternLinkIdx);
+  });
+
+  it("does not render headings under non-current patterns", () => {
+    const headings = [{ text: "How It Works", level: 2 }];
+    const html = renderSidebar(patterns, "throwaway-spike", headings);
+    const ctxIdx = html.indexOf('href="#context-library"');
+    const headingIdx = html.indexOf("How It Works");
+    // Heading for throwaway-spike (current) appears after throwaway-spike link
+    const spikeIdx = html.indexOf('href="#throwaway-spike"');
+    expect(headingIdx).toBeGreaterThan(spikeIdx);
+    // Heading does NOT appear before context-library link (i.e., not under it)
+    expect(headingIdx).toBeGreaterThan(ctxIdx);
+  });
+
+  it("renders maturity badge inside the pattern link", () => {
+    const html = renderSidebar(patterns, "context-library", []);
+    expect(html).toContain('Context Library<span class="maturity adopt">adopt</span></a>');
+    expect(html).toContain('Agent Swarm<span class="maturity assess">assess</span></a>');
+  });
+
+  it("omits maturity badge when maturity is absent", () => {
+    const noMaturity = [{ id: "foo", name: "Foo", category: "Grounding" }];
+    const html = renderSidebar(noMaturity, "foo", []);
+    expect(html).not.toContain("maturity");
   });
 });
 
@@ -235,17 +216,13 @@ describe("rewritePatternLinks", () => {
   it("rewrites patterns/*.md links to hash links", () => {
     document.body.innerHTML = '<a href="patterns/throwaway-spike.md">link</a>';
     rewritePatternLinks(document.body);
-    expect(document.querySelector("a").getAttribute("href")).toBe(
-      "#throwaway-spike",
-    );
+    expect(document.querySelector("a").getAttribute("href")).toBe("#throwaway-spike");
   });
 
   it("leaves other links unchanged", () => {
     document.body.innerHTML = '<a href="https://example.com">link</a>';
     rewritePatternLinks(document.body);
-    expect(document.querySelector("a").getAttribute("href")).toBe(
-      "https://example.com",
-    );
+    expect(document.querySelector("a").getAttribute("href")).toBe("https://example.com");
   });
 
   it("handles multiple pattern links", () => {
@@ -274,14 +251,52 @@ describe("rewritePatternLinks", () => {
   });
 });
 
+describe("assignHeadingIds", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("assigns slugified id to h2 elements", () => {
+    document.body.innerHTML = "<h2>How It Works</h2>";
+    assignHeadingIds(document.body);
+    expect(document.querySelector("h2").id).toBe("how-it-works");
+  });
+
+  it("assigns slugified id to h3 elements", () => {
+    document.body.innerHTML = "<h3>The Trade-offs</h3>";
+    assignHeadingIds(document.body);
+    expect(document.querySelector("h3").id).toBe("the-trade-offs");
+  });
+
+  it("does not assign id to h1 elements", () => {
+    document.body.innerHTML = "<h1>Pattern Name</h1>";
+    assignHeadingIds(document.body);
+    expect(document.querySelector("h1").id).toBe("");
+  });
+
+  it("does not assign id to h4 elements", () => {
+    document.body.innerHTML = "<h4>Minor Detail</h4>";
+    assignHeadingIds(document.body);
+    expect(document.querySelector("h4").id).toBe("");
+  });
+
+  it("handles multiple headings", () => {
+    document.body.innerHTML = "<h2>Overview</h2><h3>Details</h3><h2>Summary</h2>";
+    assignHeadingIds(document.body);
+    const headings = document.querySelectorAll("h2, h3");
+    expect(headings[0].id).toBe("overview");
+    expect(headings[1].id).toBe("details");
+    expect(headings[2].id).toBe("summary");
+  });
+});
+
 describe("rewriteThemeImages", () => {
   beforeEach(() => {
     document.body.innerHTML = "";
   });
 
   it("strips docs/ prefix and adds light-only class", () => {
-    document.body.innerHTML =
-      '<img src="../docs/assets/diagram.png" alt="Diagram">';
+    document.body.innerHTML = '<img src="../docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const img = document.querySelector("img.light-only");
     expect(img).not.toBeNull();
@@ -289,8 +304,7 @@ describe("rewriteThemeImages", () => {
   });
 
   it("strips docs/ prefix on dark variant", () => {
-    document.body.innerHTML =
-      '<img src="../docs/assets/diagram.png" alt="Diagram">';
+    document.body.innerHTML = '<img src="../docs/assets/diagram.png" alt="Diagram">';
     rewriteThemeImages(document.body);
     const darkImg = document.querySelector("img.dark-only");
     expect(darkImg).not.toBeNull();
@@ -345,10 +359,8 @@ describe("rewriteThemeImages", () => {
     `;
     rewriteThemeImages(document.body);
     const imgs = document.querySelectorAll("img");
-    // First light and dark images should have fetchpriority
     expect(imgs[0].getAttribute("fetchpriority")).toBe("high");
     expect(imgs[1].getAttribute("fetchpriority")).toBe("high");
-    // Second light and dark images should not have fetchpriority
     expect(imgs[2].getAttribute("fetchpriority")).toBeNull();
     expect(imgs[3].getAttribute("fetchpriority")).toBeNull();
   });

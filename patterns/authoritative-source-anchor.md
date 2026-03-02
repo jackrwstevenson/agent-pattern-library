@@ -1,3 +1,10 @@
+---
+name: Authoritative Source Anchor
+description: Embed authoritative external specifications directly in the repository so agents can cite rather than recall.
+category: Grounding
+maturity: adopt
+---
+
 # Authoritative Source Anchor
 
 AI agents working on standards-compliant code face a subtle problem: they must make decisions about specifications they weren't trained on, or can't recall accurately. Without access to the canonical source, agents hallucinate specifications with alarming confidence, generate code based on outdated understanding, and leave no audit trail for verification.

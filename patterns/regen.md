@@ -1,3 +1,10 @@
+---
+name: Regen
+description: Treat specifications and code as functions that regenerate when inputs change, keeping systems aligned with evolving standards.
+category: Evolution
+maturity: trial
+---
+
 # Regen
 
 Traditional documentation rots. Teams write specs once, then watch them drift from reality until they're worse than useless. The same happens with AI-assisted development: agents produce code based on requirements that become stale as standards evolve, dependencies update, and business rules change.

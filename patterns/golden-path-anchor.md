@@ -1,3 +1,10 @@
+---
+name: Golden Path Anchor
+description: Continuously align codebases with reference implementations through drift detection and automated remediation.
+category: Evolution
+maturity: trial
+---
+
 # Golden Path Anchor
 
 Organisations maintain reference applications - templates, starter kits, golden paths - that embody best practices. These references work well for new projects but fail to influence existing ones. Once teams fork templates, codebases diverge over time. Propagating template improvements to existing projects is tedious and error-prone. And the reference app evolves while downstream projects don't follow.

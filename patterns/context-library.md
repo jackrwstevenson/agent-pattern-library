@@ -1,3 +1,10 @@
+---
+name: Context Library
+description: Curate reference material that agents consult to understand what good looks like in your organisation.
+category: Grounding
+maturity: adopt
+---
+
 # Context Library
 
 One of the most common frustrations I hear from teams adopting AI agents is that the output looks great but doesn't *fit*. The agent ignores your coding standards, reinvents solutions the team has already built, and misses existing components entirely. It's like hiring a brilliant contractor who refuses to read the company wiki.

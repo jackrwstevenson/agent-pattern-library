@@ -1,3 +1,10 @@
+---
+name: Validation Constraint
+description: Validate agent output through externally observable behaviour rather than line-by-line code review.
+category: Workflow
+maturity: trial
+---
+
 # Validation Constraint
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Replacing human code review with automated validation requires mature test infrastructure and carries risks for security-sensitive code. Treat this as a lens for scaling agent output verification, not a mandate to stop reading code.

@@ -1,3 +1,10 @@
+---
+name: Detached Agent
+description: Use issue trackers as task queues for agents executing in sandboxed cloud environments, decoupling interface from execution.
+category: Scale
+maturity: trial
+---
+
 # Detached Agent
 
 Traditional AI coding assistants impose constraints that create friction for many workflows. They require IDE installation: VS Code, Cursor, or specific editors. They need a local development environment with dependencies, API keys, and compute resources. They demand synchronous interaction while the agent works. And they run code with full access to your machine, credentials, and network, which Simon Willison has aptly termed the [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).

@@ -1,3 +1,10 @@
+---
+name: Autonomous Agent
+description: Enable agents to select their own tasks and monitor outcomes, reducing human scheduling as a bottleneck.
+category: Scale
+maturity: assess
+---
+
 # Autonomous Agent
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. The prerequisites are steep, the tooling is immature, and human review of all agent contributions remains essential. Treat this as a lens for evaluating where agentic tooling may head, not a recommendation for immediate adoption.

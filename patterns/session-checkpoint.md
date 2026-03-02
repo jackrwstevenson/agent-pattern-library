@@ -1,3 +1,10 @@
+---
+name: Session Checkpoint
+description: Capture agent sessions with rollback capability and shadow branches for metadata and auto-summarisation.
+category: Workflow
+maturity: assess
+---
+
 # Session Checkpoint
 
 > **Pattern in Research**: This pattern describes a direction rather than current best practice. Tooling for session capture and checkpoint-based rollback is nascent, and the value depends on team workflows and review norms. Treat this as a lens for thinking about agent observability, not a mature practice.
