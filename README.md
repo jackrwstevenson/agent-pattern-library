@@ -1,6 +1,41 @@
 # Agent Pattern Library
 
-This is my attempt to make sense of the emerging patterns in AI-assisted software development. The patterns here are drawn from research, personal observations, and a fair amount of experimentation. Some are well-established; others are directions I find promising but wouldn't yet call best practice. I've tried to be honest about which is which.
+This is my attempt to make sense of the emerging patterns in AI-assisted software development. The patterns here are drawn from research, personal observations, and hands-on experimentation with AI coding agents. Some are well-established; others are directions I find promising but wouldn't yet call best practice. I have tried to be honest about which is which.
+
+If you work with AI coding agents and have found patterns that belong here, I would like to hear from you.
+
+## Using this site
+
+Browse patterns using the **left sidebar**, which lists all 26 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
+
+Each sidebar entry carries a **maturity badge** indicating how much confidence I have in it. The toggle in the top nav switches between dark and light modes.
+
+## Key concepts
+
+### Categories
+
+The 26 patterns are organised into five categories:
+
+| Category | What it covers |
+| --- | --- |
+| **Grounding** | Ensuring agents work from accurate, authoritative information rather than inventing their own |
+| **Workflow** | Structuring how agents perform work, compensating for the limitations that make unstructured use unreliable |
+| **Safety** | Controlling and validating agent output to meet compliance, safety, and quality requirements |
+| **Scale** | What happens when you push beyond single-agent constraints: context limits, throughput ceilings, coordination challenges |
+| **Evolution** | Keeping systems current as dependencies, standards, and the world around them change |
+
+### Maturity ratings
+
+Borrowed from the [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar):
+
+| Rating | Meaning |
+| --- | --- |
+| **Adopt** | Use it. It solves a real problem reliably and I apply it in my own work. |
+| **Trial** | Worth trying where the context fits. Some rough edges remain. |
+| **Assess** | Worth understanding; be cautious about deploying it yet. |
+| **Hold** | Not ready or not recommended for most situations. |
+
+---
 
 ## Patterns
 
@@ -65,31 +100,64 @@ These patterns address the challenge of keeping systems current as dependencies,
 | [Semantic Port](patterns/semantic-port.md) | Use AI agents to port code between languages or frameworks, preserving intent and producing idiomatic output rather than mechanical translation. | Goes beyond transpilation by mapping idioms and conventions, not just syntax, producing code that reads as native to the target ecosystem. |
 | [Garbage Collection Agent](patterns/garbage-collection-agent.md) | Deploy periodic agents that sweep through AI-generated codebases identifying documentation drift, architectural violations, dead code, and cross-module inconsistencies. | AI-generated codebases accumulate entropy faster than human attention can manage; scheduled maintenance agents keep the codebase healthy between human review cycles. |
 
+---
+
 ## How the Patterns Relate
 
-These patterns don't exist in isolation. Several clusters of relationships are worth calling out.
+These patterns don't exist in isolation. Here are the clusters worth understanding.
 
-**Starting a project.** For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) extracts legacy knowledge, which feeds into a [Context Library](patterns/context-library.md), which informs specification through [Specify Plan Ship](patterns/specify-plan-ship.md). For greenfield projects, you skip the archaeology and load organisational standards from the Context Library before specifying.
+### Starting a project
 
-**Maintaining consistency at scale.** [Context Library](patterns/context-library.md) defines WHAT good looks like; [Skills Library](patterns/skills-library.md) defines HOW to achieve it. Skills reference Context. [Golden Path Anchor](patterns/golden-path-anchor.md) takes this further by automatically aligning codebases with reference implementations. And when standards evolve, [Regen](patterns/regen.md) regenerates affected specs and implementations.
+For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) surfaces the implicit knowledge baked into legacy code, which feeds into a [Context Library](patterns/context-library.md). For greenfield, load organisational standards directly. Either way, [Specify Plan Ship](patterns/specify-plan-ship.md) consumes that context to drive structured specification before any code is generated.
 
-**Handling large data or async work.** [Context Bypass](patterns/context-bypass.md) delegates to local APIs when data exceeds context limits. [Detached Agent](patterns/detached-agent.md) provides fire-and-forget task execution with security isolation.
+### Consistency at scale
 
-**Increasing agent autonomy.** [Detached Agent](patterns/detached-agent.md) provides execution infrastructure; [Autonomous Agent](patterns/autonomous-agent.md) adds task selection and outcome monitoring on top. [Skills Library](patterns/skills-library.md) defines reliable coordination, which is a prerequisite before agents can self-direct. [Agent Swarm](patterns/agent-swarm.md) scales parallelism through hierarchical coordination: planners decompose, workers execute.
+- [Context Library](patterns/context-library.md) defines **what** good looks like; [Skills Library](patterns/skills-library.md) defines **how** to achieve it — skills reference context
+- [Golden Path Anchor](patterns/golden-path-anchor.md) automatically aligns production codebases with a reference implementation as standards evolve
+- [Regen](patterns/regen.md) regenerates affected specs and implementations when upstream inputs change
 
-**Testing and validation.** [Digital Twin](patterns/digital-twin.md) clones dependencies for deterministic testing. [Validation Constraint](patterns/validation-constraint.md) validates that agent output *works* through observable behaviour, while [Structural Constraint](patterns/structural-constraint.md) validates that it *fits* through architectural tests and custom linters. TDD in [Specify Plan Ship](patterns/specify-plan-ship.md) naturally produces the test suite that Validation Constraint relies on.
+### Autonomy and orchestration
 
-**Codebase health.** [Garbage Collection Agent](patterns/garbage-collection-agent.md) runs periodic sweeps to catch documentation drift, dead code, and inconsistencies that accumulate in AI-generated codebases. It builds on [Structural Constraint](patterns/structural-constraint.md) by enforcing constraints beyond CI, and complements [Golden Path Anchor](patterns/golden-path-anchor.md), which detects drift from a reference application rather than internal consistency.
+- [Detached Agent](patterns/detached-agent.md) provides execution infrastructure with audit trails and security isolation
+- [Autonomous Agent](patterns/autonomous-agent.md) adds task selection and outcome monitoring on top of that infrastructure
+- [Agent Swarm](patterns/agent-swarm.md) scales through hierarchical coordination — planners decompose, workers execute
+- [Deterministic Orchestration](patterns/deterministic-orchestration.md) enforces that agents control *what they produce*, not *what phase comes next*
 
-**Agent memory and observability.** [Agent Memory Graph](patterns/agent-memory-graph.md) provides the coordination primitives (atomic claims, dependency tracking) that [Agent Swarm](patterns/agent-swarm.md) needs. [Session Checkpoint](patterns/session-checkpoint.md) tracks concurrent agent sessions independently with rollback capability. [Generation Memory](patterns/generation-memory.md) solves a different problem: maintaining a single agent's awareness of its own work across context compactions. [Provenance Ledger](patterns/provenance-ledger.md) provides lightweight audit traceability from any artefact to the AI that produced it. [Pyramid Summary](patterns/pyramid-summary.md) handles comprehension of large systems, while [Context Bypass](patterns/context-bypass.md) handles data-heavy processing. Different tools for different scaling problems.
+### Memory and observability
 
-**Orchestration and control.** [Deterministic Orchestration](patterns/deterministic-orchestration.md) provides the workflow control layer that [Specify Plan Ship](specify-plan-ship.md) describes conceptually. It enforces [Structural Constraint](patterns/structural-constraint.md) and [Runtime Guardrails](patterns/runtime-guardrails.md) through hooks rather than relying on agents to remember them. [Agent Swarm](patterns/agent-swarm.md) uses the same principle: deterministic coordination, agentic execution.
+- [Generation Memory](patterns/generation-memory.md) — a single agent's awareness of its own progress across context compactions
+- [Agent Memory Graph](patterns/agent-memory-graph.md) — coordination primitives for parallel agents: atomic task claims, dependency tracking, ready-state detection
+- [Session Checkpoint](patterns/session-checkpoint.md) — concurrent session history with rollback, without polluting the code branch
+- [Provenance Ledger](patterns/provenance-ledger.md) — lightweight audit trail from any artefact back to the agent and prompt that produced it
+- [Pyramid Summary](patterns/pyramid-summary.md) — navigating systems that exceed context limits through selective expansion rather than lossy compression
+- [Context Bypass](patterns/context-bypass.md) — delegating data-heavy operations to local APIs so they never enter the context window at all
 
-**Safety and compliance.** [Runtime Guardrails](patterns/runtime-guardrails.md) prevents problematic output at generation time; [Post-Inference Validation](patterns/post-inference-validation.md) catches what slips through. Together they form defence in depth. For code rather than text, [Validation Constraint](patterns/validation-constraint.md) validates through tests and observable behaviour.
+### Testing and validation
 
-**Cross-language distribution.** [Spec Library](patterns/spec-library.md) defines what to implement; [Semantic Port](patterns/semantic-port.md) generates idiomatic implementations across languages. When the source evolves, [Regen](patterns/regen.md) regenerates the ports automatically.
+- [Digital Twin](patterns/digital-twin.md) clones third-party dependencies for deterministic, high-volume testing
+- [Validation Constraint](patterns/validation-constraint.md) validates that output **works** through observable behaviour (tests, monitoring)
+- [Structural Constraint](patterns/structural-constraint.md) validates that it **fits** through architectural tests and custom linters
+- [Specify Plan Ship](patterns/specify-plan-ship.md) naturally produces the test suite that Validation Constraint relies on
 
-**Exploration vs production.** [Throwaway Spike](patterns/throwaway-spike.md) validates ideas quickly with explicit throwaway markers. Once the spike proves the idea, [Specify Plan Ship](patterns/specify-plan-ship.md) builds production code with the full process.
+### Safety and compliance
+
+[Runtime Guardrails](patterns/runtime-guardrails.md) prevents problematic output at generation time. [Post-Inference Validation](patterns/post-inference-validation.md) catches what gets through. Together they provide defence in depth for content. For code, [Validation Constraint](patterns/validation-constraint.md) and [Structural Constraint](patterns/structural-constraint.md) play equivalent roles.
+
+### Codebase health
+
+- [Garbage Collection Agent](patterns/garbage-collection-agent.md) runs periodic sweeps for documentation drift, dead code, and cross-module inconsistencies
+- Builds on [Structural Constraint](patterns/structural-constraint.md) by enforcing architectural rules continuously, beyond what CI catches
+- Complements [Golden Path Anchor](patterns/golden-path-anchor.md), which catches drift from a reference app rather than internal consistency
+
+### Cross-language distribution
+
+[Spec Library](patterns/spec-library.md) defines what to implement; [Semantic Port](patterns/semantic-port.md) generates idiomatic implementations across languages. When the source evolves, [Regen](patterns/regen.md) regenerates the ports automatically.
+
+### Exploration vs production
+
+[Throwaway Spike](patterns/throwaway-spike.md) validates ideas quickly with explicit throwaway markers and safety guardrails. Once proven, [Specify Plan Ship](patterns/specify-plan-ship.md) takes over to build production code with the full process.
+
+---
 
 ## Contributing
 
