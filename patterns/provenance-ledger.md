@@ -1,7 +1,7 @@
 ---
 name: Provenance Ledger
 description: Record which agent, model, and iteration produced every artefact, providing lightweight traceability for regulated environments.
-category: Workflow
+category: Observability
 maturity: trial
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: Structural Constraint
 description: Use custom linters and structural tests to ensure agent-generated code fits your architecture, not just works.
-category: Workflow
+category: Safety
 maturity: trial
 ---
 

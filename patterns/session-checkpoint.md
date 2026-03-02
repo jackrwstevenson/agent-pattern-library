@@ -1,7 +1,7 @@
 ---
 name: Session Checkpoint
 description: Capture agent sessions with rollback capability and shadow branches for metadata and auto-summarisation.
-category: Workflow
+category: Observability
 maturity: assess
 ---
 

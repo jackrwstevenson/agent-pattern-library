@@ -1,7 +1,7 @@
 ---
 name: Generation Memory
 description: Give agents an external progress log that persists across context window compactions, preventing repeated work in long sessions.
-category: Workflow
+category: Observability
 maturity: trial
 ---
 

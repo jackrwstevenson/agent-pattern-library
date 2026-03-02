@@ -1,7 +1,7 @@
 ---
 name: Validation Constraint
 description: Validate agent output through externally observable behaviour rather than line-by-line code review.
-category: Workflow
+category: Safety
 maturity: trial
 ---
 
