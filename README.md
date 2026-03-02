@@ -1,6 +1,6 @@
 # Agent Pattern Library
 
-This is my attempt to make sense of the emerging patterns in AI-assisted software development. The patterns here are drawn from research, personal observations, and hands-on experimentation with AI coding agents. Some are well-established; others are directions I find promising but wouldn't yet call best practice. I have tried to be honest about which is which.
+Making sense of the emerging patterns in AI-assisted software development. The patterns here are drawn from research, personal observations, and hands-on experimentation with AI coding agents. Some are well-established; others are directions I find promising but wouldn't yet call best practice. I have tried to be honest about which is which.
 
 If you work with AI coding agents and have found patterns that belong here, I would like to hear from you.
 
