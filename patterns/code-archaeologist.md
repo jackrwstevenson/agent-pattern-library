@@ -25,12 +25,12 @@ The agent takes the existing codebase as input and produces a LEGACY-ANALYSIS.md
 
 The analysis is a starting point, not a final answer. Humans must curate it, making deliberate choices about each piece of extracted knowledge.
 
-| Decision | Meaning | Example |
-| --- | --- | --- |
-| **Retain** | Business logic that must be preserved | Tax calculation rules |
-| **Discard** | Constraints from obsolete technology | Batch windows from mainframe era |
-| **Modernise** | Patterns with better contemporary alternatives | Replace polling with event-driven |
-| **Question** | Unclear behaviour requiring stakeholder input | Why does this field allow negative values? |
+| Decision      | Meaning                                        | Example                                    |
+| ------------- | ---------------------------------------------- | ------------------------------------------ |
+| **Retain**    | Business logic that must be preserved          | Tax calculation rules                      |
+| **Discard**   | Constraints from obsolete technology           | Batch windows from mainframe era           |
+| **Modernise** | Patterns with better contemporary alternatives | Replace polling with event-driven          |
+| **Question**  | Unclear behaviour requiring stakeholder input  | Why does this field allow negative values? |
 
 This curation feeds directly into specification. Retained behaviours become requirements. Discarded constraints become explicit non-goals. Modernisation candidates inform architecture decisions. Questioned items become open issues to resolve.
 
@@ -38,17 +38,17 @@ This curation feeds directly into specification. Retained behaviours become requ
 
 The agent can employ multiple approaches, and combining techniques produces a more complete picture than any single method.
 
-| Technique | Extracts | Limitations |
-| --- | --- | --- |
-| Static code analysis | Structure, dependencies, data flow | Misses runtime behaviour |
-| Test mining | Expected behaviour from existing tests | Tests may be incomplete or wrong |
-| Log analysis | Actual usage patterns, error rates | Requires access to production logs |
+| Technique              | Extracts                                | Limitations                               |
+| ---------------------- | --------------------------------------- | ----------------------------------------- |
+| Static code analysis   | Structure, dependencies, data flow      | Misses runtime behaviour                  |
+| Test mining            | Expected behaviour from existing tests  | Tests may be incomplete or wrong          |
+| Log analysis           | Actual usage patterns, error rates      | Requires access to production logs        |
 | Database schema review | Data models, constraints, relationships | Schema drift from application assumptions |
-| API surface mapping | Integration contracts | May miss undocumented protocols |
+| API surface mapping    | Integration contracts                   | May miss undocumented protocols           |
 
 ## The Trade-offs
 
-The benefits centre on risk reduction. You capture what the system *actually does*, not what anyone remembers it doing. You surface obsolete constraints. You force explicit retain-or-discard decisions rather than leaving things to chance. And you create a document explaining why old behaviours were kept or dropped, which proves invaluable when questions arise later.
+The benefits centre on risk reduction. You capture what the system _actually does_, not what anyone remembers it doing. You surface obsolete constraints. You force explicit retain-or-discard decisions rather than leaving things to chance. And you create a document explaining why old behaviours were kept or dropped, which proves invaluable when questions arise later.
 
 The costs are front-loaded: the analysis takes effort before any new code exists, the agent needs read access to the legacy codebase, and some knowledge will inevitably exist only in people's heads and cannot be extracted from code alone.
 
@@ -62,8 +62,4 @@ Code Archaeologist is fundamentally a prerequisite phase. Its output feeds into 
 
 ## Maturity
 
-**Trial.** The approach is sound, but extraction quality varies with codebase characteristics. It works best on codebases with high test coverage and consistent patterns; on tangled legacy systems the agent produces a useful starting point rather than a reliable analysis.
-
-## Further Reading
-
-- [Working Effectively with Legacy Code](https://www.oreilly.com/library/view/working-effectively-with/0131177052/) - Michael Feathers
+**Adopt.** The approach is sound, but extraction quality varies with codebase characteristics.
