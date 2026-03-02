@@ -99,14 +99,18 @@ pre {
 }
 pre code { background: none; padding: 0; word-break: normal; }
 
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 1.2rem;
+}
 table {
   border-collapse: collapse;
   font-size: 0.9em;
   width: 100%;
-  overflow-x: auto;
-  display: block;
-  -webkit-overflow-scrolling: touch;
 }
+.table-wrap table { margin: 0; }
+th:first-child, td:first-child { white-space: nowrap; }
 th, td { text-align: left; padding: 0.6rem; border-bottom: 1px solid var(--border); }
 th { color: var(--accent); font-family: "Inter", sans-serif; font-size: 0.9rem; font-weight: 600; }
 
@@ -146,6 +150,47 @@ nav a:hover, nav a.active { color: var(--accent); text-decoration: none; }
   border-radius: 4px;
 }
 #theme:hover, #repo:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── Mobile menu toggle ──────────────────────────────── */
+#menu-toggle {
+  display: none;
+  cursor: pointer;
+  background: 0;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font: inherit;
+  font-size: 1.25rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+#menu-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+#sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+#sidebar-backdrop.open { display: block; }
+
+@media (max-width: 899px) {
+  #menu-toggle { display: block; }
+  #sidebar.open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(280px, 80vw);
+    height: 100vh;
+    background: var(--bg);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 1.5rem 1rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
+  }
+}
 
 /* ── Sidebar ───────────────────────────────────────── */
 #sidebar {

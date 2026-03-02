@@ -124,6 +124,15 @@ export const rewritePatternLinks = (container) => {
   });
 };
 
+export const wrapTables = (container) => {
+  container.querySelectorAll("table").forEach((t) => {
+    const wrap = document.createElement("div");
+    wrap.className = "table-wrap";
+    t.parentNode.insertBefore(wrap, t);
+    wrap.appendChild(t);
+  });
+};
+
 export const rewriteThemeImages = (container) => {
   const images = container.querySelectorAll('img[src$=".png"]');
   images.forEach((img, index) => {
@@ -189,6 +198,7 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     );
     rewritePatternLinks(tempDiv);
     rewriteThemeImages(tempDiv);
+    wrapTables(tempDiv);
     $("#content").innerHTML = tempDiv.innerHTML;
 
     // Assign IDs to headings so sidebar links work
@@ -234,9 +244,22 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     $("#theme").textContent = localStorage.theme === "light" ? "Dark" : "Light";
   }
 
+  const closeSidebar = () => {
+    $("#sidebar").classList.remove("open");
+    $("#sidebar-backdrop").classList.remove("open");
+  };
+
+  $("#menu-toggle").onclick = () => {
+    const open = $("#sidebar").classList.toggle("open");
+    $("#sidebar-backdrop").classList.toggle("open", open);
+  };
+
+  $("#sidebar-backdrop").onclick = closeSidebar;
+
   $("#sidebar").onclick = (e) => {
     const a = e.target.closest("a");
     if (!a) return;
+    closeSidebar();
     if (a.dataset.pattern) {
       e.preventDefault();
       location.hash = a.dataset.pattern;
