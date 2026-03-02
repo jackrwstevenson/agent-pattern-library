@@ -175,6 +175,18 @@ describe("renderSidebar", () => {
     expect(html).toContain('href="#the-trade-offs"');
   });
 
+  it("puts heading level class on li, not the anchor", () => {
+    const headings = [
+      { text: "How It Works", level: 2 },
+      { text: "A Detail", level: 3 },
+    ];
+    const html = renderSidebar(patterns, "context-library", headings);
+    expect(html).toContain('<li class="h2">');
+    expect(html).toContain('<li class="h3">');
+    expect(html).not.toContain('<a class="h2"');
+    expect(html).not.toContain('<a class="h3"');
+  });
+
   it("renders headings after the current pattern link", () => {
     const headings = [{ text: "How It Works", level: 2 }];
     const html = renderSidebar(patterns, "context-library", headings);

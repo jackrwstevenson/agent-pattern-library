@@ -65,7 +65,7 @@ export const renderSidebar = (patterns, currentId, headings = []) => {
                   ? `<ul class="sidebar-headings">${headings
                       .map(
                         (h) =>
-                          `<li><a href="#${slugify(h.text)}" class="h${h.level}">${h.text}</a></li>`,
+                          `<li class="h${h.level}"><a href="#${slugify(h.text)}">${h.text}</a></li>`,
                       )
                       .join("")}</ul>`
                   : "";
