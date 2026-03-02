@@ -9,18 +9,41 @@ const isLocalhost =
 export const BASE = isLocalhost ? LOCAL_BASE : GITHUB_BASE;
 
 export const PATTERN_IDS = [
-  "context-library", "authoritative-source-anchor", "code-archaeologist",
-  "specify-plan-ship", "throwaway-spike", "skills-library", "digital-twin",
-  "session-checkpoint", "validation-constraint", "structural-constraint",
-  "deterministic-orchestration", "generation-memory", "provenance-ledger",
-  "runtime-guardrails", "post-inference-validation",
-  "agent-swarm", "detached-agent", "context-bypass", "autonomous-agent",
-  "pyramid-summary", "agent-memory-graph",
-  "regen", "golden-path-anchor", "spec-library", "semantic-port",
+  "context-library",
+  "authoritative-source-anchor",
+  "code-archaeologist",
+  "specify-plan-ship",
+  "throwaway-spike",
+  "skills-library",
+  "deterministic-orchestration",
+  "validation-constraint",
+  "structural-constraint",
+  "digital-twin",
+  "session-checkpoint",
+  "generation-memory",
+  "provenance-ledger",
+  "runtime-guardrails",
+  "post-inference-validation",
+  "context-bypass",
+  "detached-agent",
+  "agent-swarm",
+  "autonomous-agent",
+  "pyramid-summary",
+  "agent-memory-graph",
+  "regen",
+  "golden-path-anchor",
+  "spec-library",
   "garbage-collection-agent",
+  "semantic-port",
 ];
 
-const CATEGORY_ORDER = ["Grounding", "Workflow", "Safety", "Scale", "Evolution"];
+const CATEGORY_ORDER = [
+  "Grounding",
+  "Workflow",
+  "Safety",
+  "Scale",
+  "Evolution",
+];
 
 export const slugify = (t) =>
   t
@@ -34,7 +57,8 @@ export const parseFrontmatter = (id, text) => {
   const result = { id };
   for (const line of match[1].split("\n")) {
     const colon = line.indexOf(":");
-    if (colon > 0) result[line.slice(0, colon).trim()] = line.slice(colon + 1).trim();
+    if (colon > 0)
+      result[line.slice(0, colon).trim()] = line.slice(colon + 1).trim();
   }
   return result;
 };
@@ -51,9 +75,9 @@ export const renderSidebar = (patterns, currentId, headings = []) => {
     grouped[p.category].push(p);
   });
 
-  let html = CATEGORY_ORDER
-    .filter((c) => grouped[c])
-    .map((c) => `
+  let html = CATEGORY_ORDER.filter((c) => grouped[c])
+    .map(
+      (c) => `
       <div class="sidebar-section">
         <div class="sidebar-category">${c}</div>
         <ul>
@@ -69,12 +93,15 @@ export const renderSidebar = (patterns, currentId, headings = []) => {
                       )
                       .join("")}</ul>`
                   : "";
-              const badge = p.maturity ? `<span class="maturity ${p.maturity}">${p.maturity}</span>` : "";
+              const badge = p.maturity
+                ? `<span class="maturity ${p.maturity}">${p.maturity}</span>`
+                : "";
               return `<li><a href="#${p.id}" data-pattern="${p.id}"${isActive ? ' class="active"' : ""}>${p.name}${badge}</a>${headingsHtml}</li>`;
             })
             .join("")}
         </ul>
-      </div>`)
+      </div>`,
+    )
     .join("");
 
   return html;
@@ -125,7 +152,9 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
 
   const $ = (s) => document.querySelector(s);
   const scrollBehavior = () =>
-    window.matchMedia("(prefers-reduced-motion:reduce)").matches ? "auto" : "smooth";
+    window.matchMedia("(prefers-reduced-motion:reduce)").matches
+      ? "auto"
+      : "smooth";
 
   const updateSidebar = (currentId, headings = []) => {
     $("#sidebar").innerHTML = renderSidebar(patterns, currentId, headings);
@@ -155,7 +184,9 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     }
 
     const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = marked.parse(p === "readme" ? text : stripFrontmatter(text));
+    tempDiv.innerHTML = marked.parse(
+      p === "readme" ? text : stripFrontmatter(text),
+    );
     rewritePatternLinks(tempDiv);
     rewriteThemeImages(tempDiv);
     $("#content").innerHTML = tempDiv.innerHTML;
@@ -164,12 +195,13 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
     if (p !== "readme") assignHeadingIds($("#content"));
 
     // Extract headings for sidebar (patterns only)
-    const headings = p !== "readme"
-      ? [...$("#content").querySelectorAll("h2,h3")].map((h) => ({
-          text: h.textContent,
-          level: parseInt(h.tagName[1]),
-        }))
-      : [];
+    const headings =
+      p !== "readme"
+        ? [...$("#content").querySelectorAll("h2,h3")].map((h) => ({
+            text: h.textContent,
+            level: parseInt(h.tagName[1]),
+          }))
+        : [];
 
     updateSidebar(p, headings);
   };
@@ -233,8 +265,12 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
 
   const readmePromise = fetch(BASE + "README.md")
     .then((r) => r.text())
-    .then((text) => { cache["readme"] = { fullText: text }; })
-    .catch(() => { cache["readme"] = { fullText: "" }; });
+    .then((text) => {
+      cache["readme"] = { fullText: text };
+    })
+    .catch(() => {
+      cache["readme"] = { fullText: "" };
+    });
 
   const patternsPromise = Promise.all(
     PATTERN_IDS.map((id) =>
@@ -245,9 +281,17 @@ if (typeof window !== "undefined" && document.querySelector("#theme")) {
           cache[id] = { meta, fullText: text };
           return meta;
         })
-        .catch(() => ({ id, name: id, description: "", category: "Workflow", maturity: "trial" })),
+        .catch(() => ({
+          id,
+          name: id,
+          description: "",
+          category: "Workflow",
+          maturity: "trial",
+        })),
     ),
-  ).then((metas) => { patterns = metas; });
+  ).then((metas) => {
+    patterns = metas;
+  });
 
   Promise.all([readmePromise, patternsPromise]).then(route);
 }
