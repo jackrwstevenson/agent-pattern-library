@@ -25,6 +25,8 @@ For brownfield environments replacing legacy systems, use the [Code Archaeologis
 
 The human and agent collaborate to flesh out requirements through iterative questioning. Where available, the agent consults a [Context Library](context-library.md) of vetted standards, components, and domain knowledge. The agent asks clarifying questions until edge cases and constraints are clear. Requirements, architecture decisions, data models, API contracts, and testing strategy are all captured in a structured SPEC.md document.
 
+A useful progression for this conversation works through five levels, each requiring agreement before moving on: **capabilities** (what the system should do and explicit non-goals), **components** (the major building blocks and abstractions), **interactions** (how components communicate and data flows between them), **contracts** (function signatures, types, schemas, and error shapes), and finally **implementation approach** (libraries, patterns, and constraints the code should follow). Catching a scope mismatch in a two-minute design conversation is fundamentally cheaper than discovering it woven through hundreds of lines of generated code.
+
 A good SPEC.md covers the problem statement and goals, explicit non-goals (what's out of scope), data models and type definitions, API or interface contracts, error handling strategy, security and performance constraints, and acceptance criteria in testable terms.
 
 The spec becomes the source of truth that both human and agent reference throughout. Nothing proceeds until the human approves it.
@@ -82,3 +84,4 @@ For trivial bug fixes, obvious errors, and single-line changes with clear scope,
 ## Further Reading
 
 - [My LLM coding workflow](https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e) - Addy Osmani
+- [Design-First Collaboration](https://martinfowler.com/articles/reduce-friction-ai/design-first-collaboration.html) - Rahul Garg
