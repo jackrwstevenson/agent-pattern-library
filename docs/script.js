@@ -30,6 +30,7 @@ export const PATTERN_IDS = [
   "autonomous-agent",
   "pyramid-summary",
   "agent-memory-graph",
+  "federated-agent-network",
   "golden-path-anchor",
   "regen",
   "spec-library",

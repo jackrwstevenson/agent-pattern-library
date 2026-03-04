@@ -20,8 +20,8 @@ describe("BASE URL", () => {
 });
 
 describe("PATTERN_IDS", () => {
-  it("contains all 26 pattern ids", () => {
-    expect(PATTERN_IDS).toHaveLength(26);
+  it("contains all 27 pattern ids", () => {
+    expect(PATTERN_IDS).toHaveLength(27);
   });
 
   it("ids are lowercase kebab-case", () => {

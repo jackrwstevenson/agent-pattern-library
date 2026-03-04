@@ -6,7 +6,7 @@ If you work with AI coding agents and have found patterns that belong here, I wo
 
 ## Using this site
 
-Browse patterns using the **left sidebar**, which lists all 26 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
+Browse patterns using the **left sidebar**, which lists all 27 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
 
 Each pattern carries a **maturity badge** indicating how much confidence I have in it.
 
@@ -14,7 +14,7 @@ Each pattern carries a **maturity badge** indicating how much confidence I have 
 
 ### Categories
 
-The 26 patterns are organised into six categories:
+The 27 patterns are organised into six categories:
 
 | Category          | What it covers                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -95,6 +95,7 @@ These patterns address what happens when you push beyond single-agent constraint
 | [Autonomous Agent](patterns/autonomous-agent.md)     | Enable agents to select tasks from backlogs, monitor outcomes, and operate under defined values; moving beyond reactive prompting toward self-direction. | Identifies the prerequisites and scaling paradox: human review remains essential, shifting the bottleneck from scheduling to verification.           |
 | [Pyramid Summary](patterns/pyramid-summary.md)       | Build reversible multi-level summaries so agents can navigate between system overview and full source detail on demand.                                  | Enables comprehension of systems that exceed context limits through selective expansion rather than lossy compression.                               |
 | [Agent Memory Graph](patterns/agent-memory-graph.md) | Replace flat task files with dependency-aware graphs supporting safe multi-agent coordination and semantic compaction.                                   | Provides the coordination primitives (atomic claims, hash-based IDs, ready-state detection) that flat TODO files lack for parallel agent work.       |
+| [Federated Agent Network](patterns/federated-agent-network.md) | Connect independent agent systems through shared protocols and schemas, enabling cross-boundary collaboration without central orchestration. | Extends beyond single-orchestrator swarms to inter-system collaboration: sovereign nodes, portable identity, and progressive trust through Git-style federation. |
 
 ### Evolution
 
@@ -129,6 +130,7 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 - [Detached Agent](patterns/detached-agent.md) provides execution infrastructure with audit trails and security isolation
 - [Autonomous Agent](patterns/autonomous-agent.md) adds task selection and outcome monitoring on top of that infrastructure
 - [Agent Swarm](patterns/agent-swarm.md) scales through hierarchical coordination; planners decompose, workers execute
+- [Federated Agent Network](patterns/federated-agent-network.md) extends beyond a single orchestrator: independent systems collaborate through shared protocols
 - [Deterministic Orchestration](patterns/deterministic-orchestration.md) enforces that agents control _what they produce_, not _what phase comes next_
 
 ### Memory and observability
