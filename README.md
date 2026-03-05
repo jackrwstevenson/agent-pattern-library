@@ -6,7 +6,7 @@ If you work with AI coding agents and have found patterns that belong here, I wo
 
 ## Using this site
 
-Browse patterns using the **left sidebar**, which lists all 27 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
+Browse patterns using the **left sidebar**, which lists all 31 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
 
 Each pattern carries a **maturity badge** indicating how much confidence I have in it.
 
@@ -14,7 +14,7 @@ Each pattern carries a **maturity badge** indicating how much confidence I have 
 
 ### Categories
 
-The 27 patterns are organised into six categories:
+The 31 patterns are organised into six categories:
 
 | Category          | What it covers                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -61,6 +61,8 @@ These patterns structure how agents perform work, compensating for the limitatio
 | [Skills Library](patterns/skills-library.md)                           | Package procedures as executable skills that agents follow to perform tasks consistently, the HOW of your organisation.                                               | Transforms tribal knowledge into repeatable workflows; agents execute these skills rather than improvising each time.                                                                   |
 | [Digital Twin](patterns/digital-twin.md)                               | Clone the observable behaviour of third-party dependencies into local replicas for deterministic, high-volume testing.                                                | Moves beyond hand-written mocks to behavioural replicas validated against the real service, giving agents a fast, reliable integration test target.                                     |
 | [Deterministic Orchestration](patterns/deterministic-orchestration.md) | Control workflow progression through deterministic hooks and pipelines, not agent reasoning; let agents reason freely only within bounded execution steps.            | Various independent teams converged on the same conclusion: agents should never decide what phase comes next. Deterministic control, creative execution.                                |
+| [Persistent Loop](patterns/persistent-loop.md)                         | Run an agent in a loop until it can truthfully declare completion, with state persisted through files and honesty enforcement at the exit gate.                       | Sidesteps upfront task decomposition entirely: the agent runs repeatedly with the same prompt, picking up where it left off by reading its own previous output from the file system.    |
+| [Adversarial Agents](patterns/adversarial-agents.md)                   | Set multiple agents on the same problem with competing hypotheses, using structured debate to fight anchoring bias and converge on stronger conclusions.             | Structurally eliminates anchoring bias by making agents challenge each other's findings rather than asking a single agent to argue against itself.                                      |
 
 ### Safety
 
@@ -72,6 +74,7 @@ These patterns control and validate agent output to meet compliance, safety, and
 | [Post-Inference Validation](patterns/post-inference-validation.md) | Place an independent validation pipeline after inference with deterministic rules, PII re-detection, contextual verification, risk scoring, and escalation.    | Runs outside the model host to preserve separation of concerns; an auditable pipeline with immutable logs and policy versioning satisfies regulatory expectations. |
 | [Validation Constraint](patterns/validation-constraint.md)         | Validate agent output through externally observable behaviour (tests, monitoring) rather than line-by-line code review.                                        | Treats generated code like ML model weights: opaque internals validated through outputs, letting automated checks scale with agent throughput.                     |
 | [Structural Constraint](patterns/structural-constraint.md)         | Use custom linters, structural tests, and enforced boundaries to constrain the architectural shape of generated code, ensuring it fits the system.             | Functional tests validate behaviour; structural constraints validate form. Constraining the solution space beats maximising flexibility.                           |
+| [Confidence-Gated Validation](patterns/confidence-gated-validation.md) | Use numeric confidence scores with calibrated thresholds and independent verification agents to filter findings, reducing false positives without losing real issues. | Moves beyond binary pass/fail to quantified certainty; a second agent validates each finding independently, catching context-dependent false positives that prompt tuning cannot. |
 
 ### Observability
 
@@ -96,6 +99,7 @@ These patterns address what happens when you push beyond single-agent constraint
 | [Pyramid Summary](patterns/pyramid-summary.md)       | Build reversible multi-level summaries so agents can navigate between system overview and full source detail on demand.                                  | Enables comprehension of systems that exceed context limits through selective expansion rather than lossy compression.                               |
 | [Agent Memory Graph](patterns/agent-memory-graph.md) | Replace flat task files with dependency-aware graphs supporting safe multi-agent coordination and semantic compaction.                                   | Provides the coordination primitives (atomic claims, hash-based IDs, ready-state detection) that flat TODO files lack for parallel agent work.       |
 | [Federated Agent Network](patterns/federated-agent-network.md) | Connect independent agent systems through shared protocols and schemas, enabling cross-boundary collaboration without central orchestration. | Extends beyond single-orchestrator swarms to inter-system collaboration: sovereign nodes, portable identity, and progressive trust through Git-style federation. |
+| [Tiered Model Routing](patterns/tiered-model-routing.md)       | Match model capability and cost to each step in a workflow, using cheap models for simple decisions and expensive models for deep reasoning.   | Most workflow steps don't need frontier reasoning; tiered routing cuts cost substantially while preserving quality where it matters.                              |
 
 ### Evolution
 
@@ -132,6 +136,9 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 - [Agent Swarm](patterns/agent-swarm.md) scales through hierarchical coordination; planners decompose, workers execute
 - [Federated Agent Network](patterns/federated-agent-network.md) extends beyond a single orchestrator: independent systems collaborate through shared protocols
 - [Deterministic Orchestration](patterns/deterministic-orchestration.md) enforces that agents control _what they produce_, not _what phase comes next_
+- [Persistent Loop](patterns/persistent-loop.md) provides a simpler alternative when upfront decomposition is premature: repeat until done, with state in files
+- [Adversarial Agents](patterns/adversarial-agents.md) puts multiple agents on the _same_ problem with competing hypotheses, where [Agent Swarm](patterns/agent-swarm.md) puts agents on _different_ tasks
+- [Tiered Model Routing](patterns/tiered-model-routing.md) optimises cost across any multi-agent workflow by matching model capability to each step's cognitive demands
 
 ### Memory and observability
 
@@ -151,7 +158,7 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 
 ### Safety and compliance
 
-[Runtime Guardrails](patterns/runtime-guardrails.md) prevents problematic output at generation time. [Post-Inference Validation](patterns/post-inference-validation.md) catches what gets through. Together they provide defence in depth for content. For code, [Validation Constraint](patterns/validation-constraint.md) and [Structural Constraint](patterns/structural-constraint.md) play equivalent roles.
+[Runtime Guardrails](patterns/runtime-guardrails.md) prevents problematic output at generation time. [Post-Inference Validation](patterns/post-inference-validation.md) catches what gets through. [Confidence-Gated Validation](patterns/confidence-gated-validation.md) extends validation from deterministic rules to agent-based verification with calibrated confidence scoring. Together they provide defence in depth for content. For code, [Validation Constraint](patterns/validation-constraint.md) and [Structural Constraint](patterns/structural-constraint.md) play equivalent roles.
 
 ### Codebase health
 
