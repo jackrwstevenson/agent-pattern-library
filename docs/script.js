@@ -16,6 +16,8 @@ export const PATTERN_IDS = [
   "throwaway-spike",
   "skills-library",
   "deterministic-orchestration",
+  "persistent-loop",
+  "adversarial-agents",
   "runtime-guardrails",
   "validation-constraint",
   "structural-constraint",
@@ -24,6 +26,7 @@ export const PATTERN_IDS = [
   "digital-twin",
   "session-checkpoint",
   "post-inference-validation",
+  "confidence-gated-validation",
   "context-bypass",
   "detached-agent",
   "agent-swarm",
@@ -31,6 +34,7 @@ export const PATTERN_IDS = [
   "pyramid-summary",
   "agent-memory-graph",
   "federated-agent-network",
+  "tiered-model-routing",
   "golden-path-anchor",
   "regen",
   "spec-library",
@@ -70,6 +74,8 @@ export const stripFrontmatter = (text) =>
 
 export const isPattern = (patterns, id) => patterns.some((p) => p.id === id);
 
+const MATURITY_ORDER = { adopt: 0, trial: 1, assess: 2, hold: 3 };
+
 export const renderSidebar = (patterns, currentId, headings = []) => {
   const grouped = {};
   patterns.forEach((p) => {
@@ -83,7 +89,12 @@ export const renderSidebar = (patterns, currentId, headings = []) => {
       <div class="sidebar-section">
         <div class="sidebar-category">${c}</div>
         <ul>
-          ${grouped[c]
+          ${[...grouped[c]]
+            .sort(
+              (a, b) =>
+                (MATURITY_ORDER[a.maturity] ?? 99) -
+                (MATURITY_ORDER[b.maturity] ?? 99),
+            )
             .map((p) => {
               const isActive = p.id === currentId;
               const headingsHtml =

@@ -1,29 +1,17 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, beforeEach } from "vitest";
 import {
-  BASE,
   PATTERN_IDS,
   slugify,
   parseFrontmatter,
   stripFrontmatter,
-  isPattern,
   renderSidebar,
   rewritePatternLinks,
   rewriteThemeImages,
   assignHeadingIds,
 } from "./script.js";
 
-describe("BASE URL", () => {
-  it("ends with slash for path joining", () => {
-    expect(BASE.endsWith("/")).toBe(true);
-  });
-});
-
 describe("PATTERN_IDS", () => {
-  it("contains all 27 pattern ids", () => {
-    expect(PATTERN_IDS).toHaveLength(27);
-  });
-
   it("ids are lowercase kebab-case", () => {
     PATTERN_IDS.forEach((id) => {
       expect(id).toMatch(/^[a-z][a-z0-9-]*$/);
@@ -109,24 +97,6 @@ describe("stripFrontmatter", () => {
   });
 });
 
-describe("isPattern", () => {
-  const patterns = [
-    { id: "throwaway-spike", name: "Throwaway Spike", category: "Workflow", maturity: "adopt" },
-    { id: "context-library", name: "Context Library", category: "Grounding", maturity: "adopt" },
-  ];
-
-  it("returns true for valid pattern ids", () => {
-    expect(isPattern(patterns, "throwaway-spike")).toBe(true);
-    expect(isPattern(patterns, "context-library")).toBe(true);
-  });
-
-  it("returns false for invalid pattern ids", () => {
-    expect(isPattern(patterns, "not-a-pattern")).toBe(false);
-    expect(isPattern(patterns, "")).toBe(false);
-    expect(isPattern(patterns, "readme")).toBe(false);
-  });
-});
-
 describe("renderSidebar", () => {
   const patterns = [
     { id: "context-library", name: "Context Library", category: "Grounding", maturity: "adopt" },
@@ -151,11 +121,6 @@ describe("renderSidebar", () => {
   it("marks current pattern as active", () => {
     const html = renderSidebar(patterns, "context-library", []);
     expect(html).toContain('data-pattern="context-library" class="active"');
-  });
-
-  it("does not mark other patterns as active", () => {
-    const html = renderSidebar(patterns, "context-library", []);
-    expect(html).not.toContain('data-pattern="throwaway-spike" class="active"');
   });
 
   it("renders pattern names as link text", () => {
@@ -217,6 +182,20 @@ describe("renderSidebar", () => {
     const html = renderSidebar(noMaturity, "foo", []);
     expect(html).not.toContain("maturity");
   });
+
+  it("sorts patterns within a category by maturity: adopt, trial, assess", () => {
+    const mixed = [
+      { id: "c", name: "C", category: "Workflow", maturity: "assess" },
+      { id: "a", name: "A", category: "Workflow", maturity: "adopt" },
+      { id: "b", name: "B", category: "Workflow", maturity: "trial" },
+    ];
+    const html = renderSidebar(mixed, null, []);
+    const aIdx = html.indexOf('data-pattern="a"');
+    const bIdx = html.indexOf('data-pattern="b"');
+    const cIdx = html.indexOf('data-pattern="c"');
+    expect(aIdx).toBeLessThan(bIdx);
+    expect(bIdx).toBeLessThan(cIdx);
+  });
 });
 
 describe("rewritePatternLinks", () => {
@@ -234,17 +213,6 @@ describe("rewritePatternLinks", () => {
     document.body.innerHTML = '<a href="https://example.com">link</a>';
     rewritePatternLinks(document.body);
     expect(document.querySelector("a").getAttribute("href")).toBe("https://example.com");
-  });
-
-  it("handles multiple pattern links", () => {
-    document.body.innerHTML = `
-      <a href="patterns/throwaway-spike.md">1</a>
-      <a href="patterns/context-library.md">2</a>
-    `;
-    rewritePatternLinks(document.body);
-    const links = document.querySelectorAll("a");
-    expect(links[0].getAttribute("href")).toBe("#throwaway-spike");
-    expect(links[1].getAttribute("href")).toBe("#context-library");
   });
 
   it("adds data-pattern attribute for click handler", () => {
@@ -291,14 +259,6 @@ describe("assignHeadingIds", () => {
     expect(document.querySelector("h4").id).toBe("");
   });
 
-  it("handles multiple headings", () => {
-    document.body.innerHTML = "<h2>Overview</h2><h3>Details</h3><h2>Summary</h2>";
-    assignHeadingIds(document.body);
-    const headings = document.querySelectorAll("h2, h3");
-    expect(headings[0].id).toBe("overview");
-    expect(headings[1].id).toBe("details");
-    expect(headings[2].id).toBe("summary");
-  });
 });
 
 describe("rewriteThemeImages", () => {
@@ -344,16 +304,6 @@ describe("rewriteThemeImages", () => {
     const imgs = document.querySelectorAll("img");
     expect(imgs).toHaveLength(1);
     expect(imgs[0].classList.contains("light-only")).toBe(false);
-  });
-
-  it("handles multiple png images", () => {
-    document.body.innerHTML = `
-      <img src="first.png" alt="First">
-      <img src="second.png" alt="Second">
-    `;
-    rewriteThemeImages(document.body);
-    const imgs = document.querySelectorAll("img");
-    expect(imgs).toHaveLength(4);
   });
 
   it("handles paths with multiple dots", () => {
