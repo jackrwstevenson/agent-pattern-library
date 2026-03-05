@@ -7,6 +7,12 @@ maturity: assess
 
 # Session Checkpoint
 
+> **In plain terms:** When an AI agent works on your code, the reasoning behind its changes disappears when the session ends. Session checkpoints save restore points throughout, stored on a separate branch, so you can roll back, review how code was produced, or branch in a different direction.
+>
+> **What is it?** Capturing AI agent sessions as a sequence of checkpoints with full context - prompts, responses, file changes - stored on shadow branches for rollback and review.
+> **What's in it for you?** Safe experimentation with rollback capability, plus team visibility into how agent-assisted code was produced.
+> **What are the trade-offs?** Operational complexity from shadow branch management and accumulating session metadata.
+
 AI agent sessions are surprisingly opaque. When an agent makes a destructive change, recovery means manual git archaeology. The chain of thought behind code changes disappears when the session ends. You cannot revisit an earlier point in a session to branch in a different direction. And team members reviewing agent-assisted code have no visibility into how it was produced.
 
 Agent output looks like any other commit, but the process that created it is fundamentally different from human development and worth preserving.

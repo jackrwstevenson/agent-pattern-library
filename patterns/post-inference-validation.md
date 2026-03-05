@@ -7,6 +7,12 @@ maturity: trial
 
 # Post-Inference Validation
 
+> **In plain terms:** Even with filters during generation, some problematic output slips through. This pattern adds an independent checking layer between the AI and the user - deterministic rules, PII re-detection, risk scoring, and escalation to humans when needed.
+>
+> **What is it?** An independent validation pipeline after AI generation with deterministic rules, risk scoring, and escalation workflows, producing an auditable record of every decision.
+> **What's in it for you?** Demonstrable, auditable proof that output was validated - essential for regulated industries and high-stakes applications.
+> **What are the trade-offs?** Adds latency and requires maintaining validation rules, detection models, and staffed review queues.
+
 Runtime guardrails reduce but cannot eliminate problematic output. No single set of filters catches every failure mode; novel phrasings, edge cases, and context-dependent risks slip through. Regulated industries need demonstrable, auditable proof that output was validated, not just that controls were configured. Validation logic coupled to the model host is harder to audit, version, and update independently. And without structured validation records, organisations cannot explain why a given output was surfaced or blocked.
 
 A second, independent validation layer is needed between inference and the user.

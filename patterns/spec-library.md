@@ -7,6 +7,12 @@ maturity: trial
 
 # Spec Library
 
+> **In plain terms:** Traditional libraries ship code in one language. A spec library ships the specification and tests instead, letting AI generate a correct implementation in any language on demand. The spec is the product; the code is disposable.
+>
+> **What is it?** Distributing specifications and test suites rather than code, with AI generating language-specific implementations on demand.
+> **What's in it for you?** Universal language availability with zero cross-language maintenance - one spec serves every platform.
+> **What are the trade-offs?** Requires rigorous specifications; non-functional properties like performance and security are less predictable in generated code.
+
 Traditional software distribution treats code as the primary artefact, and this creates several friction points. A library exists for Python but not Rust, leaving developers to write their own or go without. Each language variant requires separate upkeep, bug fixes, and version management. Ports and reimplementations slowly diverge from the original's behaviour. And downloaded code may clash with your environment, style guide, or dependency constraints.
 
 The root issue is that we distribute implementations when what we actually need is behaviour.

@@ -7,6 +7,12 @@ maturity: adopt
 
 # Context Library
 
+> **In plain terms:** When AI writes code for your organisation, it doesn't know your standards, existing components, or past decisions. It's like hiring a brilliant contractor who never read the company handbook. A context library gives the AI the same reference material you'd give a new team member.
+>
+> **What is it?** A curated collection of your organisation's standards, architecture, and domain knowledge that AI agents consult before generating anything.
+> **What's in it for you?** AI output that fits your organisation rather than looking like it was written by a capable outsider.
+> **What are the trade-offs?** Requires upfront curation effort and ongoing maintenance to stay useful.
+
 One of the most common frustrations I hear from teams adopting AI agents is that the output looks great but doesn't _fit_. The agent ignores your coding standards, reinvents solutions the team has already built, and misses existing components entirely. It's like hiring a brilliant contractor who refuses to read the company wiki.
 
 The result is code that works in isolation but clashes with the broader system. Without context, agents operate as capable outsiders who don't know what "good" looks like in your organisation.

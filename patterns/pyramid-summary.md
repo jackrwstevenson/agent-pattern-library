@@ -7,6 +7,12 @@ maturity: assess
 
 # Pyramid Summary
 
+> **In plain terms:** AI can't hold an entire large system in its working memory at once. Pyramid summaries compress the system into layers - a paragraph at the top, module summaries in the middle, full detail at the bottom. The AI starts zoomed out and drills in only where needed.
+>
+> **What is it?** Reversible multi-level summaries that let agents navigate between system overview and fine-grained detail without exhausting their context window.
+> **What's in it for you?** Agents can reason about systems far larger than their working memory, with precision where it matters.
+> **What are the trade-offs?** Bad summaries at upper layers misdirect exploration; building the pyramid takes upfront time and tokens.
+
 Agents working with large codebases or documents face a fundamental tension. Loading everything gives accuracy but exhausts token limits. Compressing to fit discards the fine-grained information needed for precision. And once summarised, the original detail is gone from context and cannot be recovered without re-reading the source.
 
 This is different from [Context Bypass](context-bypass.md), which delegates to external tools. Here the problem is that the agent needs to hold a mental model of a large system in its own context while retaining the ability to drill into specifics.

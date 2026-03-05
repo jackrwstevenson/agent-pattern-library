@@ -7,6 +7,12 @@ maturity: trial
 
 # Confidence-Gated Validation
 
+> **In plain terms:** AI code review finds lots of "issues" - but many are false alarms. After enough false alarms, teams stop reading. This pattern assigns confidence scores to each finding, filters out low-confidence noise, and sends surviving findings to an independent verifier before bothering a human.
+>
+> **What is it?** Numeric confidence scoring with calibrated thresholds, plus independent verification agents that validate each finding before it reaches a human reviewer.
+> **What's in it for you?** Dramatically fewer false positives in AI-powered code review, rebuilding trust in automated findings.
+> **What are the trade-offs?** Roughly doubles compute cost for review, and calibrating the confidence scale requires iteration.
+
 Agent-powered code review has a false positive problem. An agent scanning a pull request will identify dozens of potential issues, many of which are not actually problems. Style preferences reported as bugs. Pre-existing code flagged as if the author introduced it. Patterns that look wrong in isolation but are correct in context. The volume of noise erodes trust quickly: after dismissing the tenth false alarm, reviewers stop reading the agent's output entirely.
 
 The standard response is to tune the prompt: add "only report real bugs" or "be conservative." This helps marginally but does not solve the problem, because confidence is not binary. An agent may be 95% sure about a null pointer dereference and 40% sure about a naming convention violation. Treating both findings equally wastes human attention on the latter while correctly surfacing the former.

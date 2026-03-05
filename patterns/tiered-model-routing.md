@@ -7,6 +7,12 @@ maturity: trial
 
 # Tiered Model Routing
 
+> **In plain terms:** Using the most powerful (and expensive) AI model for every task is like hiring a brain surgeon to check your temperature. This pattern matches model capability to task complexity - cheap models for simple checks, expensive models for deep reasoning - cutting costs without sacrificing quality where it matters.
+>
+> **What is it?** Assigning AI model tiers (fast, reasoning, deep) to each workflow step based on cognitive demands rather than a blanket quality preference.
+> **What's in it for you?** Significantly lower AI costs with faster responses, without sacrificing quality on the tasks that actually need deep reasoning.
+> **What are the trade-offs?** Risk of under-provisioning where a step gets too cheap a model and quality degrades silently; tier assignments need periodic review.
+
 The default approach to model selection is to pick the most capable model and use it for everything. This is wasteful. A code review pipeline that uses a frontier model to check whether a pull request is already closed is spending serious money on a boolean question. Conversely, a pipeline that uses a cheap model to find subtle concurrency bugs is saving money it will spend later on missed defects.
 
 The mismatch matters more than it first appears. Cost scales linearly with usage, but capability requirements vary enormously across the steps of a single workflow. A gate check ("is this PR a draft?") needs pattern matching. An architectural review needs genuine reasoning. Treating both the same is like hiring a structural engineer to check whether the front door is locked.

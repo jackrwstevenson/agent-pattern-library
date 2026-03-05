@@ -7,6 +7,12 @@ maturity: assess
 
 # Federated Agent Network
 
+> **In plain terms:** When independent teams each run their own AI agent systems, central coordination doesn't work - no one wants to cede control. Federation connects these independent systems through shared protocols, like how email works across providers. Each team keeps its own tools and governance.
+>
+> **What is it?** Independent agent systems collaborating through shared schemas and Git-style fork-and-merge semantics, without central orchestration.
+> **What's in it for you?** Cross-boundary collaboration without surrendering control of your tools, data, or governance to a central platform.
+> **What are the trade-offs?** Schema evolution, trust bootstrapping, and anti-fraud are all harder in federated systems than centralised ones.
+
 [Agent Swarm](agent-swarm.md) addresses an emerging problem: how to coordinate many agents working on the same codebase under a single team's control. A central orchestrator decomposes work, assigns it, and manages integration. This works well when one party has authority over the entire system.
 
 What happens when independent teams, each running their own agent systems, want to collaborate on shared work? The central orchestrator model breaks down here, for the same reason that a single enterprise service bus breaks down across organisational boundaries. No single party has authority. No single system can hold the full context. And no one wants to cede control of their tooling to someone else.

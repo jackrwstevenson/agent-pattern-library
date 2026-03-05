@@ -7,6 +7,12 @@ maturity: assess
 
 # Autonomous Agent
 
+> **In plain terms:** Today's AI coding tools wait for instructions. Autonomous agents go further - scanning backlogs, selecting tasks based on priority, monitoring whether their work actually helped, and operating under defined values. The human shifts from scheduler to reviewer.
+>
+> **What is it?** Agents that select their own tasks from backlogs, monitor outcomes, and operate under defined organisational values, with human review as a hard constraint.
+> **What's in it for you?** Reduced scheduling overhead, with AI handling task selection so humans focus on review and strategic decisions.
+> **What are the trade-offs?** Steep prerequisites; human review remains the bottleneck, limiting the throughput gains that autonomy promises.
+
 Current AI coding tools are reactive: humans prompt, agents execute. The human remains the scheduler, deciding what gets worked on and when. This creates bottlenecks. Every task requires someone to assign it. The agent doesn't know what's burning versus what can wait. And the agent can't tell whether its work is actually helping.
 
 The same reactive pattern plagues maintenance and operations: dependency rot accumulates unnoticed, releases follow calendars rather than evidence, and governance is bolted on rather than built in.

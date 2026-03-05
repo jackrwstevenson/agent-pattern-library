@@ -7,6 +7,12 @@ maturity: assess
 
 # Adversarial Agents
 
+> **In plain terms:** A single AI investigating a problem finds one plausible answer and stops looking - like a detective who arrests the first suspect. This pattern sets multiple agents on the same problem with different starting theories, forcing them to challenge each other before reaching conclusions.
+>
+> **What is it?** Multiple agents investigating the same problem from competing hypotheses, with structured debate to eliminate anchoring bias.
+> **What's in it for you?** Stronger conclusions on genuinely ambiguous problems, with fewer blind spots from premature closure.
+> **What are the trade-offs?** Token cost scales with the number of agents; on clear-cut problems the debate is pure overhead.
+
 A single agent investigating a problem finds a plausible explanation and stops looking. This is not a bug in the model; it is how inference works. The first coherent theory anchors all subsequent reasoning. Evidence that supports the theory is noticed; evidence that contradicts it is explained away or ignored. The phenomenon is well-documented in human cognition, where it is called anchoring bias. In agents, the effect is more pronounced because there is no colleague to say "have you considered the alternative?"
 
 The usual mitigation is prompting: "consider multiple hypotheses" or "play devil's advocate with yourself." This helps marginally. But asking a single reasoning process to genuinely argue against its own conclusion is like asking someone to tickle themselves. The adversarial pressure is simulated, not real.

@@ -7,6 +7,12 @@ maturity: adopt
 
 # Skills Library
 
+> **In plain terms:** Your organisation has established ways of doing things - how to review code, respond to incidents, design APIs. AI agents don't know these procedures unless you teach them. A skills library packages your "how we do it here" into reusable instructions agents follow consistently.
+>
+> **What is it?** Organisational procedures packaged as portable, executable instructions that AI agents load and follow.
+> **What's in it for you?** Consistent execution of your processes across teams, with improvements deployed once and applied everywhere.
+> **What are the trade-offs?** Upfront investment creating skills and ongoing effort keeping them current.
+
 Organisations have procedures that should be followed consistently, but agents don't know them. Each team prompts differently, producing divergent approaches to the same task. "How we do things" lives in senior engineers' heads or scattered prompt libraries. Teams rediscover the same pitfalls because lessons aren't encoded into workflows.
 
 The gap between "how we should do X" and "how agents actually do X" widens as AI agents become common across an organisation.

@@ -7,6 +7,12 @@ maturity: assess
 
 # Digital Twin
 
+> **In plain terms:** When AI agents write code that talks to external services, testing is expensive, slow, and unreliable. A digital twin captures how the real service behaves, then replays that behaviour locally - giving agents a fast, free, controllable test double.
+>
+> **What is it?** A local replica of a third-party dependency's behaviour, built from observed real interactions rather than developer assumptions.
+> **What's in it for you?** Deterministic, high-speed integration testing at any volume without API costs or flaky external dependencies.
+> **What are the trade-offs?** Substantial upfront effort to capture and model behaviour, plus ongoing maintenance to prevent drift.
+
 AI agents writing integration code need to test against external dependencies - APIs, databases, cloud services - but the reality of doing so is painful. Real APIs charge per call, making testing at scale expensive. External services return different results at different times, producing flaky tests. Third-party services go down, blocking development entirely. Edge cases like error conditions and timeouts are difficult to reproduce. And network calls slow test suites to the point where thorough testing becomes impractical.
 
 Mocking is the traditional answer, but hand-written mocks drift from real behaviour. You end up testing the mock rather than the integration.

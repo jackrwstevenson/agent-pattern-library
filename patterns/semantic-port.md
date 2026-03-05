@@ -7,6 +7,12 @@ maturity: assess
 
 # Semantic Port
 
+> **In plain terms:** Translating code between languages usually produces output that compiles but reads like it was written by a foreigner. Semantic porting uses AI to understand what the code does (not just how), then generates idiomatic code a native developer would recognise.
+>
+> **What is it?** AI-driven code translation that preserves intent and produces idiomatic output in the target language, rather than mechanical syntax conversion.
+> **What's in it for you?** Cross-language ports that read like native code, completed in minutes rather than days.
+> **What are the trade-offs?** Behavioural equivalence must be verified through tests, not assumed; subtle language differences can cause silent changes.
+
 Porting code between languages or frameworks is common but painful. Manual translation is slow and error-prone. Syntax-level tools like transpilers and converters produce technically correct but unidiomatic output. Framework conventions differ profoundly: a React component and a SwiftUI view solve the same problem with entirely different patterns. And when the source continues to evolve, the port must track changes continuously.
 
 Traditional automated translation treats code as syntax to be converted. The result compiles but doesn't read like code a native developer would write.

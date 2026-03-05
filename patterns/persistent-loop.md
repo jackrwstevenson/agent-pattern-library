@@ -7,6 +7,12 @@ maturity: assess
 
 # Persistent Loop
 
+> **In plain terms:** Some tasks are too complex for a single AI pass but too unclear to plan upfront. This pattern runs the agent repeatedly with the same instructions, letting it pick up where it left off by reading its own files. A verification gate checks whether it's actually done.
+>
+> **What is it?** Running an agent in a loop, with each iteration starting fresh but discovering progress from previous iterations through files, until a verifiable completion condition is met.
+> **What's in it for you?** Complex tasks complete without upfront decomposition, with each iteration getting a fresh context window.
+> **What are the trade-offs?** Risk of repeated work across iterations and wasted compute; tasks that don't converge can burn resources.
+
 Most agent workflows assume a single pass: the agent receives a task, does work, and finishes. When the task is too complex to complete in one pass, the usual response is either to break it into subtasks (adding orchestration complexity) or to let the agent run longer (trusting it to manage its own progress). Neither works well. Subtask decomposition requires understanding the task upfront, which is often the hard part. And long-running agents degrade: they lose track of earlier decisions, repeat work, and drift from the goal.
 
 There is a simpler option. Run the agent repeatedly with the same prompt, letting it pick up where it left off by reading its own previous output from files. Each iteration starts fresh with full context capacity, but the accumulated work persists in the file system.

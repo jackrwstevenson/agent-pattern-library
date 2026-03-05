@@ -7,6 +7,12 @@ maturity: adopt
 
 # Authoritative Source Anchor
 
+> **In plain terms:** AI agents working on standards-compliant code often guess at specifications rather than citing them - producing confident-sounding output that's subtly wrong. Embedding the actual specs in your repository lets agents cite rather than recall, dramatically improving accuracy.
+>
+> **What is it?** Embedding authoritative external specifications directly in the repository so agents reference the real thing instead of relying on memory.
+> **What's in it for you?** Fewer hallucinated standards, longer autonomous runs, and an audit trail from decisions to specific spec sections.
+> **What are the trade-offs?** Increases repository size and requires keeping embedded specs current.
+
 AI agents working on standards-compliant code face a subtle problem: they must make decisions about specifications they weren't trained on, or can't recall accurately. Without access to the canonical source, agents hallucinate specifications with alarming confidence, generate code based on outdated understanding, and leave no audit trail for verification.
 
 The result is either unreliable output or frustratingly short autonomous runs punctuated by constant human checking.

@@ -7,6 +7,12 @@ maturity: adopt
 
 # Code Archaeologist
 
+> **In plain terms:** When you replace a legacy system, critical business rules exist only in the code - written by people long gone. An AI agent can excavate that knowledge, turning implicit rules into explicit documentation that humans curate before building anything new.
+>
+> **What is it?** Using AI to reverse-engineer legacy codebases, extracting hidden business rules and constraints into a document humans can curate.
+> **What's in it for you?** Dramatically lower risk on legacy replacement projects by surfacing what the old system actually does before you build the new one.
+> **What are the trade-offs?** Front-loaded effort before any new code exists, and some knowledge will only exist in people's heads.
+
 Replacing legacy systems is one of the riskiest things a team can do, and the reason is almost always the same: critical knowledge exists only in the code. Business rules were encoded by developers long gone. Edge cases are handled by accident rather than design. Workarounds for limitations that no longer exist sit alongside undocumented integration points that you only discover when things break.
 
 Teams replacing legacy systems tend to fall into one of two traps. They either accidentally lose important behaviour, or they faithfully recreate constraints that no longer serve any purpose. Without explicit analysis, you inherit technical decisions from a different era without knowing which ones still matter.

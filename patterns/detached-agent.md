@@ -7,6 +7,12 @@ maturity: trial
 
 # Detached Agent
 
+> **In plain terms:** Traditional AI coding tools require a local development environment and your full attention while they work. Detached agents flip this - you describe a task in a GitHub issue, a sandboxed cloud agent picks it up and opens a PR. You review when you're ready.
+>
+> **What is it?** Using issue trackers as task queues for AI agents executing in sandboxed cloud environments, decoupling the interface from execution.
+> **What's in it for you?** Asynchronous AI development accessible from anywhere, with security isolation from your local machine and credentials.
+> **What are the trade-offs?** Slow feedback loop when the agent misunderstands; each correction requires another full agent run.
+
 Traditional AI coding assistants impose constraints that create friction for many workflows. They require IDE installation: VS Code, Cursor, or specific editors. They need a local development environment with dependencies, API keys, and compute resources. They demand synchronous interaction while the agent works. And they run code with full access to your machine, credentials, and network, which Simon Willison has aptly termed the [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
 
 This creates friction for quick tasks, excludes team members without full development setups, and introduces security risks that are hard to mitigate.

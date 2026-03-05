@@ -7,6 +7,12 @@ maturity: trial
 
 # Validation Constraint
 
+> **In plain terms:** AI generates code faster than humans can review it, and line-by-line review doesn't scale. This pattern shifts validation from "read every line" to "do the tests pass?" - treating AI-generated code like a black box verified through its observable behaviour.
+>
+> **What is it?** Validating AI-generated code through tests, type checkers, and monitoring rather than line-by-line human review.
+> **What's in it for you?** Review speed matches generation speed, with humans focusing on test quality and architecture rather than reading every line.
+> **What are the trade-offs?** Only as strong as your test suite; requires mature test infrastructure before it's safe to adopt.
+
 Traditional code review doesn't scale to AI-generated code, and the reasons are worth understanding clearly. Agents produce code faster than humans can meaningfully review it. Reviewing unfamiliar code line-by-line is slow and error-prone. AI-generated code often looks clean and well-structured, creating a dangerous illusion of correctness. And the sheer volume of agent output degrades review quality over time.
 
 The instinct is to read the code carefully, but this approach collapses when agents produce substantial output in minutes.

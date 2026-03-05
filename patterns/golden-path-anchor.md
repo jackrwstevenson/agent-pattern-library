@@ -7,6 +7,12 @@ maturity: adopt
 
 # Golden Path Anchor
 
+> **In plain terms:** Organisations maintain reference applications showing best practice, but once teams fork them, codebases diverge. AI agents can continuously compare your projects against the reference, detect drift, and open PRs to bring them back into alignment.
+>
+> **What is it?** AI-driven continuous alignment of codebases with reference implementations through automated drift detection and contextual remediation PRs.
+> **What's in it for you?** Best practices propagate automatically across all projects, not just new ones.
+> **What are the trade-offs?** The reference becomes the critical path - poor quality causes fleet-wide harm; legitimate variations need explicit exception handling.
+
 Organisations maintain reference applications - templates, starter kits, golden paths - that embody best practices. These references work well for new projects but fail to influence existing ones. Once teams fork templates, codebases diverge over time. Propagating template improvements to existing projects is tedious and error-prone. And the reference app evolves while downstream projects don't follow.
 
 The result is that "best practices" exist only in documentation and new projects, while the bulk of the codebase operates on outdated patterns.

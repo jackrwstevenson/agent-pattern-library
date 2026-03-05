@@ -7,6 +7,12 @@ maturity: assess
 
 # Agent Swarm
 
+> **In plain terms:** Running many AI agents in parallel sounds powerful, but without coordination they create merge conflicts, duplicate work, and break each other's changes. An agent swarm uses planning agents to decompose work into non-overlapping tasks that worker agents execute concurrently.
+>
+> **What is it?** A hierarchical structure where planning agents decompose work into non-overlapping tasks, and worker agents execute them in parallel with human review gates.
+> **What's in it for you?** Massive parallelism on large codebases, with engineers focused on review rather than implementation.
+> **What are the trade-offs?** Substantial infrastructure for orchestration, monitoring, and compute; integration failures are common without rigorous guardrails.
+
 Scaling from one agent to many creates coordination problems that are harder than they first appear. Multiple agents working on the same codebase simultaneously produce merge conflicts that require manual resolution. Without visibility into what others are doing, agents solve the same problems independently. And independently correct changes combine into broken states at integration time.
 
 The naive approach of "just run more agents" quickly degrades. Conflict resolution and rework consume the time gained from parallelism. Beyond a handful of concurrent agents, throughput plateaus or declines.

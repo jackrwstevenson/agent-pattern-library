@@ -7,6 +7,12 @@ maturity: trial
 
 # Generation Memory
 
+> **In plain terms:** In long AI sessions, the system silently discards earlier messages to make room for new ones. The agent forgets what it's already done and starts repeating itself. A generation memory is a simple progress log the agent writes to and reads from, surviving these memory compactions.
+>
+> **What is it?** An external progress log that the agent writes to during work and reads to recover context after the system compresses earlier messages.
+> **What's in it for you?** Agents maintain coherence across long sessions instead of repeating work or contradicting earlier decisions.
+> **What are the trade-offs?** Small overhead per step; log quality depends on the agent's ability to summarise its own work accurately.
+
 Long agent sessions have a subtle failure mode that's easy to miss. Modern LLMs operate within finite context windows, and when a session grows long enough, the system compacts earlier messages to make room. This is necessary, but it means the agent silently loses awareness of work it has already completed.
 
 The symptoms are familiar to anyone who's run extended generation sessions. The agent re-implements a function it already wrote. It asks a question it already answered. It revisits a decision it already made. It loses track of which tasks are done and which remain. The context window has moved on, and the agent's working memory has moved on with it.

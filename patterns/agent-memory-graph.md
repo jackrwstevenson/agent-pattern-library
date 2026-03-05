@@ -7,6 +7,12 @@ maturity: assess
 
 # Agent Memory Graph
 
+> **In plain terms:** AI agents tracking tasks in flat to-do lists break down when work has dependencies, multiple agents run in parallel, or projects span many sessions. A memory graph replaces the flat list with a structured map of tasks, dependencies, and ownership.
+>
+> **What is it?** A structured graph replacing flat task files, with dependency tracking, collision-resistant IDs, hierarchical decomposition, and atomic task claiming for multi-agent work.
+> **What's in it for you?** Multiple agents working concurrently without conflicts, with automatic identification of what's actionable next.
+> **What are the trade-offs?** Adds infrastructure complexity that single-agent, single-session workflows don't need.
+
 Agents managing multi-step work typically use flat files - TODO.md, task lists - for memory. These work fine for a single agent on a small task. They break down as complexity grows.
 
 Flat lists cannot express "task B is blocked by task A." Sequential IDs collide when multiple agents work in parallel. Completed tasks accumulate, consuming context with irrelevant history. Two agents can claim the same task simultaneously. And subtasks lose their connection to parent goals.

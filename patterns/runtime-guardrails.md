@@ -7,6 +7,12 @@ maturity: adopt
 
 # Runtime Guardrails
 
+> **In plain terms:** AI models generate fluent text regardless of whether it's appropriate, safe, or compliant. Runtime guardrails are filters applied while the AI is generating - blocking harmful content, masking personal data, and preventing the AI from straying into high-risk topics.
+>
+> **What is it?** Layered controls applied during AI generation to block problematic output before it reaches users - topic restrictions, content filters, PII detection, and grounding checks.
+> **What's in it for you?** Prevention at generation time rather than detection after the fact, reducing liability and compliance risk.
+> **What are the trade-offs?** Each control adds latency, and overly aggressive filters block legitimate output.
+
 LLMs generate fluent, confident text regardless of whether the content is appropriate, safe, or compliant. Without active controls during inference, models freely discuss high-risk domains like financial advice and legal interpretation where incorrect output creates liability. They produce content that violates organisational policies. They reproduce personally identifiable information from context or training data without awareness of data handling obligations. And they confabulate assertions that sound authoritative but lack any basis in the provided context.
 
 Post-hoc validation catches some of these failures, but prevention at generation time is cheaper, safer, and reduces the volume of problematic output that downstream systems must handle.

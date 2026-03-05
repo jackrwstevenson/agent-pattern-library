@@ -7,6 +7,12 @@ maturity: adopt
 
 # Deterministic Orchestration
 
+> **In plain terms:** Letting AI agents decide what to do next sounds appealing but fails in practice - they skip steps, create loops, and lose track. This pattern uses hard-wired automation to control the workflow while letting agents reason freely within each step.
+>
+> **What is it?** Separating workflow control (deterministic hooks and scripts) from creative execution (agent reasoning), so progression through steps is guaranteed rather than hoped for.
+> **What's in it for you?** Reliable, auditable multi-step workflows that behave consistently regardless of which AI model is running.
+> **What are the trade-offs?** Requires explicit workflow design upfront; adds infrastructure that pure prompt-based approaches avoid.
+
 Every team I've studied that tried letting agents orchestrate themselves abandoned it. The pattern is remarkably consistent: it works on small demos, then collapses on real codebases. Agents skip steps, create cycles, get stuck in loops, and lose track of where they are in a multi-phase workflow. The more capable the model, the more confidently it goes off the rails.
 
 The instinct is understandable. If agents are good at reasoning, why not let them reason about what to do next? The answer is that workflow progression and creative execution are fundamentally different problems. One benefits from determinism; the other benefits from flexibility.

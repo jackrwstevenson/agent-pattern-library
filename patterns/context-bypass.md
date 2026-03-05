@@ -7,6 +7,12 @@ maturity: adopt
 
 # Context Bypass
 
+> **In plain terms:** AI has a limited working memory and can't process a 100,000-row spreadsheet or an entire codebase at once. Instead of cramming data into the AI, send the AI's question to a local tool that processes the full dataset and returns just the answer.
+>
+> **What is it?** Delegating data-intensive operations to local code APIs and returning only compact results to the AI, inverting the usual data flow.
+> **What's in it for you?** Processing arbitrarily large datasets with full accuracy at lower cost and higher speed.
+> **What are the trade-offs?** Requires building and maintaining local APIs; the AI must formulate queries correctly.
+
 LLM context windows have hard limits, but real-world tasks routinely exceed them. A spreadsheet with 100,000 rows won't fit in context. Reading an entire repository exhausts token limits before analysis begins. Legal contracts, research corpora, and server logs all present the same problem.
 
 The common workarounds fail in predictable ways. Truncation discards potentially critical information. Sampling misses patterns visible only in full data. Summarising first strips the fine-grained detail needed for accuracy. And agent API calls add wiring overhead, bloat parsing context, and increase token costs.

@@ -7,6 +7,12 @@ maturity: adopt
 
 # Throwaway Spike
 
+> **In plain terms:** Sometimes you just need to know if an idea works. AI agents can produce runnable prototypes in hours, but clean-looking output is dangerously easy to ship. This pattern lets teams explore fast while keeping throwaway code firmly separate from production.
+>
+> **What is it?** A structured approach to rapid AI-driven prototyping with explicit constraints that prevent accidental promotion to production.
+> **What's in it for you?** More ideas tested in less time, with clear go/no-go evidence for each.
+> **What are the trade-offs?** Clean AI output can hide gaps; strong norms needed to prevent spike code leaking into production.
+
 Traditional development practices - tests, code review, documentation - create overhead that makes sense for production code but actively hinders early-stage exploration. You end up spending time on code quality for experiments that may be discarded, over-thinking architecture for throwaway code, and building production-quality implementations for concepts that don't pan out.
 
 When an AI agent drives the spike, new risks appear alongside new opportunities. The agent can over-engineer or miss the target without a tightly scoped brief. Automated code may insert unsafe placeholders or attempt network calls. And the output that looks clean is easily copy-pasted into production, which is perhaps the most dangerous outcome of all.

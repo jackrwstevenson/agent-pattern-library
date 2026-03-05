@@ -7,6 +7,12 @@ maturity: trial
 
 # Garbage Collection Agent
 
+> **In plain terms:** AI-generated codebases accumulate entropy fast - stale documentation, dead code, architectural violations, inconsistencies between modules. Like garbage collection in a programming runtime, periodic agents sweep through and clean up, keeping the codebase healthy without expensive manual sprints.
+>
+> **What is it?** Periodic agents that sweep codebases for documentation drift, dead code, architectural violations, and inconsistencies, fixing low-risk issues automatically and flagging the rest.
+> **What's in it for you?** Continuous codebase health management instead of expensive periodic cleanup sprints.
+> **What are the trade-offs?** Infrastructure and compute costs for periodic sweeps; false positives waste human review time.
+
 AI agents generate code faster than humans can review it. Over time, this accumulation produces a familiar kind of rot: documentation drifts from implementation, dead code lingers because nobody is confident enough to remove it, architectural constraint violations creep in between CI runs, and inconsistencies multiply across modules that were generated in separate sessions with slightly different context.
 
 These problems aren't new. Every codebase accumulates entropy. But AI-generated codebases accumulate it faster, because the volume of output outpaces the human attention available to maintain it. The usual answer is periodic cleanup sprints, but those are expensive and infrequent, so debt compounds between them.

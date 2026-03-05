@@ -7,6 +7,12 @@ maturity: trial
 
 # Regen
 
+> **In plain terms:** Specifications and code drift from reality as standards evolve, dependencies update, and rules change. Instead of manually chasing updates, treat your specs and code as outputs that regenerate automatically when their inputs change - the AI drafts, humans review.
+>
+> **What is it?** Treating specifications and code as functions of their inputs - when a standard, requirement, or dependency changes, affected outputs regenerate down the chain.
+> **What's in it for you?** Systems stay aligned with evolving standards through incremental regeneration rather than expensive catch-up exercises.
+> **What are the trade-offs?** Requires dependency tracking tooling; frequent regeneration increases human review load.
+
 Traditional documentation rots. Teams write specs once, then watch them drift from reality until they're worse than useless. The same happens with AI-assisted development: agents produce code based on requirements that become stale as standards evolve, dependencies update, and business rules change.
 
 The maintenance burden compounds. Security standards tighten, but existing code isn't updated. New components become available, but old implementations don't adopt them. Domain models evolve, but specs reference outdated terminology. Best practices improve, but codebases fossilise around old patterns. Manual updates don't scale. Teams either fall behind or spend disproportionate effort keeping everything aligned.
