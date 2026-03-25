@@ -18,6 +18,8 @@ export const PATTERN_IDS = [
   "deterministic-orchestration",
   "persistent-loop",
   "adversarial-agents",
+  "generator-evaluator-loop",
+  "eval-driven-agent-development",
   "runtime-guardrails",
   "validation-constraint",
   "structural-constraint",
@@ -40,11 +42,13 @@ export const PATTERN_IDS = [
   "spec-library",
   "garbage-collection-agent",
   "semantic-port",
+  "harness-evolution",
 ];
 
 const CATEGORY_ORDER = [
   "Grounding",
   "Workflow",
+  "Harness Engineering",
   "Safety",
   "Observability",
   "Scale",

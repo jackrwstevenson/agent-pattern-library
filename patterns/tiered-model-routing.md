@@ -1,7 +1,7 @@
 ---
 name: Tiered Model Routing
 description: Match model capability and cost to each step in a workflow, using cheap models for simple decisions and expensive models for deep reasoning.
-category: Scale
+category: Harness Engineering
 maturity: trial
 ---
 
@@ -16,10 +16,6 @@ maturity: trial
 The default approach to model selection is to pick the most capable model and use it for everything. This is wasteful. A code review pipeline that uses a frontier model to check whether a pull request is already closed is spending serious money on a boolean question. Conversely, a pipeline that uses a cheap model to find subtle concurrency bugs is saving money it will spend later on missed defects.
 
 The mismatch matters more than it first appears. Cost scales linearly with usage, but capability requirements vary enormously across the steps of a single workflow. A gate check ("is this PR a draft?") needs pattern matching. An architectural review needs genuine reasoning. Treating both the same is like hiring a structural engineer to check whether the front door is locked.
-
-## Sketch
-
-_Sketch coming soon._
 
 ## How It Works
 

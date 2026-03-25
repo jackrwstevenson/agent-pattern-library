@@ -19,10 +19,6 @@ For internal tooling, this question is academic. For regulated industries -- ban
 
 [Session Checkpoint](session-checkpoint.md) preserves full session transcripts for replay and rollback. The Provenance Ledger solves a different problem: lightweight, structured traceability from any artefact to the AI system that generated it.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach maintains a structured log, typically a LEDGER.md file within the feature's working directory, that records a provenance entry for every AI generation step. Each entry captures the agent name, the model and version used, a timestamp, the task or phase that triggered the generation, the outcome (pass, fail, iterate), and the iteration count.

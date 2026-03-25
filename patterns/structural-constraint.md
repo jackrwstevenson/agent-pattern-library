@@ -19,10 +19,6 @@ Functional tests won't catch these problems. A test suite that asserts correct b
 
 Maintainable AI-generated code at scale requires _constraining the solution space_ through enforcement, not just guidance. You need to trade "generate anything" flexibility for structural rules that keep the codebase coherent as it grows.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach uses custom linters, structural tests, and enforced boundaries to constrain the architectural shape of generated code. Where functional tests validate behaviour, structural constraints validate form.

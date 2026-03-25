@@ -19,10 +19,6 @@ The usual mitigation is prompting: "consider multiple hypotheses" or "play devil
 
 The structural fix is to use multiple agents, each investigating the same problem from a different starting hypothesis, and have them challenge each other's conclusions directly.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach assigns the same problem to multiple agents, each with a different investigative angle or starting hypothesis. The agents work independently, then share findings and actively attempt to disprove each other's conclusions. A synthesis step extracts whatever consensus survives the debate.

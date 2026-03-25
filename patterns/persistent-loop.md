@@ -1,7 +1,7 @@
 ---
 name: Persistent Loop
 description: Run an agent in a loop until it can truthfully declare completion, with state persisted through files and honesty enforcement at the exit gate.
-category: Workflow
+category: Harness Engineering
 maturity: assess
 ---
 
@@ -16,10 +16,6 @@ maturity: assess
 Most agent workflows assume a single pass: the agent receives a task, does work, and finishes. When the task is too complex to complete in one pass, the usual response is either to break it into subtasks (adding orchestration complexity) or to let the agent run longer (trusting it to manage its own progress). Neither works well. Subtask decomposition requires understanding the task upfront, which is often the hard part. And long-running agents degrade: they lose track of earlier decisions, repeat work, and drift from the goal.
 
 There is a simpler option. Run the agent repeatedly with the same prompt, letting it pick up where it left off by reading its own previous output from files. Each iteration starts fresh with full context capacity, but the accumulated work persists in the file system.
-
-## Sketch
-
-_Sketch coming soon._
 
 ## How It Works
 

@@ -1,7 +1,7 @@
 ---
 name: Deterministic Orchestration
 description: Control workflow progression through deterministic hooks, not agent reasoning, reserving creativity for bounded execution steps.
-category: Workflow
+category: Harness Engineering
 maturity: adopt
 ---
 
@@ -16,10 +16,6 @@ maturity: adopt
 Every team I've studied that tried letting agents orchestrate themselves abandoned it. The pattern is remarkably consistent: it works on small demos, then collapses on real codebases. Agents skip steps, create cycles, get stuck in loops, and lose track of where they are in a multi-phase workflow. The more capable the model, the more confidently it goes off the rails.
 
 The instinct is understandable. If agents are good at reasoning, why not let them reason about what to do next? The answer is that workflow progression and creative execution are fundamentally different problems. One benefits from determinism; the other benefits from flexibility.
-
-## Sketch
-
-_Sketch coming soon._
 
 ## How It Works
 

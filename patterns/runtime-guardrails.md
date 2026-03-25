@@ -17,10 +17,6 @@ LLMs generate fluent, confident text regardless of whether the content is approp
 
 Post-hoc validation catches some of these failures, but prevention at generation time is cheaper, safer, and reduces the volume of problematic output that downstream systems must handle.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach is to apply a layered set of controls during inference that constrain what the model can generate, blocking or filtering problematic output before it leaves the model.

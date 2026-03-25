@@ -17,10 +17,6 @@ AI agents generate code faster than humans can review it. Over time, this accumu
 
 These problems aren't new. Every codebase accumulates entropy. But AI-generated codebases accumulate it faster, because the volume of output outpaces the human attention available to maintain it. The usual answer is periodic cleanup sprints, but those are expensive and infrequent, so debt compounds between them.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach deploys periodic agents that sweep through the codebase identifying inconsistencies, violations, and waste, then either fix them directly or raise them for human review.

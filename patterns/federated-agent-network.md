@@ -21,10 +21,6 @@ The instinct is to standardise: get everyone onto one platform. This fails for t
 
 The alternative is _federation_: independent systems collaborating through shared protocols, much as email works across providers or Git works across hosting platforms. I find the analogy to email particularly instructive; no one owns email, everyone speaks SMTP, and your identity is portable across providers. The question is whether something similar can work for agent-to-agent collaboration at scale.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The core idea is to separate the protocol from the platform. Each participant runs a sovereign agent system; their own orchestrator, their own data store, their own governance rules. These systems connect through a shared schema that defines how work is described, claimed, submitted, and validated. Each node stores its own copy of the relevant data. Synchronisation happens through fork-and-merge semantics on structured data.

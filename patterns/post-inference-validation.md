@@ -17,10 +17,6 @@ Runtime guardrails reduce but cannot eliminate problematic output. No single set
 
 A second, independent validation layer is needed between inference and the user.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach places an independent validation pipeline after the model produces text. Output must pass through a series of gates before it is surfaced to users or downstream systems.

@@ -6,7 +6,7 @@ If you work with AI coding agents and have found patterns that belong here, I wo
 
 ## Using this site
 
-Browse patterns using the **left sidebar**, which lists all 31 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
+Browse patterns using the **left sidebar**, which lists all 34 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
 
 Each pattern carries a **maturity badge** indicating how much confidence I have in it.
 
@@ -14,16 +14,17 @@ Each pattern carries a **maturity badge** indicating how much confidence I have 
 
 ### Categories
 
-The patterns are organised into six categories:
+The patterns are organised into seven categories:
 
-| Category          | What it covers                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Grounding**     | Ensuring agents work from accurate, authoritative information rather than inventing their own                            |
-| **Workflow**      | Structuring how agents perform work, compensating for the limitations that make unstructured use unreliable              |
-| **Safety**        | Controlling and validating agent output to meet compliance, safety, and quality requirements                             |
-| **Observability** | Persisting agent progress, decisions, and provenance so that work survives context limits and remains auditable          |
-| **Scale**         | What happens when you push beyond single-agent constraints: context limits, throughput ceilings, coordination challenges |
-| **Evolution**     | Keeping systems current as dependencies, standards, and the world around them change                                     |
+| Category                | What it covers                                                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Grounding**           | Ensuring agents work from accurate, authoritative information rather than inventing their own                            |
+| **Workflow**            | Structuring how agents perform work, compensating for the limitations that make unstructured use unreliable              |
+| **Harness Engineering** | Designing, testing, optimising, and maintaining the scaffolding that orchestrates agent execution                        |
+| **Safety**              | Controlling and validating agent output to meet compliance, safety, and quality requirements                             |
+| **Observability**       | Persisting agent progress, decisions, and provenance so that work survives context limits and remains auditable          |
+| **Scale**               | What happens when you push beyond single-agent constraints: context limits, throughput ceilings, coordination challenges |
+| **Evolution**           | Keeping systems current as dependencies, standards, and the world around them change                                     |
 
 ### Maturity ratings
 
@@ -60,9 +61,20 @@ These patterns structure how agents perform work, compensating for the limitatio
 | [Throwaway Spike](patterns/throwaway-spike.md)                         | Rapid throwaway prototypes with explicit constraints, safety guardrails, and human decision gates.                                                                    | Adds agent-specific guardrails to the classic XP spike, preventing clean-looking AI output from being accidentally promoted to production.                                              |
 | [Skills Library](patterns/skills-library.md)                           | Package procedures as executable skills that agents follow to perform tasks consistently, the HOW of your organisation.                                               | Transforms tribal knowledge into repeatable workflows; agents execute these skills rather than improvising each time.                                                                   |
 | [Digital Twin](patterns/digital-twin.md)                               | Clone the observable behaviour of third-party dependencies into local replicas for deterministic, high-volume testing.                                                | Moves beyond hand-written mocks to behavioural replicas validated against the real service, giving agents a fast, reliable integration test target.                                     |
-| [Deterministic Orchestration](patterns/deterministic-orchestration.md) | Control workflow progression through deterministic hooks and pipelines, not agent reasoning; let agents reason freely only within bounded execution steps.            | Various independent teams converged on the same conclusion: agents should never decide what phase comes next. Deterministic control, creative execution.                                |
-| [Persistent Loop](patterns/persistent-loop.md)                         | Run an agent in a loop until it can truthfully declare completion, with state persisted through files and honesty enforcement at the exit gate.                       | Sidesteps upfront task decomposition entirely: the agent runs repeatedly with the same prompt, picking up where it left off by reading its own previous output from the file system.    |
 | [Adversarial Agents](patterns/adversarial-agents.md)                   | Set multiple agents on the same problem with competing hypotheses, using structured debate to fight anchoring bias and converge on stronger conclusions.              | Structurally eliminates anchoring bias by making agents challenge each other's findings rather than asking a single agent to argue against itself.                                      |
+
+### Harness Engineering
+
+These patterns address the design, testing, optimisation, and maintenance of the scaffolding that orchestrates agent execution.
+
+| Pattern                                                                     | Description                                                                                                                                                              | Novel Insight                                                                                                                                                                             |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Deterministic Orchestration](patterns/deterministic-orchestration.md)      | Control workflow progression through deterministic hooks and pipelines, not agent reasoning; let agents reason freely only within bounded execution steps.                | Various independent teams converged on the same conclusion: agents should never decide what phase comes next. Deterministic control, creative execution.                                  |
+| [Persistent Loop](patterns/persistent-loop.md)                              | Run an agent in a loop until it can truthfully declare completion, with state persisted through files and honesty enforcement at the exit gate.                           | Sidesteps upfront task decomposition entirely: the agent runs repeatedly with the same prompt, picking up where it left off by reading its own previous output from the file system.      |
+| [Generator-Evaluator Loop](patterns/generator-evaluator-loop.md)           | Separate generation from evaluation into distinct agents, with criteria-based feedback driving iterative refinement of output quality.                                    | Tuning a standalone evaluator to be sceptical is far more tractable than making a generator critical of its own work; the separation creates real evaluative pressure that self-review cannot. |
+| [Eval-Driven Agent Development](patterns/eval-driven-agent-development.md) | Build automated test suites for the agent system itself, using repeated runs to handle variability and promoting passing tests into regression suites as the agent matures.                        | Check results, not steps: agents find valid approaches test designers did not anticipate, so rigid path assertions penalise creativity rather than catch bugs.                            |
+| [Tiered Model Routing](patterns/tiered-model-routing.md)                   | Match model capability and cost to each step in a workflow, using cheap models for simple decisions and expensive models for deep reasoning.                              | Most workflow steps don't need frontier reasoning; tiered routing cuts cost substantially while preserving quality where it matters.                                                       |
+| [Harness Evolution](patterns/harness-evolution.md)                          | Systematically stress-test and strip agent scaffolding as models improve, because every harness component encodes an assumption about model limitations that goes stale.  | The space of interesting harness combinations does not shrink as models improve; it moves. Methodical one-at-a-time removal beats radical simplification.                                 |
 
 ### Safety
 
@@ -99,7 +111,6 @@ These patterns address what happens when you push beyond single-agent constraint
 | [Pyramid Summary](patterns/pyramid-summary.md)                 | Build reversible multi-level summaries so agents can navigate between system overview and full source detail on demand.                                  | Enables comprehension of systems that exceed context limits through selective expansion rather than lossy compression.                                           |
 | [Agent Memory Graph](patterns/agent-memory-graph.md)           | Replace flat task files with dependency-aware graphs supporting safe multi-agent coordination and semantic compaction.                                   | Provides the coordination primitives (atomic claims, hash-based IDs, ready-state detection) that flat TODO files lack for parallel agent work.                   |
 | [Federated Agent Network](patterns/federated-agent-network.md) | Connect independent agent systems through shared protocols and schemas, enabling cross-boundary collaboration without central orchestration.             | Extends beyond single-orchestrator swarms to inter-system collaboration: sovereign nodes, portable identity, and progressive trust through Git-style federation. |
-| [Tiered Model Routing](patterns/tiered-model-routing.md)       | Match model capability and cost to each step in a workflow, using cheap models for simple decisions and expensive models for deep reasoning.             | Most workflow steps don't need frontier reasoning; tiered routing cuts cost substantially while preserving quality where it matters.                             |
 
 ### Evolution
 
@@ -135,10 +146,7 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 - [Autonomous Agent](patterns/autonomous-agent.md) adds task selection and outcome monitoring on top of that infrastructure
 - [Agent Swarm](patterns/agent-swarm.md) scales through hierarchical coordination; planners decompose, workers execute
 - [Federated Agent Network](patterns/federated-agent-network.md) extends beyond a single orchestrator: independent systems collaborate through shared protocols
-- [Deterministic Orchestration](patterns/deterministic-orchestration.md) enforces that agents control _what they produce_, not _what phase comes next_
-- [Persistent Loop](patterns/persistent-loop.md) provides a simpler alternative when upfront decomposition is premature: repeat until done, with state in files
 - [Adversarial Agents](patterns/adversarial-agents.md) puts multiple agents on the _same_ problem with competing hypotheses, where [Agent Swarm](patterns/agent-swarm.md) puts agents on _different_ tasks
-- [Tiered Model Routing](patterns/tiered-model-routing.md) optimises cost across any multi-agent workflow by matching model capability to each step's cognitive demands
 
 ### Memory and observability
 
@@ -159,6 +167,15 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 ### Safety and compliance
 
 [Runtime Guardrails](patterns/runtime-guardrails.md) prevents problematic output at generation time. [Post-Inference Validation](patterns/post-inference-validation.md) catches what gets through. [Confidence-Gated Validation](patterns/confidence-gated-validation.md) extends validation from deterministic rules to agent-based verification with calibrated confidence scoring. Together they provide defence in depth for content. For code, [Validation Constraint](patterns/validation-constraint.md) and [Structural Constraint](patterns/structural-constraint.md) play equivalent roles.
+
+### Harness engineering
+
+- [Deterministic Orchestration](patterns/deterministic-orchestration.md) provides the control layer: deterministic hooks govern what phase comes next, while agents reason freely within each phase
+- [Persistent Loop](patterns/persistent-loop.md) offers a simpler alternative when upfront decomposition is premature: repeat until done, with state in files
+- [Generator-Evaluator Loop](patterns/generator-evaluator-loop.md) pairs a generator with a dedicated critic for iterative refinement, distinct from [Adversarial Agents](patterns/adversarial-agents.md)' competing-hypotheses debate
+- [Tiered Model Routing](patterns/tiered-model-routing.md) optimises cost across any harness by matching model capability to each step's cognitive demands
+- [Eval-Driven Agent Development](patterns/eval-driven-agent-development.md) provides the measurement layer that validates the agent system itself, enabling confident iteration on all the above
+- [Harness Evolution](patterns/harness-evolution.md) closes the loop: re-evaluate every component as models improve, stripping what is no longer load-bearing and investing in new capabilities. Complements [Regen](patterns/regen.md), which regenerates _application code_ when inputs change
 
 ### Codebase health
 
@@ -184,4 +201,4 @@ If you spot a pattern that isn't listed here, it may be too well-known for me to
 
 ## Acknowledgements
 
-Credit to Chris Hay, Birgitta Böckeler, Dan Sheard, Simon Willison, Wilson Lin, Gergely Orosz, Drew Breunig, Tim Kellogg, Addy Osmani, Jesse Vincent, Steve Yegge, StrongDM, and Entire.io for the ideas that inspired the patterns here.
+Credit to Chris Hay, Birgitta Böckeler, Dan Sheard, Simon Willison, Wilson Lin, Gergely Orosz, Drew Breunig, Tim Kellogg, Addy Osmani, Jesse Vincent, Steve Yegge, Prithvi Rajasekaran, Mikaela Grace, Jeremy Hadfield, StrongDM, and Entire.io for the ideas that inspired the patterns here.

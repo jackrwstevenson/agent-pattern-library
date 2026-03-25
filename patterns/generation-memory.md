@@ -19,10 +19,6 @@ The symptoms are familiar to anyone who's run extended generation sessions. The 
 
 [Session Checkpoint](session-checkpoint.md) solves a different problem: rollback and replay. [Agent Memory Graph](agent-memory-graph.md) solves another: multi-agent coordination. Neither addresses the specific problem of a single agent maintaining awareness of its own work during a long session.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach gives the agent an external log of its own work that persists in a file, outside the context window. The agent writes to this log as it progresses and reads from it when it needs to recall what has happened.

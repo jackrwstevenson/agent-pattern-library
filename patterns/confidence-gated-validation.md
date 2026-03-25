@@ -17,10 +17,6 @@ Agent-powered code review has a false positive problem. An agent scanning a pull
 
 The standard response is to tune the prompt: add "only report real bugs" or "be conservative." This helps marginally but does not solve the problem, because confidence is not binary. An agent may be 95% sure about a null pointer dereference and 40% sure about a naming convention violation. Treating both findings equally wastes human attention on the latter while correctly surfacing the former.
 
-## Sketch
-
-_Sketch coming soon._
-
 ## How It Works
 
 The approach introduces two mechanisms: numeric confidence scoring with calibrated thresholds, and independent verification agents that validate each finding before it reaches a human.
