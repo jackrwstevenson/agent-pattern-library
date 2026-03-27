@@ -37,19 +37,27 @@ A good SPEC.md covers the problem statement and goals, explicit non-goals (what'
 
 The spec becomes the source of truth that both human and agent reference throughout. Nothing proceeds until the human approves it.
 
+There is, however, a subtle problem with a specification that exists only as prose. As Shaw observes, a written spec captures intent well at the moment of writing, but that intent erodes as work continues. After several prompts or sessions, the agent no longer holds the constraints from earlier work. The human reviewer is checking diffs against their recollection of the spec rather than against an automated contract. Behavioural regressions creep in not through obvious breakage but through quiet drift - an edge case handled differently when a function is regenerated, a constraint from an earlier session silently dropped.
+
+Shaw's remedy, which maps neatly onto this phase, is to derive an executable acceptance test suite from the spec before any implementation begins. The process is straightforward. Walk through SPEC.md and pull out every statement that describes observable behaviour. Group these into three buckets: the primary workflow, alternate valid paths, and error or boundary scenarios. If fewer than a fifth of the assertions cover boundaries and errors, the spec likely has gaps worth addressing before moving on.
+
+Hand the grouped assertions to the agent and generate the test suite with no implementation behind it. Run it and confirm every test fails. A fully red suite is the baseline - any test that passes before code exists points to either a flawed test or leftover code from previous work.
+
+The test names should read as a plain-language index of the feature's contract. What this amounts to is classic outside-in BDD, but with the spec as the starting point rather than a blank test file. The derivation is largely mechanical, making it well-suited to agent collaboration. The resulting suite serves as the persistent memory that agent sessions lack: a contract that continues to enforce the spec's intent long after the original context has scrolled out of the window.
+
 ### Phase 2: Planning
 
-With an approved specification in hand, the next step is breaking it into small, verifiable implementation tasks. Each task should be completable in one focused session, with explicit verification criteria (typically a test command) and mapped dependencies. The result is a PLAN.md with an ordered task list, descriptions, files touched, verification commands, and rollback points where you can safely stop.
+With an approved specification and a red acceptance suite in hand, the next step is breaking it into small, verifiable implementation tasks. Each task should be completable in one focused session, with explicit verification criteria (typically a test command) and mapped dependencies. The result is a PLAN.md with an ordered task list, descriptions, files touched, verification commands, and rollback points where you can safely stop.
 
 A good plan enables "one-shot" implementation where each step can be completed without rework. Again, human approval is required before implementation begins.
 
 ### Phase 3: Implementation
 
-Execute each task using strict Test-Driven Development: red-green-refactor.
+Execute each task from the plan, working through the acceptance suite methodically: red-green-refactor.
 
-Write a failing test that captures the expected behaviour from SPEC.md. Run it and confirm it fails. Then write the *minimum code* necessary to make the test pass. No cleverness, no optimisation, no "while I'm here" improvements. Once green, refactor: remove duplication, improve names, simplify logic, running tests after each change to ensure they stay green. Commit after each cycle.
+Pick a failing acceptance test. Write the *minimum code* necessary to make it pass. No cleverness, no optimisation, no "while I'm here" improvements. Once green, refactor: remove duplication, improve names, simplify logic, running the full suite after each change to ensure nothing regresses. Commit after each cycle. Add finer-grained unit tests where the acceptance test doesn't adequately cover internal logic.
 
-The discipline matters. One behaviour per cycle. Never skip the failing test. Never skip the refactor. Each test should trace back to a specification requirement. This creates a clear, auditable history of small, verified commits.
+The discipline matters. One behaviour per cycle. Never skip the failing test. Never skip the refactor. The acceptance suite gives you a progress meter - X of Y passing - that works across sessions and provides a precise signal when a later change silently violates an earlier requirement. This creates a clear, auditable history of small, verified commits.
 
 ### Why This Works for Agents
 
@@ -58,9 +66,10 @@ The three-phase structure compensates directly for core LLM limitations:
 | LLM Limitation | How This Pattern Compensates |
 | --- | --- |
 | Limited context window | SPEC.md and PLAN.md externalise working memory |
-| No persistent memory | Documents persist across sessions |
+| No persistent memory | Documents persist across sessions; acceptance suite encodes spec as executable memory |
 | Overconfidence | Verification gates catch errors early |
 | Scope drift | Explicit non-goals and task boundaries |
+| Cross-session spec drift | Upfront acceptance tests catch silent regressions against earlier requirements |
 | Quality degradation over time | Small cycles with mandatory refactoring |
 
 ## Scaling the Pattern
@@ -91,3 +100,4 @@ For trivial bug fixes, obvious errors, and single-line changes with clear scope,
 
 - [My LLM coding workflow](https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e) - Addy Osmani
 - [Design-First Collaboration](https://martinfowler.com/articles/reduce-friction-ai/design-first-collaboration.html) - Rahul Garg
+- [Trust, but verify](https://www.linkedin.com/pulse/trust-verify-julias-shaw-yqdoc/) - Julias Shaw (on deriving executable test suites from specs before implementation)
