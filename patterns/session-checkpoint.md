@@ -43,7 +43,7 @@ This pattern is valuable for teams adopting AI agents where code review norms re
 
 Skip it for solo prototyping, short single-purpose agent interactions, and environments where git branch restrictions prevent shadow branches.
 
-This complements [Specify Plan Ship](specify-plan-ship.md) by preserving the reasoning behind implementation decisions, and supports [Agent Swarm](agent-swarm.md) by tracking concurrent agent sessions independently with rollback capability.
+This complements [Specify Plan Ship](specify-plan-ship.md) by preserving the reasoning behind implementation decisions, and supports [Agent Team](agent-team.md) by tracking concurrent agent sessions independently with rollback capability.
 
 ## Maturity
 

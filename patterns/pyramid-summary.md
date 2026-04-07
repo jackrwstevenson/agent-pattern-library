@@ -45,7 +45,7 @@ This pattern works for agents exploring unfamiliar large codebases, multi-step t
 
 Skip it for small codebases that fit in context without compression, tasks focused on a single file or function, and situations where [Context Bypass](context-bypass.md) is more appropriate. The distinction is: Pyramid Summary handles comprehension, Context Bypass handles data processing.
 
-This supports [Context Library](context-library.md) by storing summaries as reference material, and enables [Agent Swarm](agent-swarm.md) by giving each worker agent only the relevant pyramid layers.
+This supports [Context Library](context-library.md) by storing summaries as reference material, and enables [Agent Team](agent-team.md) by giving each worker agent only the relevant pyramid layers.
 
 ## Maturity
 

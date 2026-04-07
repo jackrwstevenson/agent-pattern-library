@@ -35,9 +35,17 @@ The mechanism is simple but the effect is significant. Without it, agents on lon
 
 The log also has a secondary benefit: it creates a human-readable record of the generation process. When reviewing agent output, you can read the log to understand the sequence of decisions that led to the current state. This is less detailed than [Session Checkpoint](session-checkpoint.md) but available immediately, without replay infrastructure.
 
+### Beyond Single Sessions: Organisational Learning
+
+Within-session memory solves immediate continuity, but a more powerful application extends the same principle across sessions. Osmani describes a structured reflection cycle: after every task, the agent writes a REFLECTION.md covering what surprised it, one pattern worth adding to the context library, and one prompt improvement. The lead reviews these proposals and merges approved learnings into the team's shared context.
+
+This transforms generation memory from a single-agent continuity mechanism into an organisational learning system. Session 1 discovers a gotcha. Session 2 benefits from that discovery. Knowledge compounds across time rather than being rediscovered.
+
+The Beads pattern (from Steve Yegge's Gastown) takes this further: immutable, git-backed records of every decision and outcome with full provenance, structured as queryable task graphs with a SQL-addressable data plane. This provides richer institutional memory than flat markdown logs, because past decisions can be traversed and queried rather than merely read sequentially.
+
 ### Relationship to Context Compaction
 
-This pattern exists because of a specific technical limitation: context window compaction discards earlier messages. If models eventually gain unlimited context with perfect recall, the pattern becomes unnecessary. Until then, externalising working memory into a file is a practical workaround for a real problem.
+This pattern exists because of a specific technical limitation: context window compaction discards earlier messages. If models eventually gain unlimited context with perfect recall, the within-session aspect becomes unnecessary. But the cross-session organisational learning aspect remains valuable regardless of context window size — it solves a knowledge management problem, not a technical limitation.
 
 ## The Trade-offs
 
@@ -53,4 +61,8 @@ It's unnecessary for short, single-task interactions where context compaction wo
 
 ## Maturity
 
-**Trial.** This solves a real problem with a simple mechanism, and I use it on long sessions. The uncertainty is whether it remains necessary as models gain longer context windows with better recall.
+**Trial.** This solves a real problem with a simple mechanism, and I use it on long sessions. The within-session aspect may become less necessary as models gain longer context windows, but the cross-session organisational learning aspect is model-independent and increasingly important as teams scale agent usage.
+
+## Further Reading
+
+- [The Code Agent Orchestra](https://addyosmani.com/blog/code-agent-orchestra/) - Addy Osmani on REFLECTION.md proposals for compound learning across sessions, and the Beads pattern for queryable institutional memory

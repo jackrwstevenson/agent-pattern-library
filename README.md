@@ -6,7 +6,7 @@ If you work with AI coding agents and have found patterns that belong here, I wo
 
 ## Using this site
 
-Browse patterns using the **left sidebar**, which lists all 34 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
+Browse patterns using the **left sidebar**, which lists all 35 grouped by category. Click any pattern to read it in full. While you are on a pattern page, the sidebar expands to show its headings so you can jump between sections. The **Home** link in the top nav returns here.
 
 Each pattern carries a **maturity badge** indicating how much confidence I have in it.
 
@@ -104,12 +104,13 @@ These patterns address what happens when you push beyond single-agent constraint
 
 | Pattern                                                        | Description                                                                                                                                              | Novel Insight                                                                                                                                                    |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Agent Swarm](patterns/agent-swarm.md)                         | Deploy hierarchical swarms of planning and worker agents; intelligent task decomposition enables massive parallelism without merge conflicts.            | Demonstrates that a single engineer plus thousands of coordinated agents can produce substantial codebases by making decomposition the hard problem.             |
+| [Agent Team](patterns/agent-team.md)                           | Coordinate a small team of specialised agents through shared task lists, file ownership, and peer messaging for safe parallel execution.                 | Three focused agents consistently outperform one generalist; coordination primitives (shared tasks, file locking, peer messaging) are now shipping in real tools. |
 | [Detached Agent](patterns/detached-agent.md)                   | Use issue trackers as task queues for AI agents executing in sandboxed cloud environments, decoupling interface from execution.                          | Gains audit trails, team accessibility, and security isolation without requiring local development setup.                                                        |
 | [Context Bypass](patterns/context-bypass.md)                   | Delegate data-heavy operations to local APIs and return only compact results, avoiding context window limits entirely.                                   | Inverts the data flow: bring the model's intent to the data, not data to the model.                                                                              |
 | [Autonomous Agent](patterns/autonomous-agent.md)               | Enable agents to select tasks from backlogs, monitor outcomes, and operate under defined values; moving beyond reactive prompting toward self-direction. | Identifies the prerequisites and scaling paradox: human review remains essential, shifting the bottleneck from scheduling to verification.                       |
 | [Pyramid Summary](patterns/pyramid-summary.md)                 | Build reversible multi-level summaries so agents can navigate between system overview and full source detail on demand.                                  | Enables comprehension of systems that exceed context limits through selective expansion rather than lossy compression.                                           |
 | [Agent Memory Graph](patterns/agent-memory-graph.md)           | Replace flat task files with dependency-aware graphs supporting safe multi-agent coordination and semantic compaction.                                   | Provides the coordination primitives (atomic claims, hash-based IDs, ready-state detection) that flat TODO files lack for parallel agent work.                   |
+| [Verification Bottleneck](patterns/verification-bottleneck.md) | Recognise that verification, not generation, is the throughput constraint; organise work around human review capacity.                                   | Spec quality multiplies across a fleet of agents; comprehension debt is the new class of risk when delegation speed outpaces understanding.                      |
 | [Federated Agent Network](patterns/federated-agent-network.md) | Connect independent agent systems through shared protocols and schemas, enabling cross-boundary collaboration without central orchestration.             | Extends beyond single-orchestrator swarms to inter-system collaboration: sovereign nodes, portable identity, and progressive trust through Git-style federation. |
 
 ### Evolution
@@ -144,9 +145,10 @@ For brownfield projects, [Code Archaeologist](patterns/code-archaeologist.md) su
 
 - [Detached Agent](patterns/detached-agent.md) provides execution infrastructure with audit trails and security isolation
 - [Autonomous Agent](patterns/autonomous-agent.md) adds task selection and outcome monitoring on top of that infrastructure
-- [Agent Swarm](patterns/agent-swarm.md) scales through hierarchical coordination; planners decompose, workers execute
+- [Agent Team](patterns/agent-team.md) scales through hierarchical coordination; a lead decomposes, specialists execute in isolated worktrees
 - [Federated Agent Network](patterns/federated-agent-network.md) extends beyond a single orchestrator: independent systems collaborate through shared protocols
-- [Adversarial Agents](patterns/adversarial-agents.md) puts multiple agents on the _same_ problem with competing hypotheses, where [Agent Swarm](patterns/agent-swarm.md) puts agents on _different_ tasks
+- [Adversarial Agents](patterns/adversarial-agents.md) puts multiple agents on the _same_ problem with competing hypotheses, where [Agent Team](patterns/agent-team.md) puts agents on _different_ tasks
+- [Verification Bottleneck](patterns/verification-bottleneck.md) caps concurrency at human review capacity; spec quality multiplies across the fleet
 
 ### Memory and observability
 

@@ -49,7 +49,7 @@ The costs are real. The agents need infrastructure and compute to run periodic s
 
 ## When to Use It
 
-This pattern pays off for codebases with high volumes of AI-generated code where entropy accumulates faster than manual review can manage, long-lived projects where documentation and code drift over time, teams using [Agent Swarm](agent-swarm.md) or similar multi-agent approaches that produce code in parallel sessions with potentially inconsistent context, and organisations where codebase health metrics matter for compliance or operational reasons.
+This pattern pays off for codebases with high volumes of AI-generated code where entropy accumulates faster than manual review can manage, long-lived projects where documentation and code drift over time, teams using [Agent Team](agent-team.md) or similar multi-agent approaches that produce code in parallel sessions with potentially inconsistent context, and organisations where codebase health metrics matter for compliance or operational reasons.
 
 It's unnecessary for small projects maintained by a single developer or agent, short-lived codebases where long-term maintenance isn't a concern, and teams where the volume of AI-generated code is low enough that manual review catches inconsistencies.
 

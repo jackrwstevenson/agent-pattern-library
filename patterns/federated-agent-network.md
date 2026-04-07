@@ -13,7 +13,7 @@ maturity: assess
 > **What's in it for you?** Cross-boundary collaboration without surrendering control of your tools, data, or governance to a central platform.
 > **What are the trade-offs?** Schema evolution, trust bootstrapping, and anti-fraud are all harder in federated systems than centralised ones.
 
-[Agent Swarm](agent-swarm.md) addresses an emerging problem: how to coordinate many agents working on the same codebase under a single team's control. A central orchestrator decomposes work, assigns it, and manages integration. This works well when one party has authority over the entire system.
+[Agent Team](agent-team.md) addresses an emerging problem: how to coordinate many agents working on the same codebase under a single team's control. A central orchestrator decomposes work, assigns it, and manages integration. This works well when one party has authority over the entire system.
 
 What happens when independent teams, each running their own agent systems, want to collaborate on shared work? The central orchestrator model breaks down here, for the same reason that a single enterprise service bus breaks down across organisational boundaries. No single party has authority. No single system can hold the full context. And no one wants to cede control of their tooling to someone else.
 
@@ -65,9 +65,9 @@ I'm also uncertain about the governance model. The article that inspired this pa
 
 This pattern suits situations where multiple independent teams or organisations want to share work without ceding control to a central platform. I can see it fitting open-source ecosystems where contributors span many organisations, cross-company collaboration on shared standards, and networks of independent developers coordinating through a common protocol.
 
-Avoid it when a single team controls all the agents; use [Agent Swarm](agent-swarm.md) instead. Avoid it when the overhead of protocol compliance exceeds the benefit of federation. Avoid it for small collaborations where a shared repository and PR workflow suffice. And avoid it when trust requirements demand tightly controlled, centrally audited systems.
+Avoid it when a single team controls all the agents; use [Agent Team](agent-team.md) instead. Avoid it when the overhead of protocol compliance exceeds the benefit of federation. Avoid it for small collaborations where a shared repository and PR workflow suffice. And avoid it when trust requirements demand tightly controlled, centrally audited systems.
 
-[Agent Swarm](agent-swarm.md) scales within a single orchestrator's control; this pattern scales across independent systems. [Autonomous Agent](autonomous-agent.md) provides the task-selection capability that individual nodes need to participate effectively. [Provenance Ledger](provenance-ledger.md) records artefact provenance within a single system; federation extends that provenance across organisational boundaries. And [Agent Memory Graph](agent-memory-graph.md) provides coordination primitives within a node, while the federation protocol coordinates across nodes.
+[Agent Team](agent-team.md) scales within a single orchestrator's control; this pattern scales across independent systems. [Autonomous Agent](autonomous-agent.md) provides the task-selection capability that individual nodes need to participate effectively. [Provenance Ledger](provenance-ledger.md) records artefact provenance within a single system; federation extends that provenance across organisational boundaries. And [Agent Memory Graph](agent-memory-graph.md) provides coordination primitives within a node, while the federation protocol coordinates across nodes.
 
 ## Maturity
 

@@ -51,7 +51,7 @@ This pattern pays for itself on multi-step agent workflows where different steps
 
 It's unnecessary for single-step interactions, low-volume workflows where cost is not a concern, and tasks where every step genuinely requires deep reasoning.
 
-This complements [Deterministic Orchestration](deterministic-orchestration.md), which provides the pipeline structure that tiered routing optimises. [Agent Swarm](agent-swarm.md) benefits from tiered routing when planning agents and worker agents have different capability requirements. And [Confidence-Gated Validation](confidence-gated-validation.md) can use cheaper models for the initial finding pass and more capable models for the validation pass.
+This complements [Deterministic Orchestration](deterministic-orchestration.md), which provides the pipeline structure that tiered routing optimises. [Agent Team](agent-team.md) benefits from tiered routing when planning agents and worker agents have different capability requirements. And [Confidence-Gated Validation](confidence-gated-validation.md) can use cheaper models for the initial finding pass and more capable models for the validation pass.
 
 ## Maturity
 

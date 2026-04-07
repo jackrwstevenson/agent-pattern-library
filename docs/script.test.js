@@ -101,7 +101,7 @@ describe("renderSidebar", () => {
   const patterns = [
     { id: "context-library", name: "Context Library", category: "Grounding", maturity: "adopt" },
     { id: "throwaway-spike", name: "Throwaway Spike", category: "Workflow", maturity: "adopt" },
-    { id: "agent-swarm", name: "Agent Swarm", category: "Scale", maturity: "assess" },
+    { id: "agent-team", name: "Agent Team", category: "Scale", maturity: "assess" },
   ];
 
   it("renders categories as sections", () => {
@@ -174,7 +174,7 @@ describe("renderSidebar", () => {
   it("renders maturity badge inside the pattern link", () => {
     const html = renderSidebar(patterns, "context-library", []);
     expect(html).toContain('Context Library<span class="maturity adopt">adopt</span></a>');
-    expect(html).toContain('Agent Swarm<span class="maturity assess">assess</span></a>');
+    expect(html).toContain('Agent Team<span class="maturity assess">assess</span></a>');
   });
 
   it("omits maturity badge when maturity is absent", () => {

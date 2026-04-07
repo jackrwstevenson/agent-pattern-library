@@ -45,7 +45,7 @@ This pattern is essential for multi-phase agent workflows where steps must execu
 
 It's unnecessary for single-shot agent interactions, exploratory work where the workflow is deliberately unstructured, and simple tasks where a prompt and a response suffice.
 
-This provides the orchestration layer that [Specify Plan Ship](specify-plan-ship.md) describes conceptually. It enforces [Structural Constraint](structural-constraint.md) and [Runtime Guardrails](runtime-guardrails.md) through hooks rather than relying on agents to remember them. And it complements [Agent Swarm](agent-swarm.md) by providing deterministic coordination for hierarchical agent workflows.
+This provides the orchestration layer that [Specify Plan Ship](specify-plan-ship.md) describes conceptually. It enforces [Structural Constraint](structural-constraint.md) and [Runtime Guardrails](runtime-guardrails.md) through hooks rather than relying on agents to remember them. And it complements [Agent Team](agent-team.md) by providing deterministic coordination for hierarchical agent workflows.
 
 ## Maturity
 

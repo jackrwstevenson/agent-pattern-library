@@ -55,7 +55,7 @@ The costs are equally clear: slow feedback that makes course-correction difficul
 
 This works well for mobile or remote scenarios, batch processing of similar tasks, initial triage of bug reports, and situations where you want isolation from agent execution.
 
-[Autonomous Agent](autonomous-agent.md) builds on this pattern, adding task selection and outcome monitoring on top of the execution infrastructure. [Agent Swarm](agent-swarm.md) uses the same async execution model but adds coordination across multiple agents.
+[Autonomous Agent](autonomous-agent.md) builds on this pattern, adding task selection and outcome monitoring on top of the execution infrastructure. [Agent Team](agent-team.md) uses the same async execution model but adds coordination across multiple agents.
 
 ## Maturity
 

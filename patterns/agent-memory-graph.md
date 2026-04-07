@@ -51,7 +51,7 @@ This pattern earns its keep in multi-agent workflows where coordination is essen
 
 For single-agent, single-session tasks, simple linear workflows with no dependencies, and situations where a flat TODO.md is genuinely sufficient, it's unnecessary overhead.
 
-This enables [Agent Swarm](agent-swarm.md) by providing the coordination layer for parallel workers, supports [Autonomous Agent](autonomous-agent.md) by giving agents structured task selection, and complements [Detached Agent](detached-agent.md) where issue trackers serve a similar but less agent-native purpose.
+This enables [Agent Team](agent-team.md) by providing the coordination layer for parallel workers, supports [Autonomous Agent](autonomous-agent.md) by giving agents structured task selection, and complements [Detached Agent](detached-agent.md) where issue trackers serve a similar but less agent-native purpose.
 
 ## Maturity
 

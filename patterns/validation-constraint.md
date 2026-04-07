@@ -54,7 +54,7 @@ This pattern works for high-volume agent output where human review is the bottle
 
 Avoid it for security-critical code requiring manual audit, novel architectures where tests can't yet capture intent, early-stage projects where the specification is still fluid, and codebases where test infrastructure is immature or absent.
 
-This pairs naturally with [Specify Plan Ship](specify-plan-ship.md), where TDD is already part of the workflow. It enables [Agent Swarm](agent-swarm.md) by reducing human review as a throughput bottleneck. And it supports [Regen](regen.md), since automated validation makes regeneration low-risk.
+This pairs naturally with [Specify Plan Ship](specify-plan-ship.md), where TDD is already part of the workflow. It enables [Agent Team](agent-team.md) by reducing human review as a throughput bottleneck. And it supports [Regen](regen.md), since automated validation makes regeneration low-risk.
 
 ## Maturity
 

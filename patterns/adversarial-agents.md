@@ -61,7 +61,7 @@ This pattern suits debugging where the root cause is genuinely unclear and prema
 
 Avoid it for problems with obvious causes, where a single agent would reach the correct conclusion quickly. Avoid it when token cost is a constraint and the quality improvement does not justify the multiplied usage. And avoid it for tasks that are inherently sequential, where each step depends on the previous one and parallel investigation adds no value.
 
-This complements [Agent Swarm](agent-swarm.md), which parallelises _different tasks_ across agents; Adversarial Agents puts _multiple agents on the same task_ with competing perspectives. [Confidence-Gated Validation](confidence-gated-validation.md) validates findings after the fact; this pattern generates stronger findings through structured opposition during investigation. And [Tiered Model Routing](tiered-model-routing.md) can optimise costs by using the deep tier only for agents doing the core investigation and cheaper tiers for synthesis and coordination.
+This complements [Agent Team](agent-team.md), which parallelises _different tasks_ across agents; Adversarial Agents puts _multiple agents on the same task_ with competing perspectives. [Confidence-Gated Validation](confidence-gated-validation.md) validates findings after the fact; this pattern generates stronger findings through structured opposition during investigation. And [Tiered Model Routing](tiered-model-routing.md) can optimise costs by using the deep tier only for agents doing the core investigation and cheaper tiers for synthesis and coordination.
 
 ## Maturity
 
